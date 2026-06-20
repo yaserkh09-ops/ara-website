@@ -35,9 +35,13 @@ const { text, class: className = '' } = Astro.props;
   }
   .eyebrow__line {
     display: block;
-    inline-size: 1.75rem;
+    inline-size: 2rem;
     block-size: 1px;
-    background: var(--color-orange);
+    background: linear-gradient(90deg, transparent, var(--color-orange));
     flex: 0 0 auto;
+  }
+  /* keep the fade pointing toward the text in RTL */
+  :global([dir='rtl']) .eyebrow__line {
+    transform: scaleX(-1);
   }
 </style>

@@ -76,4 +76,40 @@ export function initNav(): void {
       }
     });
   });
+
+  initScrollSpy();
+}
+
+/* Highlight the nav link whose section is crossing the viewport's middle band. */
+function initScrollSpy(): void {
+  if (!('IntersectionObserver' in window)) return;
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.nav__link, .nav__mobile-link')
+  );
+  const ids = Array.from(
+    new Set(
+      links
+        .map((a) => a.getAttribute('href') || '')
+        .filter((h) => h.startsWith('#'))
+        .map((h) => h.slice(1))
+    )
+  );
+  const sections = ids
+    .map((id) => document.getElementById(id))
+    .filter((el): el is HTMLElement => !!el);
+  if (sections.length === 0) return;
+
+  const setActive = (id: string) => {
+    links.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === `#${id}`));
+  };
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) setActive((e.target as HTMLElement).id);
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+  );
+  sections.forEach((s) => io.observe(s));
 }

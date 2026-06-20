@@ -65,12 +65,29 @@ const isDark = theme === 'navy' || theme === 'navy-dark';
     color: var(--color-neutral-600);
   }
   .section--navy {
-    background-image: var(--grad-navy);
+    background-image:
+      radial-gradient(120% 85% at 82% -12%, rgba(40, 205, 252, 0.12), transparent 58%),
+      radial-gradient(100% 80% at 0% 110%, rgba(6, 115, 255, 0.1), transparent 60%),
+      var(--grad-navy);
     color: rgba(255, 255, 255, 0.82);
   }
   .section--navy-dark {
     background-color: var(--color-navy-dark);
     color: rgba(255, 255, 255, 0.82);
+  }
+
+  /* Faint film grain over dark sections for premium texture. */
+  .section--navy::before,
+  .section--navy-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--noise);
+    background-size: 140px 140px;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
   }
 
   /* Faint vignette to separate consecutive light sections */

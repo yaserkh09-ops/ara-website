@@ -22,7 +22,7 @@ const accents = ['sky', 'warning', 'danger'] as const;
   </div>
 
   <!-- Pain points on a navy mini-panel, bento (patient-impact card weighted) -->
-  <div class="solve__panel on-navy">
+  <div class="solve__panel on-navy grain">
     <div class="solve__panel-atmos" aria-hidden="true">
       <span class="glow solve__glow"></span>
     </div>
@@ -69,9 +69,12 @@ const accents = ['sky', 'warning', 'danger'] as const;
     isolation: isolate;
     overflow: hidden;
     border-radius: var(--radius-bento);
-    background-image: var(--grad-navy);
-    padding: clamp(1.5rem, 3.5vw, 2.75rem);
+    background-image:
+      radial-gradient(110% 80% at 12% -10%, rgba(40, 205, 252, 0.12), transparent 55%),
+      var(--grad-navy);
+    padding: clamp(1.75rem, 3.5vw, 3rem);
     box-shadow: var(--shadow-3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
   .solve__glow {
     inline-size: 28rem;

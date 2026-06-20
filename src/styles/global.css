@@ -40,10 +40,10 @@
   --font-arabic: 'IBM Plex Sans Arabic', -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
 
-  /* Navy-tinted shadows (brand-correct elevation) -> shadow-1/2/3 */
-  --shadow-1: 0 1px 4px rgba(12, 40, 93, 0.06);
-  --shadow-2: 0 4px 16px rgba(12, 40, 93, 0.1);
-  --shadow-3: 0 8px 32px rgba(12, 40, 93, 0.14);
+  /* Layered, navy-tinted elevation -> shadow-1/2/3 (premium multi-layer) */
+  --shadow-1: 0 1px 2px rgba(12, 40, 93, 0.05), 0 1px 3px rgba(12, 40, 93, 0.05);
+  --shadow-2: 0 2px 6px rgba(12, 40, 93, 0.05), 0 10px 26px -8px rgba(12, 40, 93, 0.12);
+  --shadow-3: 0 4px 10px rgba(12, 40, 93, 0.06), 0 22px 54px -14px rgba(12, 40, 93, 0.2);
 
   /* Radius -> rounded-sm/md/lg/xl/full */
   --radius-sm: 4px;
@@ -69,12 +69,29 @@
   --space-24: 96px;
 
   /* Marketing radius for big cells (16–20px) */
-  --radius-bento: 18px;
+  --radius-bento: 20px;
 
   /* Signature gradient bar (sky -> action -> orange) */
   --grad-signature: linear-gradient(90deg, #28cdfc 0%, #0673ff 50%, #f05a29 100%);
-  /* Dark section gradient */
+  /* Dark section gradient (base) */
   --grad-navy: linear-gradient(160deg, #0c285d 0%, #081b42 100%);
+  /* Sky -> action gradient for accent text */
+  --grad-text: linear-gradient(96deg, #28cdfc 0%, #0673ff 70%);
+
+  /* Premium accent / focal elevation */
+  --shadow-card: 0 1px 3px rgba(12, 40, 93, 0.05), 0 12px 30px -12px rgba(12, 40, 93, 0.16);
+  --shadow-card-hover: 0 2px 6px rgba(12, 40, 93, 0.07), 0 26px 60px -16px rgba(12, 40, 93, 0.26);
+  --shadow-action: 0 8px 22px -6px rgba(6, 115, 255, 0.5), 0 2px 6px rgba(6, 115, 255, 0.25);
+  --shadow-action-hover: 0 12px 30px -6px rgba(6, 115, 255, 0.62), 0 3px 8px rgba(6, 115, 255, 0.3);
+  --ring-sky: 0 0 0 1px rgba(40, 205, 252, 0.18), 0 18px 50px -14px rgba(40, 205, 252, 0.32);
+
+  /* Easing — Apple/Stripe-grade curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Faint film grain (very subtle) for premium texture on dark surfaces */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* ===========================================================================
@@ -94,6 +111,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga' 1, 'calt' 1, 'cv11' 1, 'ss01' 1;
+    font-optical-sizing: auto;
     overflow-x: hidden;
   }
 
@@ -101,6 +120,9 @@
   [dir='rtl'],
   :lang(ar) {
     font-family: var(--font-arabic);
+  }
+  [dir='rtl'] {
+    font-feature-settings: normal;
   }
 
   h1, h2, h3, h4 {
@@ -145,6 +167,31 @@
   section[id] {
     scroll-margin-block-start: 5rem;
   }
+
+  /* Subtle, brand-tinted scrollbar (fine pointers only) */
+  @media (pointer: fine) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(12, 40, 93, 0.28) transparent;
+    }
+    ::-webkit-scrollbar {
+      width: 11px;
+      height: 11px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(12, 40, 93, 0.26);
+      border-radius: 9999px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(12, 40, 93, 0.42);
+      background-clip: content-box;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+  }
 }
 
 /* ===========================================================================
@@ -158,21 +205,32 @@
     background-image: var(--grad-navy);
   }
 
+  /* Sky -> action gradient text (premium accent) */
+  .gradient-text {
+    background-image: var(--grad-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+
   /* Force the Arabic face on a fragment regardless of page direction
      (used for the أرى part of the wordmark on the English page). */
   .font-arabic-force {
     font-family: var(--font-arabic);
   }
 
-  /* Glassmorphic card on navy backgrounds */
+  /* Glassmorphic card on navy backgrounds — refined depth + inner highlight */
   .glass {
     position: relative;
-    background-color: rgba(255, 255, 255, 0.06);
+    background-color: rgba(255, 255, 255, 0.055);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-bento);
-    box-shadow: var(--shadow-2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    box-shadow:
+      var(--shadow-2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
   }
   /* bright gradient top-edge */
   .glass::before {
@@ -183,16 +241,46 @@
     height: 1px;
     border-radius: var(--radius-bento) var(--radius-bento) 0 0;
     background-image: var(--grad-signature);
-    opacity: 0.75;
+    opacity: 0.7;
   }
 
   /* Soft radial glow blobs for atmosphere on dark sections */
   .glow {
     position: absolute;
     border-radius: 9999px;
-    filter: blur(70px);
+    filter: blur(72px);
     pointer-events: none;
     z-index: 0;
+  }
+
+  /* Faint film grain overlay (apply to a positioned dark container) */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--noise);
+    background-size: 140px 140px;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+  }
+
+  /* Faint dot grid for light panels (Stripe-style restraint) */
+  .tex-dots {
+    background-image: radial-gradient(rgba(12, 40, 93, 0.05) 1px, transparent 1.4px);
+    background-size: 24px 24px;
+  }
+
+  /* Thin gradient hairline used at section seams */
+  .seam {
+    block-size: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(12, 40, 93, 0.12) 50%,
+      transparent 100%
+    );
   }
 
   /* mono numerals tabular for clean ticking data */
@@ -211,10 +299,10 @@
    =========================================================================== */
 html.motion [data-reveal] {
   opacity: 0;
-  transform: translateY(22px);
+  transform: translateY(26px);
   transition:
-    opacity 0.62s cubic-bezier(0.22, 0.61, 0.36, 1),
-    transform 0.62s cubic-bezier(0.22, 0.61, 0.36, 1);
+    opacity 0.8s var(--ease-out-expo),
+    transform 0.8s var(--ease-out-expo);
   will-change: opacity, transform;
 }
 html.motion [data-reveal].is-visible {

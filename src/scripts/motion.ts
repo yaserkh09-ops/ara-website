@@ -38,6 +38,7 @@ export function initMotion(): void {
     });
 
     initReveals();
+    initParallax();
     initHeroMotif(rtl);
     initMechanism();
     initStepThrough();
@@ -61,6 +62,24 @@ export function initMotion(): void {
 
 function revealAll(): void {
   document.querySelectorAll('[data-reveal]').forEach((el) => el.classList.add('is-visible'));
+}
+
+/* Gentle scroll parallax for elements tagged [data-parallax] (hero glows). */
+function initParallax(): void {
+  document.querySelectorAll<HTMLElement>('[data-parallax]').forEach((el) => {
+    const speed = parseFloat(el.dataset.parallax || '0');
+    if (!speed) return;
+    gsap.to(el, {
+      y: speed * 280,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: el.closest('section') || el,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 0.6,
+      },
+    });
+  });
 }
 
 /* Sequential rise+fade reveals; grouped elements stagger together. */
@@ -95,14 +114,14 @@ function initHeroMotif(rtl: boolean): void {
       scale: 0.9,
       duration: 0.5,
       stagger: 0.12,
-      ease: 'power2.out',
+      ease: 'power3.out',
     });
   }
 
   if (conn) {
     const len = conn.getTotalLength();
     gsap.set(conn, { strokeDasharray: len, strokeDashoffset: rtl ? -len : len });
-    tl.to(conn, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut' }, '-=0.1');
+    tl.to(conn, { strokeDashoffset: 0, duration: 0.7, ease: 'power3.inOut' }, '-=0.1');
   }
 
   tl.add(() => motif.classList.remove('is-dim'), '-=0.25');
@@ -110,7 +129,7 @@ function initHeroMotif(rtl: boolean): void {
   if (tiles.length) {
     tl.from(
       tiles,
-      { opacity: 0, y: 14, duration: 0.45, stagger: 0.07, ease: 'power2.out' },
+      { opacity: 0, y: 14, duration: 0.45, stagger: 0.07, ease: 'power3.out' },
       '-=0.4'
     );
   }

@@ -30,14 +30,18 @@ const { label, body, emphasis = false, tag, class: className = '' } = Astro.prop
     background: var(--color-white);
     border: 1px solid var(--color-neutral-100);
     border-radius: var(--radius-bento);
-    box-shadow: var(--shadow-1);
+    box-shadow: var(--shadow-card);
     block-size: 100%;
     overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.45s var(--ease-out-quint),
+      box-shadow 0.45s var(--ease-out-quint),
+      border-color 0.3s ease;
   }
   .acard:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-2);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-neutral-200);
   }
   .acard__tag {
     font-family: var(--font-mono);
@@ -79,7 +83,7 @@ const { label, body, emphasis = false, tag, class: className = '' } = Astro.prop
   }
   .acard--emphasis {
     border-color: var(--color-neutral-200);
-    box-shadow: var(--shadow-2);
+    box-shadow: var(--shadow-card-hover);
   }
 
   @media (prefers-reduced-motion: reduce) {

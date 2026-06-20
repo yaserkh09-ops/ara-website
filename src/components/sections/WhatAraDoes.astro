@@ -21,7 +21,7 @@ const { c } = Astro.props;
 
   <div class="does__bento">
     <!-- Feature cell: the locked -> live mechanism -->
-    <div class="does__feature on-navy" data-reveal>
+    <div class="does__feature on-navy grain" data-reveal>
       <MechanismDiagram c={c} />
     </div>
 
@@ -67,11 +67,15 @@ const { c } = Astro.props;
   }
   .does__feature {
     position: relative;
+    isolation: isolate;
     overflow: hidden;
     border-radius: var(--radius-bento);
-    background-image: var(--grad-navy);
+    background-image:
+      radial-gradient(120% 90% at 88% -10%, rgba(40, 205, 252, 0.16), transparent 55%),
+      var(--grad-navy);
     padding: clamp(1.5rem, 3vw, 2.5rem);
     box-shadow: var(--shadow-3);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .does__values {
@@ -90,12 +94,16 @@ const { c } = Astro.props;
     background: var(--color-white);
     border: 1px solid var(--color-neutral-100);
     border-radius: var(--radius-bento);
-    box-shadow: var(--shadow-1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-card);
+    transition:
+      transform 0.45s var(--ease-out-quint),
+      box-shadow 0.45s var(--ease-out-quint),
+      border-color 0.3s ease;
   }
   .does__value:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-2);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-neutral-200);
   }
   .does__value-index {
     font-family: var(--font-mono);

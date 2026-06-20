@@ -15,15 +15,15 @@ const { c } = Astro.props;
 
 <section id="top" class="hero on-navy">
   <div class="hero__atmos" aria-hidden="true">
-    <span class="glow hero__glow-a"></span>
-    <span class="glow hero__glow-b"></span>
+    <span class="glow hero__glow-a" data-parallax="0.12"></span>
+    <span class="glow hero__glow-b" data-parallax="-0.08"></span>
   </div>
 
   <div class="hero__inner">
     <div class="hero__copy">
       <Eyebrow text={c.hero.eyebrow} class="hero__eyebrow" />
       <h1 class="hero__headline" data-reveal>{c.hero.headline}</h1>
-      <p class="hero__tagline" data-reveal>{c.hero.tagline}</p>
+      <p class="hero__tagline gradient-text" data-reveal>{c.hero.tagline}</p>
       <p class="hero__subhead" data-reveal>{c.hero.subhead}</p>
       <div class="hero__actions" data-reveal>
         <Button href={site.signInUrl} variant="primary" external>{c.hero.primary}</Button>
@@ -37,6 +37,10 @@ const { c } = Astro.props;
       <HeroMotif c={c} />
     </div>
   </div>
+
+  <a class="hero__scroll" href={anchor(site.anchors.whatWeSolve)} aria-hidden="true" tabindex="-1">
+    <span class="hero__scroll-track"><span class="hero__scroll-dot"></span></span>
+  </a>
 </section>
 
 <style>
@@ -44,13 +48,62 @@ const { c } = Astro.props;
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background-image: var(--grad-navy);
+    background-image:
+      radial-gradient(90% 70% at 78% -10%, rgba(40, 205, 252, 0.14), transparent 60%),
+      var(--grad-navy);
     color: rgba(255, 255, 255, 0.82);
     padding-block-start: clamp(7rem, 14vh, 10rem);
     padding-block-end: clamp(4rem, 9vw, 7rem);
     min-block-size: 100svh;
     display: flex;
     align-items: center;
+  }
+  /* film grain */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image: var(--noise);
+    background-size: 140px 140px;
+    opacity: 0.045;
+    mix-blend-mode: overlay;
+  }
+
+  /* scroll cue */
+  .hero__scroll {
+    position: absolute;
+    inset-block-end: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: none;
+  }
+  .hero__scroll-track {
+    display: block;
+    inline-size: 1.55rem;
+    block-size: 2.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    position: relative;
+  }
+  .hero__scroll-dot {
+    position: absolute;
+    left: 50%;
+    inset-block-start: 7px;
+    transform: translateX(-50%);
+    inline-size: 4px;
+    block-size: 7px;
+    border-radius: 9999px;
+    background: var(--color-sky);
+    animation: heroScroll 1.9s var(--ease-out-quint) infinite;
+  }
+  @keyframes heroScroll {
+    0% { opacity: 0; transform: translate(-50%, 0); }
+    25% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, 12px); }
   }
   .hero__glow-a {
     inline-size: 42rem;
@@ -96,11 +149,12 @@ const { c } = Astro.props;
     text-wrap: balance;
   }
   .hero__tagline {
+    display: inline-block;
     margin: 1.1rem 0 0;
     font-size: clamp(1.25rem, 2.4vw, 1.7rem);
-    font-weight: 400;
-    color: var(--color-sky);
+    font-weight: 500;
     line-height: 1.25;
+    letter-spacing: -0.01em;
   }
   .hero__subhead {
     margin: 1.5rem 0 0;
@@ -123,6 +177,15 @@ const { c } = Astro.props;
   @media (min-width: 980px) {
     .hero__inner {
       grid-template-columns: 1.05fr 0.95fr;
+    }
+    .hero__scroll {
+      display: block;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-dot {
+      animation: none;
     }
   }
 </style>

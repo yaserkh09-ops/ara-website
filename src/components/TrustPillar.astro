@@ -44,11 +44,15 @@ const { icon, title, body, emphasis = false, class: className = '' } = Astro.pro
     padding: clamp(1.5rem, 2.8vw, 2.25rem);
     color: var(--color-white);
     block-size: 100%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.4s var(--ease-out-quint),
+      box-shadow 0.4s var(--ease-out-quint),
+      border-color 0.3s ease;
   }
   .pillar:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-3);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-3), 0 0 0 1px rgba(40, 205, 252, 0.22);
+    border-color: rgba(40, 205, 252, 0.32);
   }
   .pillar__icon {
     display: inline-flex;

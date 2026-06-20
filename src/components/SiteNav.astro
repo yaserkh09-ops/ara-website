@@ -130,8 +130,16 @@ const links = [
     background: var(--color-sky);
     transition: inline-size 0.22s ease;
   }
-  .nav__link:hover::after {
+  .nav__link:hover::after,
+  .nav__link.is-active::after {
     inline-size: 100%;
+  }
+  .nav__link.is-active {
+    color: var(--color-white);
+    opacity: 1;
+  }
+  .nav__mobile-link.is-active {
+    color: var(--color-sky);
   }
 
   .nav__actions {
