@@ -187,12 +187,31 @@ const en = {
     motif: {
       caption:
         'Hidden inventory becomes shared, live visibility: stock tiles light up as an organization and a company connect.',
+      panelTitle: 'Live inventory', // [micro-copy]
+      liveLabel: 'Live', // [micro-copy]
       org: 'Organization',
       company: 'Company',
       inStock: 'In stock',
       low: 'Low',
       out: 'Out',
     },
+    // §3 product dashboard mock (clearly sample data). [micro-copy]
+    dashboard: {
+      title: 'Inventory',
+      item: 'Item',
+      stock: 'Stock',
+      status: 'Status',
+      access: 'Access',
+      shared: 'Shared',
+      private: 'Private',
+    },
+    // Honest value strip — short claims drawn from the locked copy. [micro-copy]
+    proof: [
+      'Free for healthcare organizations',
+      'Real-time visibility',
+      'Permission-based by design',
+      'Enterprise-grade access control',
+    ],
     // §3 mechanism diagram + §5 flow. [micro-copy]
     diagram: {
       locked: 'Locked',
@@ -348,12 +367,30 @@ const ar: Copy = {
     motif: {
       caption:
         'يتحوّل المخزون الخفيّ إلى رؤيةٍ حيّةٍ مشتركة: تُضيء بطاقات المخزون عند اتصال المنشأة بالشركة.', // [micro-copy]
+      panelTitle: 'المخزون الحيّ', // [micro-copy]
+      liveLabel: 'حيّ', // [micro-copy]
       org: 'المنشأة',
       company: 'الشركة',
       inStock: 'متوفر',
       low: 'منخفض',
       out: 'نافد',
     },
+    // §3 product dashboard mock (clearly sample data). [micro-copy]
+    dashboard: {
+      title: 'المخزون',
+      item: 'الصنف',
+      stock: 'الكمية',
+      status: 'الحالة',
+      access: 'الوصول',
+      shared: 'مُشارَك',
+      private: 'خاص',
+    },
+    proof: [
+      'مجانية للمنشآت الصحية',
+      'رؤية لحظية',
+      'قائمة على الأذونات',
+      'تحكّمٌ في الوصول بمعايير المؤسسات',
+    ],
     diagram: {
       locked: 'مُقفل',
       live: 'حيّ',

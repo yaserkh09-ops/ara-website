@@ -3,7 +3,7 @@ import type { Copy, Locale } from '../../i18n/copy';
 import { site } from '../../i18n/copy';
 import Section from '../Section.astro';
 import Eyebrow from '../Eyebrow.astro';
-import MechanismDiagram from '../MechanismDiagram.astro';
+import ProductPanel from '../ProductPanel.astro';
 
 interface Props {
   locale: Locale;
@@ -22,7 +22,7 @@ const { c } = Astro.props;
   <div class="does__bento">
     <!-- Feature cell: the locked -> live mechanism -->
     <div class="does__feature on-navy grain" data-reveal>
-      <MechanismDiagram c={c} />
+      <ProductPanel c={c} />
     </div>
 
     <!-- Small value cells -->

@@ -21,6 +21,7 @@ const { c } = Astro.props;
   <div class="who__bento" data-reveal-group>
     <AudienceCard
       tag="01"
+      icon="org"
       label={c.audiences.organizations.label}
       body={c.audiences.organizations.body}
       emphasis
@@ -28,6 +29,7 @@ const { c } = Astro.props;
     />
     <AudienceCard
       tag="02"
+      icon="company"
       label={c.audiences.companies.label}
       body={c.audiences.companies.body}
       class="who__cell--co"

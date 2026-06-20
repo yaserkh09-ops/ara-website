@@ -14,7 +14,7 @@ const { c } = Astro.props;
 const icons = ['own', 'access', 'current'] as const;
 ---
 
-<Section id={site.anchors.trust} theme="navy" glow>
+<Section id={site.anchors.trust} theme="navy" glow seam>
   <div class="trust__head">
     <Eyebrow text={c.trust.eyebrow} />
     <h2 class="trust__heading" data-reveal>{c.trust.heading}</h2>

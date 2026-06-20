@@ -101,11 +101,16 @@ function initHeroMotif(rtl: boolean): void {
 
   motif.classList.add('is-dim');
 
+  const panel = motif.querySelector<HTMLElement>('.motif__panel');
   const conn = motif.querySelector<SVGPathElement>('[data-connector]');
   const nodes = motif.querySelectorAll<HTMLElement>('[data-node]');
   const tiles = motif.querySelectorAll<HTMLElement>('[data-tile]');
 
-  const tl = gsap.timeline({ delay: 0.45 });
+  const tl = gsap.timeline({ delay: 0.35 });
+
+  if (panel) {
+    tl.from(panel, { opacity: 0, y: 28, duration: 0.8, ease: 'power3.out' });
+  }
 
   if (nodes.length) {
     tl.from(nodes, {
@@ -188,7 +193,13 @@ function initStepThrough(): void {
   const steps = Array.from(how.querySelectorAll<HTMLElement>('[data-step]'));
   const nodes = Array.from(how.querySelectorAll<HTMLElement>('[data-flow-node]'));
   const fill = how.querySelector<HTMLElement>('[data-flow-fill]');
+  const stepsWrap = how.querySelector<HTMLElement>('.how__steps');
   if (steps.length === 0) return;
+
+  // Reserve room for the tallest step BEFORE we stack them, so the cross-fade
+  // never clips and the pinned canvas keeps a stable height.
+  const maxH = steps.reduce((h, s) => Math.max(h, s.offsetHeight), 0);
+  if (stepsWrap && maxH) stepsWrap.style.minHeight = `${maxH}px`;
 
   how.classList.add('is-enhanced');
 
@@ -200,19 +211,19 @@ function initStepThrough(): void {
     });
   };
   setActive(0);
-  if (fill) fill.style.transform = 'scaleY(0)';
+  if (fill) fill.style.transform = 'scaleY(0.04)';
 
   ScrollTrigger.create({
     trigger: how,
-    start: 'top top+=88',
-    end: `+=${steps.length * 78}%`,
+    start: 'top top+=96',
+    end: `+=${steps.length * 60}%`,
     pin: true,
     pinSpacing: true,
     anticipatePin: 1,
     onUpdate: (self) => {
       const idx = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
       setActive(idx);
-      if (fill) fill.style.transform = `scaleY(${self.progress})`;
+      if (fill) fill.style.transform = `scaleY(${Math.max(0.04, self.progress)})`;
     },
   });
 }

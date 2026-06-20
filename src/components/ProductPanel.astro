@@ -1,0 +1,283 @@
+---
+// §3 product surface — a realistic (clearly sample) ARA inventory dashboard.
+// Light "app screenshot" that sits on the navy feature frame. Reuses the
+// mechanism hooks: motion.ts adds `.is-locked` on enter, then releases it so
+// the panel transitions from a greyed/locked back-office view to a live one.
+// Default render = final live state (no-JS / reduced motion safe).
+import type { Copy } from '../i18n/copy';
+interface Props {
+  c: Copy;
+}
+const { c } = Astro.props;
+const dash = c.ui.dashboard;
+const d = c.ui.diagram;
+const m = c.ui.motif;
+
+const rows = [
+  { sku: 'SKU-4821', qty: '142', fill: 88, status: 'in', access: 'shared' },
+  { sku: 'SKU-1907', qty: '38', fill: 42, status: 'low', access: 'shared' },
+  { sku: 'SKU-7233', qty: '0', fill: 5, status: 'out', access: 'private' },
+  { sku: 'SKU-5560', qty: '210', fill: 94, status: 'in', access: 'shared' },
+  { sku: 'SKU-2418', qty: '12', fill: 16, status: 'low', access: 'private' },
+];
+const statusLabel: Record<string, string> = { in: m.inStock, low: m.low, out: m.out };
+---
+
+<div class="product" data-mechanism role="img" aria-label={d.caption}>
+  <div class="product__card">
+    <header class="product__head">
+      <span class="product__brand">
+        <span class="product__app" aria-hidden="true">ARA</span>
+        <span class="product__title">{dash.title}</span>
+      </span>
+      <span class="product__state" data-state>
+        <svg class="product__lock-open" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path d="M7 10V7a5 5 0 0 1 9.6-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <rect x="4" y="10" width="16" height="10" rx="2.5" fill="currentColor"></rect>
+        </svg>
+        <svg class="product__lock-closed" viewBox="0 0 24 24" width="14" height="14" aria-hidden="true">
+          <path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <rect x="4" y="10" width="16" height="10" rx="2.5" fill="currentColor"></rect>
+        </svg>
+        <span class="product__state-live">{d.live}</span>
+        <span class="product__state-locked">{d.locked}</span>
+      </span>
+    </header>
+
+    <div class="product__table" role="table">
+      <div class="product__row product__row--head" role="row">
+        <span role="columnheader">{dash.item}</span>
+        <span role="columnheader">{dash.stock}</span>
+        <span role="columnheader">{dash.status}</span>
+        <span class="product__access-col" role="columnheader">{dash.access}</span>
+      </div>
+      {
+        rows.map((r) => (
+          <div class="product__row" data-row role="row">
+            <span class="product__sku tnum" role="cell">{r.sku}</span>
+            <span class="product__stock" role="cell">
+              <span class="product__bar">
+                <span class={`product__bar-fill product__bar-fill--${r.status}`} style={`width:${r.fill}%`} />
+              </span>
+              <span class="product__qty tnum">{r.qty}</span>
+            </span>
+            <span class={`product__chip product__chip--${r.status}`} role="cell">
+              <span class="product__chip-dot" />
+              {statusLabel[r.status]}
+            </span>
+            <span class="product__access product__access-col" role="cell">
+              {r.access === 'shared' ? dash.shared : dash.private}
+            </span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .product {
+    position: relative;
+    z-index: 1;
+    inline-size: 100%;
+  }
+  .product__card {
+    background: #ffffff;
+    border: 1px solid var(--color-neutral-200);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-3);
+    overflow: hidden;
+    transition: filter 0.5s ease, opacity 0.5s ease;
+  }
+
+  .product__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    background: var(--color-neutral-50);
+    border-block-end: 1px solid var(--color-neutral-100);
+  }
+  .product__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .product__app {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem 0.45rem;
+    border-radius: var(--radius-sm);
+    background-image: var(--grad-navy);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+  .product__title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-neutral-700);
+  }
+  .product__state {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-success);
+  }
+  :global([dir='rtl']) .product__state {
+    font-family: var(--font-arabic);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .product__lock-closed,
+  .product__state-locked {
+    display: none;
+  }
+
+  .product__table {
+    padding: 0.35rem 0.5rem 0.6rem;
+  }
+  .product__row {
+    display: grid;
+    grid-template-columns: 1.1fr 1.3fr 0.9fr 0.7fr;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 0.6rem;
+    border-radius: var(--radius-sm);
+  }
+  .product__row:not(.product__row--head):nth-child(odd) {
+    background: var(--color-neutral-50);
+  }
+  .product__row--head span {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-neutral-400);
+  }
+  :global([dir='rtl']) .product__row--head span {
+    font-family: var(--font-arabic);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .product__sku {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--color-neutral-600);
+  }
+  .product__stock {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .product__bar {
+    flex: 1;
+    block-size: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-neutral-100);
+    overflow: hidden;
+  }
+  .product__bar-fill {
+    display: block;
+    block-size: 100%;
+    border-radius: 9999px;
+    transition: width 0.6s var(--ease-out-quint), opacity 0.4s ease;
+  }
+  .product__bar-fill--in { background: var(--color-success); }
+  .product__bar-fill--low { background: var(--color-warning); }
+  .product__bar-fill--out { background: var(--color-danger); }
+  .product__qty {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--color-neutral-700);
+    min-inline-size: 2.3rem;
+    text-align: end;
+  }
+
+  .product__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    font-weight: 600;
+    inline-size: fit-content;
+  }
+  .product__chip-dot {
+    inline-size: 0.42rem;
+    block-size: 0.42rem;
+    border-radius: 9999px;
+    background: currentColor;
+  }
+  .product__chip--in {
+    color: #0f7a50;
+    background: color-mix(in srgb, var(--color-success) 16%, #fff);
+  }
+  .product__chip--low {
+    color: #9a6500;
+    background: color-mix(in srgb, var(--color-warning) 18%, #fff);
+  }
+  .product__chip--out {
+    color: #b42323;
+    background: color-mix(in srgb, var(--color-danger) 14%, #fff);
+  }
+
+  .product__access {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-neutral-500);
+  }
+  :global([dir='rtl']) .product__access {
+    font-family: var(--font-arabic);
+  }
+
+  /* ---- locked state (only while motion plays) ---- */
+  .product.is-locked .product__card {
+    filter: grayscale(0.8) brightness(0.99);
+  }
+  .product.is-locked .product__table {
+    filter: blur(3px);
+    opacity: 0.65;
+  }
+  .product.is-locked .product__state {
+    color: var(--color-neutral-400);
+  }
+  .product.is-locked .product__lock-open,
+  .product.is-locked .product__state-live {
+    display: none;
+  }
+  .product.is-locked .product__lock-closed {
+    display: inline;
+  }
+  .product.is-locked .product__state-locked {
+    display: inline;
+  }
+
+  /* responsive: drop the access column on narrow screens */
+  @media (max-width: 600px) {
+    .product__row {
+      grid-template-columns: 1fr 1.3fr 0.9fr;
+    }
+    .product__access-col {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product__card,
+    .product__bar-fill {
+      transition: none;
+    }
+  }
+</style>

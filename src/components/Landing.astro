@@ -1,6 +1,7 @@
 ---
 import type { Copy, Locale } from '../i18n/copy';
 import Hero from './sections/Hero.astro';
+import ProofStrip from './ProofStrip.astro';
 import WhatWeSolve from './sections/WhatWeSolve.astro';
 import WhatAraDoes from './sections/WhatAraDoes.astro';
 import WhoItsFor from './sections/WhoItsFor.astro';
@@ -16,6 +17,7 @@ const { locale, c } = Astro.props;
 ---
 
 <Hero locale={locale} c={c} />
+<ProofStrip c={c} />
 <WhatWeSolve locale={locale} c={c} />
 <WhatAraDoes locale={locale} c={c} />
 <WhoItsFor locale={locale} c={c} />
