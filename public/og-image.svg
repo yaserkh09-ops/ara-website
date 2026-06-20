@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="ARA — Inventory Intelligence Solution">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0C285D"/>
+      <stop offset="100%" stop-color="#081B42"/>
+    </linearGradient>
+    <linearGradient id="sig" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#28CDFC"/>
+      <stop offset="50%" stop-color="#0673FF"/>
+      <stop offset="100%" stop-color="#F05A29"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="78%" cy="18%" r="55%">
+      <stop offset="0%" stop-color="#28CDFC" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#28CDFC" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- wordmark chip -->
+  <g transform="translate(96,112)">
+    <rect x="0" y="0" width="232" height="74" rx="10" fill="#0C285D" stroke="#28CDFC" stroke-opacity="0.25"/>
+    <text x="26" y="50" font-family="Inter, Arial, sans-serif" font-size="40" font-weight="800" fill="#FFFFFF">ARA</text>
+    <text x="118" y="49" font-family="Arial, sans-serif" font-size="34" font-weight="300" fill="#28CDFC">|</text>
+    <text x="140" y="50" font-family="'IBM Plex Sans Arabic', Arial, sans-serif" font-size="40" font-weight="600" fill="#FFFFFF" direction="rtl">أرى</text>
+  </g>
+
+  <!-- eyebrow -->
+  <text x="96" y="262" font-family="'IBM Plex Mono', monospace" font-size="26" letter-spacing="3" fill="#F05A29">INVENTORY INTELLIGENCE SOLUTION</text>
+
+  <!-- headline -->
+  <text x="94" y="350" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800" fill="#FFFFFF">Never caught short.</text>
+  <text x="94" y="440" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800" fill="#FFFFFF">Never sold blind.</text>
+
+  <!-- tagline -->
+  <text x="96" y="506" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="400" fill="#28CDFC">See what’s available. Instantly.</text>
+
+  <!-- signature bar -->
+  <rect x="96" y="556" width="320" height="6" rx="3" fill="url(#sig)"/>
+</svg>

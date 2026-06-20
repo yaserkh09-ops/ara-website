@@ -1,0 +1,98 @@
+---
+// Glassmorphic card for the pain points (used on a navy mini-panel).
+interface Props {
+  index: string;
+  title: string;
+  body: string;
+  accent?: 'sky' | 'warning' | 'danger';
+  emphasis?: boolean;
+  class?: string;
+}
+const {
+  index,
+  title,
+  body,
+  accent = 'sky',
+  emphasis = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<article
+  class:list={['glass gcard', { 'gcard--emphasis': emphasis }, `gcard--${accent}`, className]}
+  data-reveal
+>
+  <div class="gcard__top">
+    <span class="gcard__index tnum">{index}</span>
+    <span class="gcard__dot" aria-hidden="true"></span>
+  </div>
+  <h3 class="gcard__title">{title}</h3>
+  <p class="gcard__body">{body}</p>
+</article>
+
+<style>
+  .gcard {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: clamp(1.5rem, 2.6vw, 2.1rem);
+    color: var(--color-white);
+    block-size: 100%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .gcard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-3);
+  }
+  .gcard__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .gcard__index {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.45);
+  }
+  .gcard__dot {
+    inline-size: 0.6rem;
+    block-size: 0.6rem;
+    border-radius: 9999px;
+    background: var(--color-sky);
+  }
+  .gcard--sky .gcard__dot {
+    background: var(--color-sky);
+    box-shadow: 0 0 12px rgba(40, 205, 252, 0.7);
+  }
+  .gcard--warning .gcard__dot {
+    background: var(--color-warning);
+    box-shadow: 0 0 12px rgba(245, 166, 35, 0.7);
+  }
+  .gcard--danger .gcard__dot {
+    background: var(--color-danger);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+  }
+  .gcard__title {
+    margin: 0;
+    font-size: clamp(1.15rem, 1.8vw, 1.4rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-white);
+  }
+  .gcard__body {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.74);
+  }
+  .gcard--emphasis .gcard__title {
+    font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gcard:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+// ARA | أرى wordmark — white-on-navy chip (never on a bare light background).
+// "ARA" stays in the Latin/sans face; "أرى" is forced to the Arabic face
+// regardless of page direction. Optional signature gradient hairline beneath.
+interface Props {
+  href: string;
+  ariaLabel: string;
+  size?: 'sm' | 'md' | 'lg';
+  underline?: boolean;
+  class?: string;
+}
+const {
+  href,
+  ariaLabel,
+  size = 'md',
+  underline = false,
+  class: className = '',
+} = Astro.props;
+---
+
+<a href={href} class:list={['wordmark no-fade', `wordmark--${size}`, className]} aria-label={ariaLabel}>
+  <span class="wordmark__chip">
+    <span class="wordmark__latin">ARA</span>
+    <span class="wordmark__sep" aria-hidden="true">|</span>
+    <span class="wordmark__ar font-arabic-force">أرى</span>
+  </span>
+  {underline && <span class="wordmark__bar grad-signature" aria-hidden="true"></span>}
+</a>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    line-height: 1;
+  }
+  .wordmark__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-navy);
+    background-image: var(--grad-navy);
+    color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding-inline: 0.7rem;
+    padding-block: 0.45rem;
+    box-shadow: var(--shadow-1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .wordmark__latin {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .wordmark__sep {
+    color: var(--color-sky);
+    font-weight: 300;
+    opacity: 0.85;
+  }
+  .wordmark__ar {
+    font-weight: 600;
+  }
+  .wordmark__bar {
+    block-size: 2px;
+    inline-size: 100%;
+    border-radius: 2px;
+    opacity: 0.9;
+  }
+
+  /* sizes */
+  .wordmark--sm .wordmark__chip {
+    font-size: 1rem;
+  }
+  .wordmark--md .wordmark__chip {
+    font-size: 1.15rem;
+  }
+  .wordmark--lg .wordmark__chip {
+    font-size: 1.6rem;
+    padding-inline: 0.9rem;
+    padding-block: 0.55rem;
+  }
+</style>

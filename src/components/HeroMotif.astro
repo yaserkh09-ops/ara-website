@@ -1,0 +1,252 @@
+---
+// The signature motif: "the shelf becomes visible."
+// An organization node and a company node connect; greyed stock tiles light up
+// to live status; one tile ticks amber -> green on a slow loop.
+//
+// Rendered in its FINAL lit state by default, so no-JS / reduced-motion users
+// see the resolved picture. motion.ts dims it, then plays the orchestrated
+// entrance when motion is enabled.
+import type { Copy } from '../i18n/copy';
+interface Props {
+  c: Copy;
+}
+const { c } = Astro.props;
+const m = c.ui.motif;
+
+// Sample system data (Western mono digits — reads as real system data, per spec).
+const tiles = [
+  { sku: 'SKU-4821', qty: '142', status: 'in' },
+  { sku: 'SKU-1907', qty: '38', status: 'low', restock: true },
+  { sku: 'SKU-7233', qty: '0', status: 'out' },
+  { sku: 'SKU-5560', qty: '210', status: 'in' },
+  { sku: 'SKU-3094', qty: '76', status: 'in' },
+  { sku: 'SKU-2418', qty: '12', status: 'low' },
+];
+const statusLabel: Record<string, string> = {
+  in: m.inStock,
+  low: m.low,
+  out: m.out,
+};
+---
+
+<div id="hero-motif" class="motif" role="img" aria-label={m.caption} data-motif>
+  <div class="motif__glow glow" aria-hidden="true"></div>
+
+  <!-- connection between the two parties -->
+  <svg class="motif__wire" viewBox="0 0 320 80" preserveAspectRatio="none" aria-hidden="true">
+    <path
+      d="M 28 40 C 110 40, 210 40, 292 40"
+      fill="none"
+      stroke="url(#motifWire)"
+      stroke-width="2"
+      stroke-linecap="round"
+      data-connector
+    ></path>
+    <defs>
+      <linearGradient id="motifWire" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#28CDFC"></stop>
+        <stop offset="50%" stop-color="#0673FF"></stop>
+        <stop offset="100%" stop-color="#F05A29"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="motif__nodes">
+    <span class="motif__node motif__node--org" data-node>
+      <span class="motif__node-dot"></span>{m.org}
+    </span>
+    <span class="motif__node motif__node--company" data-node>
+      <span class="motif__node-dot"></span>{m.company}
+    </span>
+  </div>
+
+  <ul class="motif__grid">
+    {
+      tiles.map((t) => (
+        <li
+          class="motif__tile"
+          data-tile
+          data-status={t.status}
+          data-restock={t.restock ? 'true' : undefined}
+        >
+          <span class="motif__tile-head">
+            <span class="motif__sku tnum">{t.sku}</span>
+            <span class="motif__status-dot" data-dot></span>
+          </span>
+          <span class="motif__qty tnum" data-qty>{t.qty}</span>
+          <span class="motif__status-label" data-status-label>{statusLabel[t.status]}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .motif {
+    position: relative;
+    inline-size: 100%;
+    max-inline-size: 34rem;
+    margin-inline: auto;
+  }
+  .motif__glow {
+    inline-size: 24rem;
+    block-size: 24rem;
+    background: radial-gradient(circle, rgba(40, 205, 252, 0.22), transparent 70%);
+    inset-block-start: -6rem;
+    inset-inline-end: -4rem;
+    z-index: 0;
+  }
+
+  .motif__wire {
+    position: absolute;
+    inset-block-start: 2.1rem;
+    inset-inline: 6%;
+    inline-size: 88%;
+    block-size: 3rem;
+    z-index: 1;
+    opacity: 0.9;
+  }
+
+  .motif__nodes {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 1.5rem;
+  }
+  .motif__node {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-block: 0.5rem;
+    padding-inline: 0.9rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-2);
+    white-space: nowrap;
+  }
+  :global([dir='rtl']) .motif__node {
+    font-family: var(--font-arabic);
+  }
+  .motif__node-dot {
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 9999px;
+    background: var(--color-sky);
+    box-shadow: 0 0 10px rgba(40, 205, 252, 0.9);
+  }
+  .motif__node--company .motif__node-dot {
+    background: var(--color-orange);
+    box-shadow: 0 0 10px rgba(240, 90, 41, 0.8);
+  }
+
+  .motif__grid {
+    position: relative;
+    z-index: 2;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  @media (min-width: 480px) {
+    .motif__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .motif__tile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.8rem 0.85rem;
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-1);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .motif__tile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+  .motif__sku {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.62);
+  }
+  .motif__status-dot {
+    inline-size: 0.55rem;
+    block-size: 0.55rem;
+    border-radius: 9999px;
+    flex: 0 0 auto;
+  }
+  .motif__qty {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-white);
+    line-height: 1;
+  }
+  .motif__status-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  :global([dir='rtl']) .motif__status-label,
+  :global([dir='rtl']) .motif__sku {
+    font-family: var(--font-mono);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* Status colors (final lit state = default) */
+  .motif__tile[data-status='in'] .motif__status-dot {
+    background: var(--color-success);
+    box-shadow: 0 0 10px rgba(29, 184, 122, 0.7);
+  }
+  .motif__tile[data-status='in'] .motif__status-label {
+    color: var(--color-success);
+  }
+  .motif__tile[data-status='low'] .motif__status-dot {
+    background: var(--color-warning);
+    box-shadow: 0 0 10px rgba(245, 166, 35, 0.7);
+  }
+  .motif__tile[data-status='low'] .motif__status-label {
+    color: var(--color-warning);
+  }
+  .motif__tile[data-status='out'] .motif__status-dot {
+    background: var(--color-danger);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
+  }
+  .motif__tile[data-status='out'] .motif__status-label {
+    color: var(--color-danger);
+  }
+
+  /* Dimmed / "hidden data" state, applied only while motion plays. */
+  .motif.is-dim .motif__tile {
+    filter: grayscale(1) brightness(0.7);
+    opacity: 0.5;
+    transition: filter 0.6s ease, opacity 0.6s ease;
+  }
+  .motif.is-dim .motif__tile .motif__status-dot {
+    background: var(--color-neutral-400) !important;
+    box-shadow: none !important;
+  }
+  .motif__tile {
+    transition: filter 0.6s ease, opacity 0.6s ease, transform 0.3s ease;
+  }
+</style>

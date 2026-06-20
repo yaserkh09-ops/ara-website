@@ -1,0 +1,76 @@
+---
+import type { Copy, Locale } from '../../i18n/copy';
+import { site } from '../../i18n/copy';
+import Section from '../Section.astro';
+import Eyebrow from '../Eyebrow.astro';
+import TrustPillar from '../TrustPillar.astro';
+
+interface Props {
+  locale: Locale;
+  c: Copy;
+}
+const { c } = Astro.props;
+
+const icons = ['own', 'access', 'current'] as const;
+---
+
+<Section id={site.anchors.trust} theme="navy" glow>
+  <div class="trust__head">
+    <Eyebrow text={c.trust.eyebrow} />
+    <h2 class="trust__heading" data-reveal>{c.trust.heading}</h2>
+  </div>
+
+  <div class="trust__bento" data-reveal-group>
+    {
+      c.trust.pillars.map((p, i) => (
+        <TrustPillar
+          icon={icons[i]}
+          title={p.title}
+          body={p.body}
+          emphasis={i === 0}
+          class={i === 0 ? 'trust__cell--wide' : ''}
+        />
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .trust__head {
+    max-inline-size: 52rem;
+    margin-block-end: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .trust__heading {
+    margin: 1.25rem 0 0;
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--color-white);
+    text-wrap: balance;
+  }
+
+  .trust__bento {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  /* three-cell bento; first pillar runs wider */
+  @media (min-width: 760px) {
+    .trust__bento {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .trust__cell--wide {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1040px) {
+    .trust__bento {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+    .trust__cell--wide {
+      grid-column: auto;
+    }
+  }
+</style>

@@ -1,0 +1,128 @@
+---
+import type { Copy, Locale } from '../../i18n/copy';
+import { site } from '../../i18n/copy';
+import { anchor } from '../../i18n/utils';
+import Eyebrow from '../Eyebrow.astro';
+import Button from '../Button.astro';
+import HeroMotif from '../HeroMotif.astro';
+
+interface Props {
+  locale: Locale;
+  c: Copy;
+}
+const { c } = Astro.props;
+---
+
+<section id="top" class="hero on-navy">
+  <div class="hero__atmos" aria-hidden="true">
+    <span class="glow hero__glow-a"></span>
+    <span class="glow hero__glow-b"></span>
+  </div>
+
+  <div class="hero__inner">
+    <div class="hero__copy">
+      <Eyebrow text={c.hero.eyebrow} class="hero__eyebrow" />
+      <h1 class="hero__headline" data-reveal>{c.hero.headline}</h1>
+      <p class="hero__tagline" data-reveal>{c.hero.tagline}</p>
+      <p class="hero__subhead" data-reveal>{c.hero.subhead}</p>
+      <div class="hero__actions" data-reveal>
+        <Button href={site.signInUrl} variant="primary" external>{c.hero.primary}</Button>
+        <Button href={anchor(site.anchors.howItWorks)} variant="ghost" tone="navy">
+          {c.hero.secondary}
+        </Button>
+      </div>
+    </div>
+
+    <div class="hero__motif" data-reveal>
+      <HeroMotif c={c} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background-image: var(--grad-navy);
+    color: rgba(255, 255, 255, 0.82);
+    padding-block-start: clamp(7rem, 14vh, 10rem);
+    padding-block-end: clamp(4rem, 9vw, 7rem);
+    min-block-size: 100svh;
+    display: flex;
+    align-items: center;
+  }
+  .hero__glow-a {
+    inline-size: 42rem;
+    block-size: 42rem;
+    background: radial-gradient(circle, rgba(40, 205, 252, 0.18), transparent 70%);
+    inset-block-start: -14rem;
+    inset-inline-end: -10rem;
+  }
+  .hero__glow-b {
+    inline-size: 34rem;
+    block-size: 34rem;
+    background: radial-gradient(circle, rgba(6, 115, 255, 0.16), transparent 70%);
+    inset-block-end: -16rem;
+    inset-inline-start: -12rem;
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    inline-size: 100%;
+    max-inline-size: 1200px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 3rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-items: center;
+  }
+
+  .hero__copy {
+    max-inline-size: 38rem;
+  }
+  .hero__eyebrow {
+    margin-block-end: 1.5rem;
+  }
+  .hero__headline {
+    margin: 0;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    font-weight: 800;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    color: var(--color-white);
+    text-wrap: balance;
+  }
+  .hero__tagline {
+    margin: 1.1rem 0 0;
+    font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+    font-weight: 400;
+    color: var(--color-sky);
+    line-height: 1.25;
+  }
+  .hero__subhead {
+    margin: 1.5rem 0 0;
+    font-size: clamp(1.02rem, 1.4vw, 1.18rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.78);
+    max-inline-size: 34rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-block-start: 2.25rem;
+  }
+
+  .hero__motif {
+    inline-size: 100%;
+  }
+
+  @media (min-width: 980px) {
+    .hero__inner {
+      grid-template-columns: 1.05fr 0.95fr;
+    }
+  }
+</style>

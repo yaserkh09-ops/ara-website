@@ -1,0 +1,258 @@
+---
+// §3 mechanism: locked back-office data -> live, connected, permission-based.
+// Default render = final "live" state (for no-JS / reduced motion).
+// motion.ts adds `.is-locked` on enter, then releases it to animate.
+import type { Copy } from '../i18n/copy';
+interface Props {
+  c: Copy;
+}
+const { c } = Astro.props;
+const d = c.ui.diagram;
+const m = c.ui.motif;
+
+const rows = [
+  { sku: 'SKU-4821', qty: '142' },
+  { sku: 'SKU-1907', qty: '38' },
+  { sku: 'SKU-7233', qty: '0' },
+];
+---
+
+<div class="mech" data-mechanism role="img" aria-label={d.caption}>
+  <div class="mech__store" data-store>
+    <div class="mech__store-head">
+      <span class="mech__lock" data-lock aria-hidden="true">
+        <!-- open (live) padlock -->
+        <svg class="mech__lock-open" viewBox="0 0 24 24" width="18" height="18">
+          <path
+            d="M7 10V7a5 5 0 0 1 9.6-2"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          ></path>
+          <rect x="4" y="10" width="16" height="10" rx="2.5" fill="currentColor"></rect>
+        </svg>
+        <!-- closed (locked) padlock -->
+        <svg class="mech__lock-closed" viewBox="0 0 24 24" width="18" height="18">
+          <path
+            d="M7 10V7a5 5 0 0 1 10 0v3"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          ></path>
+          <rect x="4" y="10" width="16" height="10" rx="2.5" fill="currentColor"></rect>
+        </svg>
+      </span>
+      <span class="mech__state" data-state>
+        <span class="mech__state-live">{d.live}</span>
+        <span class="mech__state-locked">{d.locked}</span>
+      </span>
+    </div>
+
+    <ul class="mech__rows">
+      {
+        rows.map((r) => (
+          <li class="mech__row" data-row>
+            <span class="mech__sku tnum">{r.sku}</span>
+            <span class="mech__bar"><span class="mech__bar-fill" /></span>
+            <span class="mech__qty tnum">{r.qty}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <svg class="mech__wire" viewBox="0 0 240 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M 20 30 H 220" fill="none" stroke="url(#mechWire)" stroke-width="2" data-conn></path>
+    <defs>
+      <linearGradient id="mechWire" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#28CDFC"></stop>
+        <stop offset="100%" stop-color="#0673FF"></stop>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <div class="mech__nodes">
+    <span class="mech__node" data-node>
+      <span class="mech__node-dot"></span>{m.org}
+    </span>
+    <span class="mech__node mech__node--company" data-node>
+      <span class="mech__node-dot"></span>{m.company}
+    </span>
+  </div>
+</div>
+
+<style>
+  .mech {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    inline-size: 100%;
+  }
+
+  .mech__store {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-lg);
+    padding: 1.1rem 1.15rem;
+    box-shadow: var(--shadow-2);
+  }
+  .mech__store-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-block-end: 0.9rem;
+  }
+  .mech__lock {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: var(--radius-md);
+    background: rgba(40, 205, 252, 0.16);
+    color: var(--color-sky);
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+  .mech__lock-closed {
+    display: none;
+  }
+  .mech__state {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-sky);
+  }
+  :global([dir='rtl']) .mech__state {
+    font-family: var(--font-arabic);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .mech__state-locked {
+    display: none;
+  }
+
+  .mech__rows {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .mech__row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .mech__sku {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+  .mech__bar {
+    block-size: 0.45rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+  }
+  .mech__bar-fill {
+    display: block;
+    block-size: 100%;
+    inline-size: 70%;
+    border-radius: 9999px;
+    background-image: var(--grad-signature);
+    transition: width 0.6s ease, opacity 0.4s ease;
+  }
+  .mech__row:nth-child(1) .mech__bar-fill {
+    inline-size: 86%;
+  }
+  .mech__row:nth-child(2) .mech__bar-fill {
+    inline-size: 40%;
+  }
+  .mech__row:nth-child(3) .mech__bar-fill {
+    inline-size: 8%;
+  }
+  .mech__qty {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-white);
+    min-inline-size: 2.2rem;
+    text-align: end;
+  }
+
+  .mech__wire {
+    inline-size: 100%;
+    block-size: 2.6rem;
+    opacity: 0.9;
+  }
+
+  .mech__nodes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .mech__node {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: var(--color-white);
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    white-space: nowrap;
+  }
+  :global([dir='rtl']) .mech__node {
+    font-family: var(--font-arabic);
+  }
+  .mech__node-dot {
+    inline-size: 0.5rem;
+    block-size: 0.5rem;
+    border-radius: 9999px;
+    background: var(--color-sky);
+    box-shadow: 0 0 10px rgba(40, 205, 252, 0.8);
+  }
+  .mech__node--company .mech__node-dot {
+    background: var(--color-orange);
+    box-shadow: 0 0 10px rgba(240, 90, 41, 0.7);
+  }
+
+  /* ---- locked state (only while motion plays) ---- */
+  .mech.is-locked .mech__lock {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-neutral-300);
+  }
+  .mech.is-locked .mech__lock-open {
+    display: none;
+  }
+  .mech.is-locked .mech__lock-closed {
+    display: block;
+  }
+  .mech.is-locked .mech__state {
+    color: var(--color-neutral-300);
+  }
+  .mech.is-locked .mech__state-live {
+    display: none;
+  }
+  .mech.is-locked .mech__state-locked {
+    display: inline;
+  }
+  .mech.is-locked .mech__bar-fill {
+    opacity: 0.25;
+    filter: grayscale(1);
+  }
+  .mech.is-locked .mech__wire {
+    opacity: 0;
+  }
+  .mech.is-locked .mech__node-dot {
+    background: var(--color-neutral-400) !important;
+    box-shadow: none !important;
+  }
+</style>

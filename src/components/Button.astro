@@ -1,0 +1,112 @@
+---
+// Link-styled button. Variants: primary (solid action-blue) | ghost (outline).
+// `tone` adapts the ghost variant to light vs navy backgrounds.
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost';
+  tone?: 'light' | 'navy';
+  external?: boolean;
+  class?: string;
+  id?: string;
+  'data-jump'?: string;
+}
+const {
+  href,
+  variant = 'primary',
+  tone = 'light',
+  external = false,
+  class: className = '',
+  id,
+  ...rest
+} = Astro.props;
+
+const ext = external
+  ? { target: '_blank', rel: 'noopener noreferrer' }
+  : {};
+---
+
+<a
+  href={href}
+  id={id}
+  class:list={['btn no-fade', `btn--${variant}`, `btn--${tone}`, className]}
+  {...ext}
+  {...rest}
+>
+  <span class="btn__label"><slot /></span>
+</a>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-block: 0.85rem;
+    padding-inline: 1.6rem;
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease,
+      color 0.15s ease;
+    white-space: nowrap;
+  }
+  :global([dir='rtl']) .btn {
+    font-family: var(--font-arabic);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  /* Primary — solid action blue */
+  .btn--primary {
+    background-color: var(--color-action);
+    color: var(--color-white);
+    box-shadow: var(--shadow-2);
+  }
+  .btn--primary:hover {
+    background-color: #2a86ff;
+    box-shadow: var(--shadow-3);
+  }
+
+  /* Ghost on light */
+  .btn--ghost.btn--light {
+    background-color: transparent;
+    color: var(--color-navy);
+    border-color: var(--color-neutral-200);
+  }
+  .btn--ghost.btn--light:hover {
+    border-color: var(--color-action);
+    color: var(--color-action);
+    box-shadow: var(--shadow-1);
+  }
+
+  /* Ghost on navy */
+  .btn--ghost.btn--navy {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+  .btn--ghost.btn--navy:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.55);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn:hover,
+    .btn:active {
+      transform: none;
+    }
+  }
+</style>
