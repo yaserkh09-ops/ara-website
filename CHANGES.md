@@ -1,5 +1,48 @@
 # ARA Landing Page v2 — CHANGES
 
+## v2.1 — Stripe-calibre refinement pass
+
+Built from a five-lens deconstruction of stripe.com (layout geometry, type &
+color, motion grammar, enterprise trust moves, restraint rules), mapped onto
+ARA's locked brand, then adversarially reviewed (22 confirmed findings fixed).
+
+**Restraint (the biggest single upgrade)** — attention treated as a budget:
+the hero now runs one quiet motion system (three slow packets) instead of
+four competing loops, and its decorative dots no longer spend the semantic
+alert colors; gradient text appears only at the hero/final-CTA bookends;
+buttons shift color instead of jumping with growing glows; section heads no
+longer animate in (only the visual grids do, less and faster); spacing,
+gaps, and type sizes sit on closed scales; display type drops to 700 with
+tighter tracking (mass from size, not boldness).
+
+**Structure** — the two navy bands (#intelligence, #trust) enter on Stripe's
+signature diagonal seam (clip-path, constant angle at every width) with two
+accent stripes riding the intelligence fold; Integration is now a bento whose
+focal card proves "not a systems overhaul" with an honest API request sample
+(labeled fully illustrative); Trust closes with a facts strip that counts
+architecture truths (0 / 1 / 2 / Now) — deliberately not traction numbers;
+platform value rows carry mechanism receipts; the hero carries a quiet
+three-line qualifier (free for healthcare orgs · works alongside your ERP ·
+built in Riyadh).
+
+**Micro-interactions** — Stripe's sliding-arrow hover on the demo CTAs
+(chevron at rest, stem draws in); nav-link underlines; FAQ answers fade in
+via CSS only (native `<details>` semantics untouched — an earlier JS
+animation was removed after review for race/compat/AT reasons); the final
+CTA drifts two slow aurora blobs (46/58s, compositor-only), the one ambient
+moment on the page.
+
+**Review fixes worth knowing about** — the mobile-collapse rules were being
+defeated by cascade order (grids genuinely didn't stack between 761–880px);
+alert-feed table now scrolls inside its card on phones; two new text styles
+were below AA contrast and got darkened; "three ways in" vs the facts
+strip's "2 ways in" contradiction resolved ("two ways in, one shared
+catalog"); the API sample's "This is the whole integration" softened to
+"The integration is this small" with a stronger illustrative hedge; a
+mechanism line that over-specified the security claim was aligned with the
+vetted "enforced at the database level" wording.
+
+
 What changed from the approved draft to v2, section by section, and why.
 Companion to `REVISION_PLAN.md` (the approved checkpoint). Branch:
 `claude/gallant-ride-eafxir`; the v1 Astro site stays archived on
