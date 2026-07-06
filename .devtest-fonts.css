@@ -1,0 +1,9 @@
+@font-face { font-family:'Inter'; font-weight:400; src:url('.devtest-fonts/Inter-400.ttf'); }
+@font-face { font-family:'Inter'; font-weight:500; src:url('.devtest-fonts/Inter-500.ttf'); }
+@font-face { font-family:'Inter'; font-weight:600; src:url('.devtest-fonts/Inter-600.ttf'); }
+@font-face { font-family:'Inter'; font-weight:700; src:url('.devtest-fonts/Inter-700.ttf'); }
+@font-face { font-family:'Inter'; font-weight:800; src:url('.devtest-fonts/Inter-700.ttf'); }
+@font-face { font-family:'IBM Plex Mono'; font-weight:400; src:url('.devtest-fonts/PlexMono-400.ttf'); }
+@font-face { font-family:'IBM Plex Mono'; font-weight:500; src:url('.devtest-fonts/PlexMono-500.ttf'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:400; src:url('.devtest-fonts/PlexArabic-400.ttf'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:500; src:url('.devtest-fonts/PlexArabic-500.ttf'); }
