@@ -1,5 +1,36 @@
 # ARA Landing Page v2 — CHANGES
 
+## v2.2 — Design audit + typography system
+
+Three parallel audits (visual/layout, typography, microcopy) ran against the
+rendered page; every adopted finding is below.
+
+**Typography** — Inter now loads as a single variable font with the optical-
+size axis: body text keeps the text masters, headlines get the true Display
+cut (tracking relaxed to match), and the payload shrinks versus the four
+static weights. Fonts moved from `@import` inside the token sheet to
+preconnect + `<link>` in the head (faster first paint). IBM Plex Mono 600
+now actually loads — the ticking clock and step numbers were faux-bold.
+Scale repairs: the statement head is now a real step above section heads;
+a stray 24px heading tier removed; FAQ measure to 65ch; mono letter-spacing
+unified to three stops. Three Arabic bugs fixed: أرى was silently falling
+back to a system font (missing `lang`/family), the nav "قريباً" was below
+Arabic legibility size, and the footer's Arabic fell out of the mono stack.
+
+**Visual audit fixes (14)** — alert feed fills its focal card and fits
+phones properly (location column dropped ≤480px, header stacks); orphaned
+caption fixed; decorative hero dots no longer collide with mobile copy;
+step cards became open columns (restoring dense/airy rhythm); SKU-mapping
+rows align on a grid; the redundant ROADMAP pill removed; the FAQ's dead
+right rail is now a sticky "Still deciding?" contact aside; border radii
+collapsed to an 8/12/16 scale and icon tiles to two sizes; footer brand
+gets its own row on phones; the nav CTA's one-off glow removed.
+
+**Microcopy (12 edits)** — terminology unified (pharma suppliers are
+"companies" everywhere); "Arabic-ready" corrected to "Arabic coming soon";
+the ERP FAQ now says "stays in sync with it" (accurate: data is pushed);
+clichés and filler trimmed.
+
 ## v2.1 — Stripe-calibre refinement pass
 
 Built from a five-lens deconstruction of stripe.com (layout geometry, type &
