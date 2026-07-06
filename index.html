@@ -88,10 +88,10 @@
         </a>
       </div>
     </div>
-    <div class="reveal in" style="transition-delay:.1s">
+    <div class="reveal in reveal-d1">
       <div class="browser hero-browser">
         <div class="browser-bar">
-          <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <div class="browser-dots"><i></i><i></i><i></i></div>
           <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
         </div>
         <img class="browser-screen" src="assets/screens/rep-dashboard.png" alt="ARA inventory dashboard showing live stock alerts">
@@ -123,16 +123,16 @@
       <!-- FOCAL POINT · live alert feed -->
       <div class="card focal-alerts">
         <div class="feed-head">
-          <div class="feed-title"><span class="live-dot"></span><span class="kicker" style="margin:0">Live alert feed · the gap, made visible</span></div>
-          <span class="pill pill-danger" id="unresolvedPill" style="background:#fff;border-color:var(--color-danger-border)"><span id="unresolvedCount">13</span> unresolved</span>
+          <div class="feed-title"><span class="live-dot"></span><span class="kicker">Live alert feed · the gap, made visible</span></div>
+          <span class="pill pill-danger" id="unresolvedPill"><span id="unresolvedCount">13</span> unresolved</span>
         </div>
         <table class="mini-table" id="alertTable">
-          <thead><tr><th>Product</th><th>Location</th><th>Status</th><th style="text-align:right">Qty</th></tr></thead>
+          <thead><tr><th>Product</th><th>Location</th><th>Status</th><th class="num">Qty</th></tr></thead>
           <tbody id="alertBody">
-            <tr><td class="prod">Lipitor</td><td>Branch 2 — Al Rawdah</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono" style="text-align:right">0</td></tr>
-            <tr><td class="prod">Norvasc</td><td>Main Pharmacy</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono" style="text-align:right">15</td></tr>
-            <tr><td class="prod">Celebrex</td><td>OPD Dispensary</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono" style="text-align:right">0</td></tr>
-            <tr><td class="prod">Zithromax</td><td>OPD Dispensary</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono" style="text-align:right">5</td></tr>
+            <tr><td class="prod">Lipitor</td><td>Branch 2 — Al Rawdah</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
+            <tr><td class="prod">Norvasc</td><td>Main Pharmacy</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">15</td></tr>
+            <tr><td class="prod">Celebrex</td><td>OPD Dispensary</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
+            <tr><td class="prod">Zithromax</td><td>OPD Dispensary</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">5</td></tr>
           </tbody>
         </table>
         <div class="feed-foot"><span class="mono">Updated 2 min ago</span> · invisible today — surfaced the moment it happens</div>
@@ -171,7 +171,7 @@
       <!-- patient impact · wide focal -->
       <div class="card pain-card pain-wide">
         <div class="pw-copy">
-          <span class="kicker" style="margin-bottom:8px;display:block">The cost lands here</span>
+          <span class="kicker">The cost lands here</span>
           <h3>Stockouts reach the patient</h3>
           <p>A gap nobody could see — the organization, the company, and the patient all pay for it.</p>
         </div>
@@ -195,22 +195,22 @@
       <p class="lead">ARA brings your inventory to life and give you a better view to manage your stock from anywhere, anytime. ARA take you one step ahead to give permission to your supply partners to access their stock at your organization.</p>
     </div>
 
-    <div class="reveal" style="display:grid;grid-template-columns:1.62fr 1fr;gap:22px;align-items:stretch">
-      <div class="card card-flush" style="display:flex;flex-direction:column">
-        <div class="browser on-light" style="border-radius:12px 12px 0 0;border-bottom:0;box-shadow:none;border-color:var(--color-neutral-100)">
+    <div class="reveal platform-grid">
+      <div class="card card-flush flex-col">
+        <div class="browser on-light panel-frame">
           <div class="browser-bar">
-            <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+            <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
           </div>
-          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard — network inventory health by territory" style="display:block;width:100%">
+          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard — network inventory health by territory">
         </div>
-        <div style="padding:22px 26px 4px">
+        <div class="panel-caption">
           <span class="kicker">One source of truth</span>
-          <p style="color:var(--color-neutral-600);font-size:16.5px;margin-top:4px">The back-office ERP locked spreadsheet, turned into a living command center.</p>
+          <p>The back-office ERP locked spreadsheet, turned into a living command center.</p>
         </div>
       </div>
 
-      <div class="card" style="display:flex;flex-direction:column;justify-content:center;padding:14px 30px">
+      <div class="card value-stack">
         <div class="vrow">
           <div class="vi ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-7 4 14 2-7h4"/></svg></div>
           <div><h4>Live</h4><p>Stock reflects reality the moment it changes.</p></div>
@@ -236,56 +236,56 @@
       <h2 class="h2">Built for every side of the shelf.</h2>
     </div>
 
-    <div class="reveal" style="display:grid;grid-template-columns:1.28fr 1fr;gap:22px;align-items:stretch">
+    <div class="reveal who-grid">
       <!-- healthcare org (larger) -->
-      <div class="card card-flush" style="display:flex;flex-direction:column">
-        <div style="padding:30px 32px 0">
+      <div class="card card-flush flex-col">
+        <div class="who-body">
           <div class="who-head">
-            <div class="card-icon ci-green" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 8v3M10.5 9.5h3"/></svg></div>
-            <span class="kicker kicker-strong" style="color:var(--color-success)">For healthcare organizations</span>
+            <div class="card-icon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 8v3M10.5 9.5h3"/></svg></div>
+            <span class="kicker kicker-strong kicker-green">For healthcare organizations</span>
           </div>
-          <h3 class="h3" style="font-size:25px">Free to use, and fully in your control</h3>
-          <p style="color:var(--color-neutral-600);font-size:16.5px">Get a clearer, more intelligent view of your own stock. Decide which companies can see it and in return you get fewer stockouts, less manual chasing of suppliers, and a supply chain that finally responds to what you actually need. Your data stays yours.</p>
+          <h3 class="h3 h3-lg">Free to use, and fully in your control</h3>
+          <p class="card-lead">Get a clearer, more intelligent view of your own stock. Decide which companies can see it and in return you get fewer stockouts, less manual chasing of suppliers, and a supply chain that finally responds to what you actually need. Your data stays yours.</p>
         </div>
-        <div style="padding:24px 32px 30px;margin-top:auto">
+        <div class="who-shot">
           <div class="browser on-light">
             <div class="browser-bar">
-              <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="browser-dots"><i></i><i></i><i></i></div>
               <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
             </div>
-            <img class="browser-screen" src="assets/screens/admin-dashboard.png" alt="ARA organization dashboard — inventory uploads and territory coverage" style="display:block;width:100%">
+            <img class="browser-screen" src="assets/screens/admin-dashboard.png" alt="ARA organization dashboard — inventory uploads and territory coverage">
           </div>
         </div>
       </div>
 
       <!-- pharma company -->
-      <div class="card" style="display:flex;flex-direction:column">
+      <div class="card flex-col">
         <div class="who-head">
-          <div class="card-icon ci-blue" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l7-7a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></div>
-          <span class="kicker kicker-strong" style="color:var(--color-action)">For pharmaceutical companies</span>
+          <div class="card-icon ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l7-7a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></div>
+          <span class="kicker kicker-strong kicker-blue">For pharmaceutical companies</span>
         </div>
-        <h3 class="h3" style="font-size:25px">See real-time stock across every authorized account</h3>
-        <p style="color:var(--color-neutral-600);font-size:16.5px;margin-bottom:24px">Act before a shelf runs empty, direct your effort where it's genuinely needed, and serve your customers on data instead of guesswork.</p>
+        <h3 class="h3 h3-lg">See real-time stock across every authorized account</h3>
+        <p class="card-lead card-lead-gap">Act before a shelf runs empty, direct your effort where it's genuinely needed, and serve your customers on data instead of guesswork.</p>
 
-        <div style="margin-top:auto;border-top:1px solid var(--color-neutral-100);padding-top:20px">
-          <div class="kicker" style="margin-bottom:14px">My reps · authorized customers &amp; products</div>
-          <div style="display:flex;flex-direction:column;gap:13px">
+        <div class="rep-block">
+          <div class="kicker">My reps · authorized customers &amp; products</div>
+          <div class="rep-list">
             <div>
-              <div style="font-weight:600;color:var(--color-neutral-700);font-size:14.5px;margin-bottom:8px">Mohammed Al-Harbi <span class="pill pill-ok" style="margin-inline-start:6px">Active</span></div>
-              <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <div class="rep-name">Mohammed Al-Harbi <span class="pill pill-ok">Active</span></div>
+              <div class="rep-tags">
                 <span class="tag">Habib Sahafa Hospital</span>
                 <span class="tag">Dallah Namar Medical</span>
-                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Norvasc</span>
-                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Lipitor</span>
-                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Zithromax</span>
+                <span class="tag tag-ok">Norvasc</span>
+                <span class="tag tag-ok">Lipitor</span>
+                <span class="tag tag-ok">Zithromax</span>
               </div>
             </div>
             <div>
-              <div style="font-weight:600;color:var(--color-neutral-700);font-size:14.5px;margin-bottom:8px">Sara Al-Otaibi <span class="pill pill-ok" style="margin-inline-start:6px">Active</span></div>
-              <div style="display:flex;flex-wrap:wrap;gap:7px">
+              <div class="rep-name">Sara Al-Otaibi <span class="pill pill-ok">Active</span></div>
+              <div class="rep-tags">
                 <span class="tag">Salam Pharmacy Chain</span>
-                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Celebrex</span>
-                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Diflucan</span>
+                <span class="tag tag-ok">Celebrex</span>
+                <span class="tag tag-ok">Diflucan</span>
               </div>
             </div>
           </div>
@@ -308,12 +308,12 @@
       <div class="step">
         <div class="step-no"><b>1</b> Share</div>
         <h3 class="h3">Connect inventory, on your own terms</h3>
-        <p class="muted" style="font-size:15.5px">Healthcare organizations connect their inventory securely. The data stays theirs; they decide who can see it.</p>
+        <p class="muted">Healthcare organizations connect their inventory securely. The data stays theirs; they decide who can see it.</p>
         <div class="step-visual">
           <div class="perm-list">
-            <div class="perm-item"><div class="co"><span class="av" style="background:#0673FF">PF</span> Pfizer</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av" style="background:#1DB87A">NV</span> Novartis</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av" style="background:#8892A4">GS</span> GSK</div><span class="toggle off"></span></div>
+            <div class="perm-item"><div class="co"><span class="av av-blue">PF</span> Pfizer</div><span class="toggle"></span></div>
+            <div class="perm-item"><div class="co"><span class="av av-green">NV</span> Novartis</div><span class="toggle"></span></div>
+            <div class="perm-item"><div class="co"><span class="av av-gray">GS</span> GSK</div><span class="toggle off"></span></div>
           </div>
         </div>
       </div>
@@ -322,7 +322,7 @@
       <div class="step">
         <div class="step-no"><b>2</b> Standardize</div>
         <h3 class="h3">One clean, standardized catalog</h3>
-        <p class="muted" style="font-size:15.5px">ARA maps every item to one catalog — so a product means the same thing every time, everywhere.</p>
+        <p class="muted">ARA maps every item to one catalog — so a product means the same thing every time, everywhere.</p>
         <div class="step-visual">
           <div class="mapwrap">
             <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">→</span><span class="std">Lipitor 20mg</span></div>
@@ -336,8 +336,8 @@
       <div class="step">
         <div class="step-no"><b>3</b> See</div>
         <h3 class="h3">A live view, for cleared teams</h3>
-        <p class="muted" style="font-size:15.5px">Organizations see their own stock in a new light, and companies see only their products, at authorized accounts.</p>
-        <div class="step-visual" style="background:linear-gradient(160deg,#0C285D,#081B42);border-color:#0C285D">
+        <p class="muted">Organizations see their own stock in a new light, and companies see only their products, at authorized accounts.</p>
+        <div class="step-visual dark">
           <svg viewBox="0 0 220 180" width="100%" height="168" fill="none" aria-hidden="true">
             <g stroke="#28CDFC" stroke-opacity="0.18">
               <circle cx="110" cy="90" r="42"/><circle cx="110" cy="90" r="72"/>
@@ -390,7 +390,7 @@
         <p>Everyone works from the same live data, the moment it changes. No stale reports, no guesswork.</p>
       </div>
     </div>
-    <div class="divider-grad reveal" style="margin-top:56px"></div>
+    <div class="divider-grad reveal mt-56"></div>
   </div>
 </section>
 
@@ -399,9 +399,9 @@
   <div class="wrap">
     <div class="cta-card reveal">
       <div class="divider-grad"></div>
-      <h2 class="h2" style="font-size:clamp(34px,4.4vw,56px)">Ready to see what's available instantly?</h2>
-      <p class="lead" style="margin:0 auto 36px;color:rgba(255,255,255,0.78)">Whether you're a healthcare organization or a company that supplies one, ARA is live and ready today. Sign in to your account, or reach us to bring your organization on board.</p>
-      <div class="btn-row" style="justify-content:center">
+      <h2 class="h2 cta-title">Ready to see what's available instantly?</h2>
+      <p class="lead">Whether you're a healthcare organization or a company that supplies one, ARA is live and ready today. Sign in to your account, or reach us to bring your organization on board.</p>
+      <div class="btn-row center">
         <a class="btn btn-primary" href="https://app.arasolutions.io">Sign in
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
@@ -412,13 +412,13 @@
 </section>
 
 <!-- ============ 8 · FOOTER ============ -->
-<footer class="footer bg-navy-dark" style="border-top:1px solid rgba(255,255,255,0.08)" data-screen-label="Footer">
+<footer class="footer bg-navy-dark" data-screen-label="Footer">
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <a class="brand" href="#top"><img src="assets/ara-logo-mark.png" alt="ARA" style="width:40px;height:40px;border-radius:9px"><span class="brand-name">ARA<span class="ar">أرى</span></span></a>
+        <a class="brand" href="#top"><img src="assets/ara-logo-mark.png" alt="ARA logo"><span class="brand-name">ARA<span class="ar">أرى</span></span></a>
         <p class="footer-tag">See what's available. Instantly.</p>
-        <a href="mailto:admin@arasolutions.io" style="color:var(--color-sky);font-family:var(--font-mono);font-size:14px;text-decoration:none;display:inline-block;margin-top:18px">admin@arasolutions.io</a>
+        <a class="footer-email" href="mailto:admin@arasolutions.io">admin@arasolutions.io</a>
       </div>
       <div>
         <h5>Product</h5>
@@ -439,7 +439,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 ARA. Pharmaceutical inventory intelligence for Saudi Arabia.</span>
-      <span class="mono" style="color:rgba(255,255,255,0.4)">Riyadh · KSA</span>
+      <span class="mono footer-note">Riyadh · KSA</span>
     </div>
   </div>
 </footer>
@@ -521,7 +521,7 @@
     var pillClass = a[2] === 'danger' ? 'pill-danger' : 'pill-warn';
     tr.innerHTML = '<td class="prod">'+a[0]+'</td><td>'+a[1]+'</td>'+
       '<td><span class="pill '+pillClass+'">'+a[3]+'</span></td>'+
-      '<td class="mono" style="text-align:right">'+a[4]+'</td>';
+      '<td class="mono num">'+a[4]+'</td>';
     return tr;
   }
   if (alertBody && !reduce) {
