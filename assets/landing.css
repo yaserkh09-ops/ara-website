@@ -51,6 +51,28 @@ a:hover { opacity: 1; }
   color: #fff;
 }
 .bg-navy-dark { background: #061634; color: #fff; }
+/* aurora drift — one ambient moment at the close, echoing the hero's palette */
+.section.bg-navy-dark { position: relative; overflow: hidden; }
+.section.bg-navy-dark .wrap { position: relative; z-index: 1; }
+.section.bg-navy-dark::before, .section.bg-navy-dark::after {
+  content: ""; position: absolute; width: 55vmax; height: 55vmax; border-radius: 50%;
+  filter: blur(60px); pointer-events: none; will-change: transform;
+}
+.section.bg-navy-dark::before {
+  top: -30vmax; left: -14vmax;
+  background: radial-gradient(circle, rgba(40,205,252,0.09), transparent 62%);
+  animation: auroraA 46s ease-in-out infinite;
+}
+.section.bg-navy-dark::after {
+  bottom: -30vmax; right: -14vmax;
+  background: radial-gradient(circle, rgba(6,115,255,0.13), transparent 62%);
+  animation: auroraB 58s ease-in-out infinite;
+}
+@keyframes auroraA { 50% { transform: translate(10vmax, 6vmax) scale(1.12); } }
+@keyframes auroraB { 50% { transform: translate(-9vmax, -7vmax) scale(0.92); } }
+@media (prefers-reduced-motion: reduce) {
+  .section.bg-navy-dark::before, .section.bg-navy-dark::after { animation: none; }
+}
 
 /* ---------- TYPE ---------- */
 .eyebrow {
@@ -124,6 +146,15 @@ h1.display {
   text-decoration: none; white-space: nowrap;
 }
 .btn svg { width: 18px; height: 18px; }
+/* sliding-arrow hover: chevron at rest, stem draws in on hover */
+.arr .arr-stem { opacity: 0; transform: translateX(-2px); transition: opacity .15s ease, transform .15s ease; }
+.arr .arr-head { transition: transform .15s ease; }
+.btn:hover .arr .arr-stem, .btn:focus-visible .arr .arr-stem { opacity: 1; transform: none; }
+.btn:hover .arr .arr-head, .btn:focus-visible .arr .arr-head { transform: translateX(2px); }
+@media (prefers-reduced-motion: reduce) {
+  .arr .arr-stem, .arr .arr-head { transition: none; }
+  .btn:hover .arr .arr-head { transform: none; }
+}
 .btn-primary {
   background: var(--color-action);
   color: #fff;
@@ -174,8 +205,16 @@ h1.display {
 .nav-links { display: flex; gap: 30px; margin-inline-start: 14px; }
 .nav-links a {
   color: rgba(255,255,255,0.80); font-size: 15px; font-weight: 500; text-decoration: none;
-  transition: color .15s ease;
+  transition: color .15s ease; position: relative;
 }
+.nav-links a::after {
+  content: ""; position: absolute; inset-inline: 0; bottom: -7px; height: 2px;
+  border-radius: 2px; background: currentColor;
+  transform: scaleX(0); transform-origin: 0 50%;
+  transition: transform .18s ease;
+}
+.nav-links a:hover::after, .nav-links a:focus-visible::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) { .nav-links a::after { transition: none; } }
 .nav-links a:hover { color: #fff; }
 .nav.scrolled .nav-links a { color: var(--color-neutral-600); }
 .nav.scrolled .nav-links a:hover { color: var(--color-action); }
@@ -764,6 +803,15 @@ h1.display {
 .faq-chev { width: 18px; height: 18px; flex: none; color: var(--color-neutral-400); transition: transform .25s ease; }
 .faq-item[open] .faq-chev { transform: rotate(180deg); }
 .faq-body { padding: 0 24px 20px; }
+/* animated disclosure (class added by JS; native <details> behavior is the fallback) */
+.faq-anim .faq-body {
+  display: grid; grid-template-rows: 0fr; padding-bottom: 0;
+  transition: grid-template-rows .26s ease, padding-bottom .26s ease;
+}
+.faq-anim .faq-body > p { overflow: hidden; min-height: 0; }
+.faq-anim .faq-item.is-open .faq-body { grid-template-rows: 1fr; padding-bottom: 20px; }
+.faq-anim .faq-item[open] .faq-chev { transform: none; }
+.faq-anim .faq-item.is-open .faq-chev { transform: rotate(180deg); }
 .faq-body p { color: var(--color-neutral-500); font-size: 15px; margin: 0; max-width: 70ch; }
 .faq-body a { color: var(--color-action); text-decoration: none; }
 .faq-body a:hover { text-decoration: underline; }

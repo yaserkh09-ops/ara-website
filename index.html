@@ -96,7 +96,7 @@
       <p class="lead hero-sub">ARA gives hospitals, pharmacies, and the companies that supply them one live view of pharmaceutical stock — so gaps are seen and solved before they reach the patient.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="mailto:admin@arasolutions.io?subject=Demo%20request%20%E2%80%94%20%5BYour%20organization%5D&amp;body=Hello%20ARA%20team%2C%0A%0AOrganization%3A%20%0AWe%20are%20a%3A%20healthcare%20organization%20%2F%20pharmaceutical%20company%0ACity%3A%20%0AWhat%20we%27d%20like%20to%20see%3A%20%0A%0AThank%20you">Request a demo
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M5 12h14"/><path class="arr-head" d="M13 6l6 6-6 6"/></svg>
         </a>
         <a class="btn btn-ghost-light" href="#how">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
@@ -568,7 +568,7 @@
           <span class="kicker">Run a healthcare organization?</span>
           <p>A live view of every shelf you manage. Free for healthcare organizations.</p>
           <a class="btn btn-primary" href="mailto:admin@arasolutions.io?subject=Demo%20request%20%E2%80%94%20%5BYour%20organization%5D&amp;body=Hello%20ARA%20team%2C%0A%0AOrganization%3A%20%0ACity%3A%20%0ABranches%20%2F%20pharmacies%3A%20%0AWhat%20we%27d%20like%20to%20see%3A%20%0A%0AThank%20you">Request a demo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M5 12h14"/><path class="arr-head" d="M13 6l6 6-6 6"/></svg>
           </a>
         </div>
         <div class="cta-cell">
@@ -630,6 +630,28 @@
   var nav = document.getElementById('nav');
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // FAQ: animated disclosure (falls back to native <details> under reduced motion)
+  var faqRoot = document.querySelector('.faq');
+  if (faqRoot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    faqRoot.classList.add('faq-anim');
+    faqRoot.querySelectorAll('.faq-item').forEach(function(d){
+      var body = d.querySelector('.faq-body');
+      d.querySelector('summary').addEventListener('click', function(e){
+        e.preventDefault();
+        if (d.open) {
+          d.classList.remove('is-open');
+          var onEnd = function(ev){
+            if (ev.propertyName === 'grid-template-rows') { d.open = false; body.removeEventListener('transitionend', onEnd); }
+          };
+          body.addEventListener('transitionend', onEnd);
+        } else {
+          d.open = true;
+          requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add('is-open'); }); });
+        }
+      });
+    });
+  }
 
   // reveal on scroll
   var io = new IntersectionObserver(function(entries){
