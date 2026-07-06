@@ -147,7 +147,7 @@
           <div class="feed-title"><span class="live-dot"></span><span class="kicker">Live alert feed · the gap, made visible</span></div>
           <span class="pill pill-danger" id="unresolvedPill"><span id="unresolvedCount">13</span> unresolved</span>
         </div>
-        <table class="mini-table" id="alertTable">
+        <div class="table-scroll"><table class="mini-table" id="alertTable">
           <thead><tr><th>Product</th><th>Location</th><th>Status</th><th class="num">Qty</th></tr></thead>
           <tbody id="alertBody">
             <tr><td class="prod">Atorvastatin 20 mg</td><td>Branch 2 — Al Rawdah</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
@@ -155,7 +155,7 @@
             <tr><td class="prod">Celecoxib 200 mg</td><td>OPD Dispensary</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
             <tr><td class="prod">Azithromycin 250 mg</td><td>OPD Dispensary</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">5</td></tr>
           </tbody>
-        </table>
+        </table></div>
         <div class="feed-foot"><span class="mono">Illustrative data</span> · this is what the blind spot looks like once you can see it</div>
       </div>
 
@@ -167,7 +167,7 @@
         <p>Manual checks and reorder calls consume hours every week — time that should go to patients.</p>
         <div class="pain-viz viz-time">
           <div class="time-clock"><span id="lostH">128</span><span class="tsep">:</span><span id="lostM">04</span><span class="tsep">:</span><span id="lostS">17</span></div>
-          <div class="time-label">Illustrative — the meter runs while stock is counted by hand <span class="tick-dot"></span></div>
+          <div class="time-label"><span class="tick-dot"></span>Illustrative — the meter runs while stock is counted <span class="nowrap">by hand</span></div>
         </div>
       </div>
 
@@ -242,7 +242,7 @@
         </div>
         <div class="vrow">
           <div class="vi ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <div><h4>Permission-based</h4><p>Every view is consent-driven. You decide exactly who sees what — and can change it at any time.</p><span class="mech">Row-level access · unauthorized queries return nothing</span></div>
+          <div><h4>Permission-based</h4><p>Every view is consent-driven. You decide exactly who sees what — and can change it at any time.</p><span class="mech">Enforced at the database level · not just in the UI</span></div>
         </div>
       </div>
     </div>
@@ -448,13 +448,13 @@
     <div class="section-head">
       <div class="eyebrow">Integration</div>
       <h2 class="h2">Works with what you have.</h2>
-      <p class="lead">No rip-and-replace. ARA sits alongside the ERP you already run — three ways in, no migration project.</p>
+      <p class="lead">No rip-and-replace. ARA sits alongside the ERP you already run — two ways in, one shared catalog, no migration project.</p>
     </div>
     <div class="bento-integration reveal">
       <div class="card card-api">
         <div class="card-icon ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
         <h3 class="h3">Push API</h3>
-        <p>Your system pushes stock changes to ARA as they happen. A lightweight API for live sync — not a systems overhaul. This is the whole integration:</p>
+        <p>Your system pushes stock changes to ARA as they happen. A lightweight API for live sync — not a systems overhaul. The integration is this small:</p>
         <div class="api-snippet">
           <div class="api-bar"><span class="api-method">POST</span><span class="api-path">/v1/stock-events</span></div>
           <pre aria-label="Example stock event payload">{
@@ -465,7 +465,7 @@
 }
 <span class="ok">→ 200 OK · mapped to “Atorvastatin 20 mg”</span></pre>
         </div>
-        <div class="api-note">Representative shape — the full spec ships with onboarding.</div>
+        <div class="api-note">Representative example — endpoint, fields, and response are illustrative. The full spec ships with onboarding.</div>
       </div>
       <div class="card card-csv">
         <div class="card-icon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
@@ -630,28 +630,6 @@
   var nav = document.getElementById('nav');
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
-
-  // FAQ: animated disclosure (falls back to native <details> under reduced motion)
-  var faqRoot = document.querySelector('.faq');
-  if (faqRoot && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    faqRoot.classList.add('faq-anim');
-    faqRoot.querySelectorAll('.faq-item').forEach(function(d){
-      var body = d.querySelector('.faq-body');
-      d.querySelector('summary').addEventListener('click', function(e){
-        e.preventDefault();
-        if (d.open) {
-          d.classList.remove('is-open');
-          var onEnd = function(ev){
-            if (ev.propertyName === 'grid-template-rows') { d.open = false; body.removeEventListener('transitionend', onEnd); }
-          };
-          body.addEventListener('transitionend', onEnd);
-        } else {
-          d.open = true;
-          requestAnimationFrame(function(){ requestAnimationFrame(function(){ d.classList.add('is-open'); }); });
-        }
-      });
-    });
-  }
 
   // reveal on scroll
   var io = new IntersectionObserver(function(entries){

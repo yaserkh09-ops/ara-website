@@ -64,7 +64,7 @@ a:hover { opacity: 1; }
   animation: auroraA 46s ease-in-out infinite;
 }
 .section.bg-navy-dark::after {
-  bottom: -30vmax; right: -14vmax;
+  bottom: 0; right: -14vmax;
   background: radial-gradient(circle, rgba(6,115,255,0.13), transparent 62%);
   animation: auroraB 58s ease-in-out infinite;
 }
@@ -297,7 +297,7 @@ h1.display {
   margin: 0 0 22px;
 }
 .hero-sub { max-width: 540px; margin-bottom: 34px; }
-.hero-meta { display: flex; gap: 24px; margin-top: 34px; flex-wrap: wrap; }
+.hero-meta { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
 .hero-meta div { display: flex; align-items: center; gap: 9px; color: rgba(255,255,255,0.72); font-size: 14px; }
 .hero-meta .dot { width: 8px; height: 8px; border-radius: 50%; }
 
@@ -552,7 +552,10 @@ h1.display {
   margin-top: 12px; font-size: 13px; color: var(--color-neutral-400);
   display: flex; align-items: center; gap: 8px;
 }
-.time-label .tick-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-orange); animation: tickPulse 1s ease-in-out infinite; }
+.time-label .tick-dot { width: 6px; height: 6px; border-radius: 50%; flex: none; background: var(--color-orange); animation: tickPulse 1s ease-in-out infinite; }
+.nowrap { white-space: nowrap; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.table-scroll .mini-table { min-width: 420px; }
 @keyframes tickPulse { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
 @media (prefers-reduced-motion: reduce) {
   .time-clock .tsep, .time-label .tick-dot { animation: none; }
@@ -598,9 +601,6 @@ h1.display {
 @media (max-width: 880px) {
   .solve-bento { grid-template-columns: 1fr; grid-template-areas: "focal" "pain1" "pain2" "wide"; }
   .pain-wide { grid-template-columns: 1fr; gap: 24px; }
-  .platform-grid, .who-grid { grid-template-columns: 1fr; }
-  .steps, .bento-3, .pillars { grid-template-columns: 1fr; }
-  .bento-integration { grid-template-columns: 1fr; grid-template-areas: "api" "csv" "cat"; }
 }
 
 /* ---------- HOW IT WORKS ---------- */
@@ -646,11 +646,20 @@ h1.display {
   clip-path: polygon(0 var(--fold), 100% 0, 100% 100%, 0 100%);
   padding-top: calc(clamp(84px, 10vw, 124px) + var(--fold));
 }
-/* accent stripes riding the fold — clipped by the same polygon, so they share its angle */
-.seam-bars { position: absolute; top: 0; inset-inline: 0; height: calc(var(--fold) + 16px); pointer-events: none; }
-.seam-bars i { position: absolute; top: 0; height: 100%; display: block; }
-.seam-bars i:nth-child(1) { inset-inline-end: 0; width: 24%; background: var(--color-action); opacity: .38; }
-.seam-bars i:nth-child(2) { inset-inline-end: 25.5%; width: 11%; background: var(--color-sky); opacity: .26; }
+/* accent stripes riding the fold — one band clipped parallel to the seam,
+   colored segments via gradient stops (bottoms stay parallel to the angle) */
+.seam-bars {
+  position: absolute; top: 0; inset-inline: 0;
+  height: calc(var(--fold) + 18px);
+  clip-path: polygon(0 var(--fold), 100% 0, 100% 18px, 0 calc(var(--fold) + 18px));
+  background: linear-gradient(90deg,
+    transparent 0 63.5%,
+    rgba(40,205,252,0.26) 63.5% 74.5%,
+    transparent 74.5% 76%,
+    rgba(6,115,255,0.38) 76% 100%);
+  pointer-events: none;
+}
+.seam-bars i { display: none; }
 
 /* hero background layer (clips the decorative rings; the hero itself no longer clips) */
 .hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
@@ -688,7 +697,9 @@ h1.display {
 .api-snippet .s { color: var(--color-sky); }
 .api-snippet .n { color: #9BE8C5; }
 .api-snippet .ok { color: var(--color-success); }
-.api-note { margin-top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-neutral-400); }
+.api-note { margin-top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-neutral-500); }
+.card-api .api-snippet { flex: 1; display: flex; flex-direction: column; }
+.card-api .api-snippet pre { flex: 1; }
 
 /* ---------- FACTS STRIP (architecture truths, not traction) ---------- */
 .statband { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 44px; }
@@ -703,7 +714,7 @@ h1.display {
 .vrow .mech {
   display: block; margin-top: 7px;
   font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em;
-  text-transform: uppercase; color: var(--color-neutral-400);
+  text-transform: uppercase; color: var(--color-neutral-500);
 }
 
 /* ---------- INTELLIGENCE ---------- */
@@ -803,15 +814,9 @@ h1.display {
 .faq-chev { width: 18px; height: 18px; flex: none; color: var(--color-neutral-400); transition: transform .25s ease; }
 .faq-item[open] .faq-chev { transform: rotate(180deg); }
 .faq-body { padding: 0 24px 20px; }
-/* animated disclosure (class added by JS; native <details> behavior is the fallback) */
-.faq-anim .faq-body {
-  display: grid; grid-template-rows: 0fr; padding-bottom: 0;
-  transition: grid-template-rows .26s ease, padding-bottom .26s ease;
-}
-.faq-anim .faq-body > p { overflow: hidden; min-height: 0; }
-.faq-anim .faq-item.is-open .faq-body { grid-template-rows: 1fr; padding-bottom: 20px; }
-.faq-anim .faq-item[open] .faq-chev { transform: none; }
-.faq-anim .faq-item.is-open .faq-chev { transform: rotate(180deg); }
+/* CSS-only open animation — native <details> semantics stay untouched */
+@keyframes faqOpen { from { opacity: 0; transform: translateY(-5px); } }
+.faq-item[open] .faq-body { animation: faqOpen .22s ease; }
 .faq-body p { color: var(--color-neutral-500); font-size: 15px; margin: 0; max-width: 70ch; }
 .faq-body a { color: var(--color-action); text-decoration: none; }
 .faq-body a:hover { text-decoration: underline; }
@@ -947,4 +952,21 @@ h1.display {
   .lead { font-size: 17px; }
   h1.display { font-size: clamp(28px, 8.4vw, 40px); }
   .hero-eyebrow { font-size: 11px; letter-spacing: 0.12em; }
+}
+
+/* ---------- LATE-CASCADE OVERRIDES (must remain at end of file) ---------- */
+/* mobile collapse for grids whose base rules are defined above */
+@media (max-width: 880px) {
+  .platform-grid, .who-grid, .steps, .bento-3, .pillars { grid-template-columns: 1fr; }
+  .bento-integration { grid-template-columns: 1fr; grid-template-areas: "api" "csv" "cat"; }
+}
+
+/* consolidated reduced-motion backstop */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .focal-alerts .feed-title .live-dot::after { animation: none; }
+  .solve-bento.in .viz-ecg .ecg-line, .reveal.in .viz-ecg .ecg-line { animation: none; stroke-dashoffset: 0; }
+  .btn:focus-visible .arr .arr-head { transform: none; }
+  .faq-item[open] .faq-body { animation: none; }
+  .section.bg-navy-dark::before, .section.bg-navy-dark::after { animation: none; }
 }
