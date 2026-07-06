@@ -4,14 +4,12 @@
    ========================================================= */
 
 /* ---------------------------------------------------------
-   GOOGLE FONTS — IBM Plex Sans (Latin + Arabic) + Mono
+   FONTS — loaded from the HTML <head> via preconnect + <link>
+   (variable Inter with optical sizing, IBM Plex Mono 400/500/600,
+   IBM Plex Sans Arabic 400/500/700). @import was removed: it
+   serialized behind this stylesheet and hid fonts from the
+   browser preload scanner.
    --------------------------------------------------------- */
-/* Latin UI font — Inter (matches production codebase) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
-/* Arabic / RTL font — IBM Plex Sans Arabic (loaded separately, applied only in RTL contexts) */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
-/* Monospace — IBM Plex Mono for IDs, timestamps, data values */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 /* ---------------------------------------------------------
    ROOT CUSTOM PROPERTIES
@@ -247,6 +245,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  font-optical-sizing: auto; /* variable Inter: opsz tracks rendered size (clamped 14–32) */
 }
 
 body {
