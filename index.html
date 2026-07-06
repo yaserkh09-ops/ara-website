@@ -4,13 +4,31 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ARA — See what's available. Instantly.</title>
+<meta name="description" content="ARA gives Saudi hospitals, pharmacies, and the companies that supply them one live, permission-based view of pharmaceutical stock — so gaps are seen and solved before they reach the patient.">
+<link rel="canonical" href="https://arasolutions.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ARA">
+<meta property="og:title" content="ARA — See what's available. Instantly.">
+<meta property="og:description" content="One live, permission-based view of pharmaceutical stock for Saudi healthcare — hospitals, pharmacies, and the companies that supply them.">
+<meta property="og:url" content="https://arasolutions.io/">
+<meta property="og:image" content="https://arasolutions.io/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ARA — See what's available. Instantly.">
+<meta name="twitter:description" content="One live, permission-based view of pharmaceutical stock for Saudi healthcare.">
+<meta name="twitter:image" content="https://arasolutions.io/assets/og-image.png">
+<meta name="theme-color" content="#0C285D">
+<link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="stylesheet" href="colors_and_type.css">
 <link rel="stylesheet" href="assets/landing.css">
 </head>
 <body class="lp">
+<a class="skip-link" href="#main">Skip to content</a>
 
 <!-- ============ NAV ============ -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Main">
   <div class="nav-inner">
     <a class="brand" href="#top">
       <img src="assets/ara-logo-mark.png" alt="ARA">
@@ -34,6 +52,7 @@
 </nav>
 
 <a id="top"></a>
+<main id="main">
 
 <!-- ============ HERO ============ -->
 <header class="hero bg-navy" data-screen-label="Hero">
@@ -97,7 +116,7 @@
           <div class="browser-dots"><i></i><i></i><i></i></div>
           <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
         </div>
-        <img class="browser-screen" src="assets/screens/rep-dashboard.png" alt="ARA inventory dashboard showing live stock alerts">
+        <img class="browser-screen" src="assets/screens/rep-dashboard.png" alt="ARA representative dashboard with live low-stock and out-of-stock alerts across authorized accounts" width="2880" height="1800" fetchpriority="high">
       </div>
     </div>
   </div>
@@ -205,7 +224,7 @@
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
           </div>
-          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard — network inventory health by territory">
+          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard — network inventory health by territory with recent unresolved alerts" width="2940" height="1662" loading="lazy">
         </div>
         <div class="panel-caption">
           <span class="kicker">One source of truth</span>
@@ -544,8 +563,9 @@
     </div>
   </div>
 </section>
+</main>
 
-<!-- ============ 8 · FOOTER ============ -->
+<!-- ============ 11 · FOOTER ============ -->
 <footer class="footer bg-navy-dark" data-screen-label="Footer">
   <div class="wrap">
     <div class="footer-top">
@@ -571,10 +591,18 @@
           <li><a href="#top">Back to top</a></li>
         </ul>
       </div>
+      <div>
+        <h5>Legal</h5>
+        <ul>
+          <!-- TODO: legal pages -->
+          <li><a href="#" aria-disabled="true">Privacy Policy</a></li>
+          <li><a href="#" aria-disabled="true">Terms of Service</a></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 ARA. Pharmaceutical inventory intelligence for Saudi Arabia.</span>
-      <span class="mono footer-note">Riyadh · KSA</span>
+      <span>© 2026 ARA Solutions · Riyadh, Saudi Arabia</span>
+      <span class="mono footer-note" lang="ar">أرى — "I see"</span>
     </div>
   </div>
 </footer>
@@ -591,7 +619,19 @@
   }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduce = reduceQuery.matches;
+
+  // SMIL animations in the hero SVG ignore prefers-reduced-motion — pause them explicitly
+  var heroSvg = document.querySelector('.hero-rings');
+  function syncSmil(matches) {
+    if (!heroSvg || !heroSvg.pauseAnimations) return;
+    if (matches) heroSvg.pauseAnimations(); else heroSvg.unpauseAnimations();
+  }
+  syncSmil(reduce);
+  if (reduceQuery.addEventListener) {
+    reduceQuery.addEventListener('change', function(e){ syncSmil(e.matches); });
+  }
 
   // "lights on" — scroll-driven brightening of the statement section
   var statement = document.querySelector('.statement');
