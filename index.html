@@ -56,6 +56,7 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero bg-navy" data-screen-label="Hero">
+  <div class="hero-bg" aria-hidden="true">
   <div class="hero-grid"></div>
   <svg class="hero-rings" viewBox="0 0 760 760" fill="none" aria-hidden="true">
     <defs>
@@ -87,6 +88,7 @@
       <circle r="3.5" fill="#FFFFFF" fill-opacity="0.7"><animateMotion dur="22s" begin="5s" repeatCount="indefinite"><mpath href="#orbit-c"/></animateMotion></circle>
     </g>
   </svg>
+  </div>
   <div class="wrap hero-inner">
     <div class="reveal in">
       <p class="hero-tagline hero-eyebrow">Pharmaceutical inventory intelligence</p>
@@ -100,6 +102,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
           See how it works
         </a>
+      </div>
+      <div class="hero-meta">
+        <div><span class="dot"></span>Free for healthcare organizations</div>
+        <div><span class="dot"></span>Works alongside your ERP</div>
+        <div><span class="dot"></span>Built in Riyadh</div>
       </div>
     </div>
     <div class="reveal in reveal-d1">
@@ -227,15 +234,15 @@
       <div class="card value-stack">
         <div class="vrow">
           <div class="vi ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-7 4 14 2-7h4"/></svg></div>
-          <div><h4>Live</h4><p>Stock reflects reality the moment it changes.</p></div>
+          <div><h4>Live</h4><p>Stock reflects reality the moment it changes.</p><span class="mech">Push API · your ERP sends each stock change as it happens</span></div>
         </div>
         <div class="vrow">
           <div class="vi ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12V7a7 7 0 0 1 14 0"/><rect x="3" y="11" width="18" height="10" rx="2"/></svg></div>
-          <div><h4>Accessible</h4><p>Data that lived in the ERP back office becomes something every cleared team can act on.</p></div>
+          <div><h4>Accessible</h4><p>Data that lived in the ERP back office becomes something every cleared team can act on.</p><span class="mech">Web app · no installs, works on any branch computer</span></div>
         </div>
         <div class="vrow">
           <div class="vi ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-          <div><h4>Permission-based</h4><p>Every view is consent-driven. You decide exactly who sees what — and can change it at any time.</p></div>
+          <div><h4>Permission-based</h4><p>Every view is consent-driven. You decide exactly who sees what — and can change it at any time.</p><span class="mech">Row-level access · unauthorized queries return nothing</span></div>
         </div>
       </div>
     </div>
@@ -243,7 +250,8 @@
 </section>
 
 <!-- ============ 4 · INTELLIGENCE ============ -->
-<section class="section bg-navy" id="intelligence" data-screen-label="Intelligence">
+<section class="section bg-navy section--angled" id="intelligence" data-screen-label="Intelligence">
+  <div class="seam-bars" aria-hidden="true"><i></i><i></i></div>
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Intelligence</div>
@@ -442,18 +450,29 @@
       <h2 class="h2">Works with what you have.</h2>
       <p class="lead">No rip-and-replace. ARA sits alongside the ERP you already run — three ways in, no migration project.</p>
     </div>
-    <div class="bento bento-3 reveal">
-      <div class="card hover-lift">
+    <div class="bento-integration reveal">
+      <div class="card card-api">
         <div class="card-icon ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
         <h3 class="h3">Push API</h3>
-        <p>Your system pushes stock changes to ARA as they happen. A lightweight API for live sync — not a systems overhaul.</p>
+        <p>Your system pushes stock changes to ARA as they happen. A lightweight API for live sync — not a systems overhaul. This is the whole integration:</p>
+        <div class="api-snippet">
+          <div class="api-bar"><span class="api-method">POST</span><span class="api-path">/v1/stock-events</span></div>
+          <pre aria-label="Example stock event payload">{
+  <span class="k">"sku_code"</span>: <span class="s">"ATORVA 20 TAB"</span>,
+  <span class="k">"location"</span>: <span class="s">"main-pharmacy"</span>,
+  <span class="k">"on_hand"</span>:  <span class="n">84</span>,
+  <span class="k">"batch"</span>:    { <span class="k">"lot"</span>: <span class="s">"B2607-54E4"</span>, <span class="k">"expiry"</span>: <span class="s">"2027-01-31"</span> }
+}
+<span class="ok">→ 200 OK · mapped to “Atorvastatin 20 mg”</span></pre>
+        </div>
+        <div class="api-note">Representative shape — the full spec ships with onboarding.</div>
       </div>
-      <div class="card hover-lift">
+      <div class="card card-csv">
         <div class="card-icon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
         <h3 class="h3">CSV upload</h3>
         <p>No integration team? Export and upload. A spreadsheet is enough to put an organization on the network.</p>
       </div>
-      <div class="card hover-lift">
+      <div class="card card-cat">
         <div class="card-icon ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5-10 5L2 7z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg></div>
         <h3 class="h3">Catalog standardization</h3>
         <p>Whatever your ERP calls a product, ARA maps it to one standard catalog entry — so the same medicine means the same thing in every system, every report, every view.</p>
@@ -463,7 +482,7 @@
 </section>
 
 <!-- ============ 8 · BUILT ON TRUST ============ -->
-<section class="section bg-navy" data-screen-label="Built on Trust">
+<section class="section bg-navy section--angled" id="trust" data-screen-label="Built on Trust">
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Built on trust</div>
@@ -486,7 +505,14 @@
         <p>Built in Riyadh, for the Saudi market — Arabic-ready, and designed around how Saudi healthcare actually buys, stocks, and supplies.</p>
       </div>
     </div>
-    <div class="divider-grad mt-56"></div>
+    <div class="statband mt-56 reveal">
+      <div class="stats">
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">companies can see your stock before you grant access</div></div>
+        <div class="stat"><div class="stat-num">1</div><div class="stat-label">standardized catalog entry per product — however your ERP names it</div></div>
+        <div class="stat"><div class="stat-num">2</div><div class="stat-label">ways in: push API for live sync, CSV as the universal fallback</div></div>
+        <div class="stat"><div class="stat-num"><span class="u">Now</span></div><div class="stat-label">when revocation takes effect — immediately, at the source</div></div>
+      </div>
+    </div>
   </div>
 </section>
 

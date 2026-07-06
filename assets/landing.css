@@ -224,7 +224,7 @@ h1.display {
 .hero {
   min-height: 100vh;
   padding: 140px 0 84px;
-  position: relative; overflow: hidden;
+  position: relative; z-index: 2;
   display: flex; align-items: center;
 }
 .hero .wrap { width: 100%; }
@@ -232,6 +232,7 @@ h1.display {
   position: absolute; top: -8%; right: -6%; width: 760px; height: 760px;
   pointer-events: none; opacity: 0.9;
 }
+.hero-meta .dot { background: var(--color-sky); opacity: 0.8; }
 .hero-grid {
   position: absolute; inset: 0;
   background-image:
@@ -560,6 +561,7 @@ h1.display {
   .pain-wide { grid-template-columns: 1fr; gap: 24px; }
   .platform-grid, .who-grid { grid-template-columns: 1fr; }
   .steps, .bento-3, .pillars { grid-template-columns: 1fr; }
+  .bento-integration { grid-template-columns: 1fr; grid-template-areas: "api" "csv" "cat"; }
 }
 
 /* ---------- HOW IT WORKS ---------- */
@@ -597,6 +599,73 @@ h1.display {
 .maprow .raw { font-family: var(--font-mono); color: var(--color-neutral-500); background:#fff; border:1px solid var(--color-neutral-100); border-radius:6px; padding:7px 9px; flex:1; }
 .maprow .arr { color: var(--color-neutral-300); flex: none; }
 .maprow .std { font-weight: 600; color: var(--color-navy); background: var(--color-action-bg); border:1px solid var(--color-action-border); border-radius:6px; padding:7px 10px; flex:1; }
+
+/* ---------- ANGLED SECTION SEAMS ---------- */
+.section--angled {
+  --fold: clamp(20px, 2.8vw, 44px);
+  margin-top: calc(-1 * var(--fold));
+  clip-path: polygon(0 var(--fold), 100% 0, 100% 100%, 0 100%);
+  padding-top: calc(clamp(84px, 10vw, 124px) + var(--fold));
+}
+/* accent stripes riding the fold — clipped by the same polygon, so they share its angle */
+.seam-bars { position: absolute; top: 0; inset-inline: 0; height: calc(var(--fold) + 16px); pointer-events: none; }
+.seam-bars i { position: absolute; top: 0; height: 100%; display: block; }
+.seam-bars i:nth-child(1) { inset-inline-end: 0; width: 24%; background: var(--color-action); opacity: .38; }
+.seam-bars i:nth-child(2) { inset-inline-end: 25.5%; width: 11%; background: var(--color-sky); opacity: .26; }
+
+/* hero background layer (clips the decorative rings; the hero itself no longer clips) */
+.hero-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+
+/* ---------- INTEGRATION BENTO + API SNIPPET ---------- */
+.bento-integration {
+  display: grid; gap: 24px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-areas: "api api api api csv csv" "api api api api cat cat";
+  align-items: stretch;
+}
+.card-api { grid-area: api; display: flex; flex-direction: column; }
+.card-csv { grid-area: csv; }
+.card-cat { grid-area: cat; }
+.api-snippet {
+  margin-top: 22px; background: linear-gradient(160deg, #0C285D, #0A2150);
+  border-radius: 10px; overflow-x: auto;
+}
+.api-bar {
+  display: flex; align-items: center; gap: 10px; padding: 10px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+  font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.66);
+}
+.api-method {
+  font-weight: 500; color: var(--color-sky);
+  background: rgba(40,205,252,0.12); border: 1px solid rgba(40,205,252,0.35);
+  border-radius: 5px; padding: 1px 8px; font-size: 11px; letter-spacing: 0.04em;
+}
+.api-snippet pre {
+  margin: 0; padding: 16px 18px 18px;
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75;
+  color: rgba(255,255,255,0.88); white-space: pre;
+}
+.api-snippet .k { color: rgba(255,255,255,0.60); }
+.api-snippet .s { color: var(--color-sky); }
+.api-snippet .n { color: #9BE8C5; }
+.api-snippet .ok { color: var(--color-success); }
+.api-note { margin-top: 12px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-neutral-400); }
+
+/* ---------- FACTS STRIP (architecture truths, not traction) ---------- */
+.statband { border-top: 1px solid rgba(255,255,255,0.14); padding-top: 44px; }
+.stat-num {
+  font-family: var(--font-mono); font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  font-size: 40px; letter-spacing: -0.02em; line-height: 1; color: #fff;
+}
+.stat-label { margin-top: 12px; font-size: 14px; color: rgba(255,255,255,0.66); max-width: 24ch; }
+
+/* mechanism receipts under value rows */
+.vrow .mech {
+  display: block; margin-top: 7px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--color-neutral-400);
+}
 
 /* ---------- INTELLIGENCE ---------- */
 .intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
