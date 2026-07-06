@@ -565,10 +565,11 @@ h1.display {
   .solve-bento { grid-template-columns: 1fr; grid-template-areas: "focal" "pain1" "pain2" "wide"; }
   .pain-wide { grid-template-columns: 1fr; gap: 22px; }
   .platform-grid, .who-grid { grid-template-columns: 1fr; }
+  .steps, .bento-3, .pillars { grid-template-columns: 1fr; }
 }
 
 /* ---------- HOW IT WORKS ---------- */
-.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; position: relative; }
+.steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; position: relative; }
 .step {
   background: #fff; border: 1px solid var(--color-neutral-100); border-radius: var(--radius-xl);
   box-shadow: var(--shadow-1); padding: 30px; display: flex; flex-direction: column;
@@ -843,4 +844,6 @@ h1.display {
   .footer-top { grid-template-columns: 1fr 1fr; }
   .hero { padding: 132px 0 72px; }
   .lead { font-size: 17px; }
+  h1.display { font-size: clamp(28px, 8.4vw, 40px); }
+  .hero-eyebrow { font-size: 11.5px; letter-spacing: 0.12em; }
 }
