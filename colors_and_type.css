@@ -1,0 +1,326 @@
+/* =========================================================
+   ARA | أرى — Design System Tokens
+   colors_and_type.css
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   GOOGLE FONTS — IBM Plex Sans (Latin + Arabic) + Mono
+   --------------------------------------------------------- */
+/* Latin UI font — Inter (matches production codebase) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+/* Arabic / RTL font — IBM Plex Sans Arabic (loaded separately, applied only in RTL contexts) */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+/* Monospace — IBM Plex Mono for IDs, timestamps, data values */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+/* ---------------------------------------------------------
+   ROOT CUSTOM PROPERTIES
+   --------------------------------------------------------- */
+:root {
+
+  /* === BRAND COLORS === */
+  --color-navy:        #0C285D;   /* Primary — sidebar, headings, primary buttons */
+  --color-sky:         #28CDFC;   /* Secondary — logo accent, highlights, active states */
+  --color-action:      #0673FF;   /* Interactive — links, focus rings, selected */
+  --color-orange:      #F05A29;   /* CTA — call-to-action buttons, highlights */
+  --color-white:       #FFFFFF;
+
+  /* === SEMANTIC COLORS === */
+  --color-success:     #1DB87A;
+  --color-warning:     #F5A623;
+  --color-danger:      #EF4444;
+
+  /* Success tints */
+  --color-success-bg:  #EDFAF4;
+  --color-success-border: #A8E8CE;
+
+  /* Warning tints */
+  --color-warning-bg:  #FFF8EC;
+  --color-warning-border: #F9D98A;
+
+  /* Danger tints */
+  --color-danger-bg:   #FEF2F2;
+  --color-danger-border: #FECACA;
+
+  /* Action/blue tints */
+  --color-action-bg:   #EBF3FF;
+  --color-action-border: #B3D4FF;
+
+  /* === NEUTRAL RAMP === */
+  --color-neutral-50:  #F3F4F6;   /* Page background — cool blue-gray */
+  --color-neutral-100: #EFF1F5;   /* Card border, divider */
+  --color-neutral-200: #D1D5E0;   /* Input border, stronger divider */
+  --color-neutral-300: #B0B8CB;   /* Placeholder text */
+  --color-neutral-400: #8892A4;   /* Muted / secondary text */
+  --color-neutral-500: #5A677C;   /* Body text secondary */
+  --color-neutral-600: #3D4A5C;   /* Body text primary */
+  --color-neutral-700: #243144;   /* Headings on light */
+  --color-neutral-800: #152236;   /* Near-black text */
+  --color-navy-dark:   #081B42;   /* Deep navy for pressed/hover states */
+
+  /* === SIDEBAR COLORS (dark surface) === */
+  --color-sidebar-bg:         #0C285D;
+  --color-sidebar-bg-hover:   rgba(255,255,255,0.06);
+  --color-sidebar-bg-active:  rgba(40,205,252,0.15);
+  --color-sidebar-text:       rgba(255,255,255,0.75);
+  --color-sidebar-text-active: #FFFFFF;
+  --color-sidebar-accent:     #28CDFC;
+  --color-sidebar-border:     rgba(255,255,255,0.08);
+  --color-sidebar-icon:       rgba(255,255,255,0.50);
+
+  /* === FUNCTIONAL SEMANTIC ALIASES === */
+  --color-fg-primary:   var(--color-neutral-700);
+  --color-fg-secondary: var(--color-neutral-500);
+  --color-fg-muted:     var(--color-neutral-400);
+  --color-fg-disabled:  var(--color-neutral-300);
+  --color-fg-on-dark:   #FFFFFF;
+  --color-fg-on-navy:   rgba(255,255,255,0.90);
+
+  --color-bg-page:      var(--color-neutral-50);
+  --color-bg-surface:   var(--color-white);
+  --color-bg-subtle:    var(--color-neutral-50);
+  --color-bg-hover:     rgba(6,115,255,0.05);
+  --color-bg-selected:  rgba(6,115,255,0.08);
+
+  --color-border:       var(--color-neutral-100);
+  --color-border-strong: var(--color-neutral-200);
+
+  /* ---------------------------------------------------------
+     TYPOGRAPHY
+     --------------------------------------------------------- */
+
+  /* Font families */
+  --font-sans:     'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-arabic:   'IBM Plex Sans Arabic', -apple-system, sans-serif;  /* RTL contexts only */
+  --font-mono:     'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Font sizes — base 14px, scale ×1.25 */
+  --text-xs:   11px;
+  --text-sm:   12px;
+  --text-base: 14px;
+  --text-md:   16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  28px;
+  --text-4xl:  34px;
+  --text-5xl:  42px;
+
+  /* Font weights */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.65;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0;
+  --tracking-wide:    0.04em;
+  --tracking-caps:    0.08em;
+
+  /* ---------------------------------------------------------
+     SEMANTIC TYPE SCALE
+     --------------------------------------------------------- */
+
+  /* Display / Hero */
+  --type-display-size:   var(--text-5xl);
+  --type-display-weight: var(--weight-bold);
+  --type-display-leading: var(--leading-tight);
+  --type-display-tracking: var(--tracking-tight);
+
+  /* H1 — Page title */
+  --type-h1-size:   var(--text-4xl);
+  --type-h1-weight: var(--weight-bold);
+  --type-h1-leading: var(--leading-tight);
+
+  /* H2 — Section heading */
+  --type-h2-size:   var(--text-3xl);
+  --type-h2-weight: var(--weight-semibold); /* 600 */
+  --type-h2-leading: var(--leading-snug);
+
+  /* H3 — Card / panel heading */
+  --type-h3-size:   var(--text-xl);
+  --type-h3-weight: var(--weight-semibold); /* 600 */
+  --type-h3-leading: var(--leading-snug);
+
+  /* H4 — Sub-section label */
+  --type-h4-size:   var(--text-md);
+  --type-h4-weight: var(--weight-semibold);
+  --type-h4-leading: var(--leading-normal);
+
+  /* Body — Default paragraph */
+  --type-body-size:   var(--text-base);
+  --type-body-weight: var(--weight-regular);
+  --type-body-leading: var(--leading-normal);
+
+  /* Body Small — Secondary / helper text */
+  --type-body-sm-size:   var(--text-sm);
+  --type-body-sm-weight: var(--weight-regular);
+  --type-body-sm-leading: var(--leading-normal);
+
+  /* Label — UI labels, nav items */
+  --type-label-size:   var(--text-sm);
+  --type-label-weight: var(--weight-medium);
+  --type-label-leading: var(--leading-tight);
+  --type-label-tracking: var(--tracking-wide);
+
+  /* Caption — Table sub-labels, timestamps */
+  --type-caption-size:   var(--text-xs);
+  --type-caption-weight: var(--weight-regular);
+  --type-caption-tracking: var(--tracking-wide);
+
+  /* Code / Mono — IDs, timestamps, data values */
+  --type-code-size:   var(--text-sm);
+  --type-code-weight: var(--weight-regular);
+  --type-code-leading: var(--leading-normal);
+
+  /* ---------------------------------------------------------
+     SPACING SYSTEM — 4px base
+     --------------------------------------------------------- */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+
+  /* ---------------------------------------------------------
+     BORDER RADIUS
+     --------------------------------------------------------- */
+  --radius-xs:   2px;   /* data table rows, compact chips */
+  --radius-sm:   4px;   /* input fields, small badges */
+  --radius-md:   6px;   /* buttons, medium cards */
+  --radius-lg:   8px;   /* standard cards, modals */
+  --radius-xl:   12px;  /* large panels */
+  --radius-full: 9999px; /* pill badges, status indicators */
+
+  /* ---------------------------------------------------------
+     SHADOWS / ELEVATION
+     --------------------------------------------------------- */
+  --shadow-0: none;
+  --shadow-1: 0 1px 4px rgba(12, 40, 93, 0.06);      /* cards, table containers */
+  --shadow-2: 0 4px 16px rgba(12, 40, 93, 0.10);     /* dropdowns, popovers */
+  --shadow-3: 0 8px 32px rgba(12, 40, 93, 0.14);     /* modals, floating panels */
+
+  /* ---------------------------------------------------------
+     TRANSITIONS
+     --------------------------------------------------------- */
+  --transition-fast:   150ms ease;     /* @kind other */
+  --transition-base:   200ms ease;     /* @kind other */
+  --transition-slow:   250ms ease-out; /* @kind other */
+
+  /* ---------------------------------------------------------
+     LAYOUT CONSTANTS
+     --------------------------------------------------------- */
+  --sidebar-width:         240px;
+  --sidebar-collapsed:     64px;
+  --content-max-width:     1280px;
+  --topbar-height:         56px;
+  --table-row-height:      48px;
+  --card-padding:          var(--space-6);
+}
+
+/* ---------------------------------------------------------
+   BASE RESETS & GLOBAL STYLES
+   --------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--color-fg-primary);
+  background-color: var(--color-bg-page);
+}
+
+/* RTL / Arabic — IBM Plex Sans Arabic applied only in RTL contexts */
+[dir="rtl"],
+[dir="rtl"] body,
+:lang(ar),
+[lang="ar"] {
+  font-family: var(--font-arabic);
+}
+
+/* ---------------------------------------------------------
+   SEMANTIC TYPE ELEMENTS
+   --------------------------------------------------------- */
+h1 {
+  font-size: var(--type-h1-size);
+  font-weight: var(--type-h1-weight);
+  line-height: var(--type-h1-leading);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-navy);
+}
+
+h2 {
+  font-size: var(--type-h2-size);
+  font-weight: var(--type-h2-weight);
+  line-height: var(--type-h2-leading);
+  color: var(--color-navy);
+}
+
+h3 {
+  font-size: var(--type-h3-size);
+  font-weight: var(--type-h3-weight);
+  line-height: var(--type-h3-leading);
+  color: var(--color-fg-primary);
+}
+
+h4 {
+  font-size: var(--type-h4-size);
+  font-weight: var(--type-h4-weight);
+  color: var(--color-fg-primary);
+}
+
+p {
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-leading);
+  color: var(--color-fg-secondary);
+}
+
+small {
+  font-size: var(--type-body-sm-size);
+  color: var(--color-fg-muted);
+}
+
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--type-code-size);
+}
+
+a {
+  color: var(--color-action);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+a:hover { opacity: 0.8; }
+a:focus-visible {
+  outline: 2px solid var(--color-action);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
