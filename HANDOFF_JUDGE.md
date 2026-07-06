@@ -48,6 +48,28 @@ stylesheets fully before judging.
   Al Wadi General Hospital, Qimam Medical Group, Rawasi Pharmacy; generic INN
   drug names only.
 
+## Skills — load before judging
+
+Use every relevant skill available to you, in this order:
+
+1. **`design-taste-frontend`** (account skill) — the founder's chosen lens:
+   anti-templated, audit-first on redesigns, strict pre-flight check. Load it
+   BEFORE forming any design opinion and run its audit method on the page.
+2. **`frontend-design`** and **`ui-ux-pro-max`** (account skills) — aesthetic
+   direction/typography rigor and UX guidelines respectively; apply their
+   checks to hierarchy, spacing, states, and accessibility.
+3. **`artifact-design`** (session skill) — load before building/republishing
+   the founder's preview artifact.
+4. **`code-review`** (session skill) — run on your final diff before pushing.
+5. **`verify`** — if available, use it to exercise the page end-to-end.
+
+Known trap: account-level skills (1–2) have failed to load via the Skill tool
+in previous remote sessions ("Unknown skill") even though SearchSkills shows
+them enabled. Try anyway — the harness may differ. For any that won't load:
+say so explicitly in your report, then substitute the skill's stated
+methodology (from its SearchSkills description) with equivalent rigor rather
+than skipping the lens. Never claim a skill was used if it didn't load.
+
 ## Your job
 
 1. **Judge:** read the rendered page top-to-bottom as (a) a skeptical hospital
