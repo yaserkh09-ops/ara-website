@@ -157,6 +157,8 @@
             <tr><td class="prod">Amlodipine 5 mg</td><td>Main Pharmacy</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">15</td></tr>
             <tr><td class="prod">Celecoxib 200 mg</td><td>OPD Dispensary</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
             <tr><td class="prod">Azithromycin 250 mg</td><td>OPD Dispensary</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">5</td></tr>
+            <tr><td class="prod">Fluconazole 150 mg</td><td>Main Pharmacy</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono num">8</td></tr>
+            <tr><td class="prod">Metformin 500 mg</td><td>Branch 1 — Malaz</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
           </tbody>
         </table></div>
         <div class="feed-foot"><span class="mono">Illustrative data</span> · this is what the blind spot looks like once you can see it</div>
@@ -170,7 +172,7 @@
         <p>Manual checks and reorder calls consume hours every week — time that should go to patients.</p>
         <div class="pain-viz viz-time">
           <div class="time-clock"><span id="lostH">128</span><span class="tsep">:</span><span id="lostM">04</span><span class="tsep">:</span><span id="lostS">17</span></div>
-          <div class="time-label"><span class="tick-dot"></span>Illustrative — the meter runs while stock is counted <span class="nowrap">by hand</span></div>
+          <div class="time-label"><span class="tick-dot"></span><span>Illustrative — the meter runs while stock is counted by hand</span></div>
         </div>
       </div>
 
@@ -273,7 +275,6 @@
         </ul>
       </div>
       <div class="intel-card roadmap">
-        <span class="badge-roadmap">Roadmap</span>
         <span class="kicker intel-kicker">Next — where ARA is going</span>
         <h3 class="h3">The network starts to think.</h3>
         <p>The same data that shows what's on the shelf can learn what belongs there. Expiry watch. Demand signals. Reorder recommendations that know the whole network, not one store. This is ARA's next chapter — in development, and labeled that way on purpose.</p>
@@ -404,9 +405,9 @@
         <p class="muted">ARA maps every item to one catalog entry — so a product means the same thing every time, everywhere.</p>
         <div class="step-visual">
           <div class="mapwrap">
-            <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">→</span><span class="std">Atorvastatin 20 mg</span></div>
-            <div class="maprow"><span class="raw">amlodipine_5</span><span class="arr">→</span><span class="std">Amlodipine 5 mg</span></div>
-            <div class="maprow"><span class="raw">AZITH-250-CAP</span><span class="arr">→</span><span class="std">Azithromycin 250 mg</span></div>
+            <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">→</span><span class="std">Atorvastatin 20&nbsp;mg</span></div>
+            <div class="maprow"><span class="raw">amlodipine_5</span><span class="arr">→</span><span class="std">Amlodipine 5&nbsp;mg</span></div>
+            <div class="maprow"><span class="raw">AZITH-250-CAP</span><span class="arr">→</span><span class="std">Azithromycin 250&nbsp;mg</span></div>
           </div>
         </div>
       </div>
@@ -526,7 +527,8 @@
       <div class="eyebrow">FAQ</div>
       <h2 class="h2">The questions buyers actually ask.</h2>
     </div>
-    <div class="faq reveal">
+    <div class="faq-wrap reveal">
+    <div class="faq">
       <details class="faq-item">
         <summary>What does ARA cost?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>ARA is free for healthcare organizations — hospitals, clinics, and pharmacies pay nothing to join. Pharmaceutical companies partner with ARA commercially. Write to us at <a href="mailto:admin@arasolutions.io">admin@arasolutions.io</a> and we'll walk you through it.</p></div>
@@ -555,6 +557,13 @@
         <summary>Who is behind ARA?<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>ARA is a Saudi company based in Riyadh, built specifically for the Saudi healthcare market. We're early-stage and build in the open — what you see on this page is what's live today, and we label what's still ahead.</p></div>
       </details>
+    </div>
+    <aside class="faq-aside">
+      <span class="kicker">Still deciding?</span>
+      <h3 class="h3">Ask us directly.</h3>
+      <p>A short call or an email — a person answers, not a ticket queue.</p>
+      <a class="aside-link" href="mailto:admin@arasolutions.io">admin@arasolutions.io</a>
+    </aside>
     </div>
   </div>
 </section>
@@ -719,7 +728,7 @@
     function pushAlert(){
       var a = pool[pi % pool.length]; pi++;
       alertBody.insertBefore(makeRow(a), alertBody.firstChild);
-      while (alertBody.children.length > 5) alertBody.removeChild(alertBody.lastChild);
+      while (alertBody.children.length > 6) alertBody.removeChild(alertBody.lastChild);
       if (a[2] === 'danger' && countEl) {
         countEl.textContent = (parseInt(countEl.textContent, 10) + 1);
         pill.classList.add('bump');
