@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ARA — See what's available. Instantly.</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="assets/landing.css">
+</head>
+<body class="lp">
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <img src="assets/ara-logo-mark.png" alt="ARA">
+      <span class="brand-name">ARA<span class="ar">أرى</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#solve">What We Solve?</a>
+      <a href="#who">Who It's For?</a>
+      <a href="#how">How It Works?</a>
+    </div>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Language">
+        <span class="on" data-lang="en">EN</span>
+        <span data-lang="ar">AR</span>
+      </div>
+      <a class="nav-signin" href="https://app.arasolutions.io">Sign in</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<header class="hero bg-navy" data-screen-label="Hero">
+  <div class="hero-grid"></div>
+  <svg class="hero-rings" viewBox="0 0 760 760" fill="none" aria-hidden="true">
+    <defs>
+      <path id="orbit-a" d="M260,380 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0"/>
+      <path id="orbit-b" d="M180,380 a200,200 0 1,0 400,0 a200,200 0 1,0 -400,0"/>
+      <path id="orbit-c" d="M95,380 a285,285 0 1,0 570,0 a285,285 0 1,0 -570,0"/>
+    </defs>
+    <g class="rings" stroke="#28CDFC">
+      <circle cx="380" cy="380" r="120" stroke-opacity="0.16"/>
+      <circle cx="380" cy="380" r="200" stroke-opacity="0.16"/>
+      <circle cx="380" cy="380" r="285" stroke-opacity="0.16"/>
+      <circle cx="380" cy="380" r="370" stroke-opacity="0.10"/>
+    </g>
+    <!-- expanding data ripples from the hub -->
+    <g class="ripples" fill="none" stroke="#28CDFC" stroke-width="1.4">
+      <circle cx="380" cy="380" r="20"><animate attributeName="r" values="18;360" dur="6.5s" repeatCount="indefinite" calcMode="spline" keySplines="0.2 0.6 0.3 1" keyTimes="0;1"/><animate attributeName="stroke-opacity" values="0.42;0" dur="6.5s" repeatCount="indefinite"/></circle>
+      <circle cx="380" cy="380" r="20"><animate attributeName="r" values="18;360" dur="6.5s" begin="2.2s" repeatCount="indefinite" calcMode="spline" keySplines="0.2 0.6 0.3 1" keyTimes="0;1"/><animate attributeName="stroke-opacity" values="0.42;0" dur="6.5s" begin="2.2s" repeatCount="indefinite"/></circle>
+      <circle cx="380" cy="380" r="20"><animate attributeName="r" values="18;360" dur="6.5s" begin="4.4s" repeatCount="indefinite" calcMode="spline" keySplines="0.2 0.6 0.3 1" keyTimes="0;1"/><animate attributeName="stroke-opacity" values="0.42;0" dur="6.5s" begin="4.4s" repeatCount="indefinite"/></circle>
+    </g>
+    <!-- pulsing network nodes (stock lighting up) -->
+    <g class="nodes">
+      <circle cx="380" cy="180" r="5" fill="#28CDFC"><animate attributeName="fill-opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/></circle>
+      <circle cx="580" cy="380" r="5" fill="#1DB87A"><animate attributeName="fill-opacity" values="0.4;1;0.4" dur="2.6s" begin="0.6s" repeatCount="indefinite"/></circle>
+      <circle cx="245" cy="540" r="5" fill="#F5A623"><animate attributeName="fill-opacity" values="0.4;1;0.4" dur="3.6s" begin="1.1s" repeatCount="indefinite"/></circle>
+      <circle cx="180" cy="300" r="4" fill="#EF4444"><animate attributeName="fill-opacity" values="0.4;1;0.4" dur="2.9s" begin="0.3s" repeatCount="indefinite"/></circle>
+      <circle cx="520" cy="565" r="4" fill="#28CDFC"><animate attributeName="fill-opacity" values="0.4;1;0.4" dur="3.4s" begin="1.6s" repeatCount="indefinite"/></circle>
+    </g>
+    <!-- central hub -->
+    <circle cx="380" cy="380" r="7" fill="#0673FF"/>
+    <circle cx="380" cy="380" r="7" fill="none" stroke="#28CDFC" stroke-width="1.6" stroke-opacity="0.9"/>
+    <!-- data packets flowing along the orbits -->
+    <g class="packets">
+      <circle r="4.5" fill="#1DB87A"><animateMotion dur="10s" repeatCount="indefinite"><mpath href="#orbit-b"/></animateMotion></circle>
+      <circle r="3.5" fill="#28CDFC"><animateMotion dur="7.5s" begin="1.5s" repeatCount="indefinite"><mpath href="#orbit-a"/></animateMotion></circle>
+      <circle r="4" fill="#F5A623"><animateMotion dur="14s" begin="0.8s" repeatCount="indefinite"><mpath href="#orbit-c"/></animateMotion></circle>
+      <circle r="3.5" fill="#28CDFC"><animateMotion dur="10s" begin="5s" repeatCount="indefinite"><mpath href="#orbit-b"/></animateMotion></circle>
+      <circle r="3" fill="#1DB87A"><animateMotion dur="14s" begin="7s" repeatCount="indefinite"><mpath href="#orbit-c"/></animateMotion></circle>
+    </g>
+  </svg>
+  <div class="wrap hero-inner">
+    <div class="reveal in">
+      <p class="hero-tagline hero-eyebrow">Inventory Intelligence Solution</p>
+      <h1 class="display">Never caught short.<br><span class="gradient-text">Never sold blind.</span></h1>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="https://app.arasolutions.io">Sign in
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-ghost-light" href="#how">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
+          See how it works
+        </a>
+      </div>
+    </div>
+    <div class="reveal in" style="transition-delay:.1s">
+      <div class="browser hero-browser">
+        <div class="browser-bar">
+          <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+          <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
+        </div>
+        <img class="browser-screen" src="assets/screens/rep-dashboard.png" alt="ARA inventory dashboard showing live stock alerts">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ============ STATEMENT (hero → light transition) ============ -->
+<section class="statement" data-screen-label="Statement">
+  <div class="wrap">
+    <div class="statement-inner reveal">
+      <h2 class="statement-head">See what's available. <span class="gradient-text">Instantly.</span></h2>
+      <p class="statement-body">ARA gives healthcare organizations a more reliable supply — and gives the companies that serve them real-time visibility into what's actually in stock. Stronger partnerships on both sides, so the best is always there for the patient.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · WHAT WE SOLVE ============ -->
+<section class="section bg-mist" id="solve" data-screen-label="What We Solve">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">WHAT WE SOLVE?</div>
+      <h2 class="h2">Right now, data is not intelligent.</h2>
+      <p class="lead solve-lead">Running out of stock is an on-going risk for healthcare organizations.<span class="emph">It is manual — costing time and money.</span></p>
+    </div>
+
+    <div class="reveal solve-bento">
+      <!-- FOCAL POINT · live alert feed -->
+      <div class="card focal-alerts">
+        <div class="feed-head">
+          <div class="feed-title"><span class="live-dot"></span><span class="kicker" style="margin:0">Live alert feed · the gap, made visible</span></div>
+          <span class="pill pill-danger" id="unresolvedPill" style="background:#fff;border-color:var(--color-danger-border)"><span id="unresolvedCount">13</span> unresolved</span>
+        </div>
+        <table class="mini-table" id="alertTable">
+          <thead><tr><th>Product</th><th>Location</th><th>Status</th><th style="text-align:right">Qty</th></tr></thead>
+          <tbody id="alertBody">
+            <tr><td class="prod">Lipitor</td><td>Branch 2 — Al Rawdah</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono" style="text-align:right">0</td></tr>
+            <tr><td class="prod">Norvasc</td><td>Main Pharmacy</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono" style="text-align:right">15</td></tr>
+            <tr><td class="prod">Celebrex</td><td>OPD Dispensary</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono" style="text-align:right">0</td></tr>
+            <tr><td class="prod">Zithromax</td><td>OPD Dispensary</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono" style="text-align:right">5</td></tr>
+          </tbody>
+        </table>
+        <div class="feed-foot"><span class="mono">Updated 2 min ago</span> · invisible today — surfaced the moment it happens</div>
+      </div>
+
+      <!-- pain 1 · time-consuming -->
+      <div class="card pain-card pain-1">
+        <div class="pain-head">
+          <h3>Managing stock is time-consuming</h3>
+        </div>
+        <p>Manual checks and reorders eat hours that should go to patients.</p>
+        <div class="pain-viz viz-time">
+          <div class="time-clock"><span id="lostH">128</span><span class="tsep">:</span><span id="lostM">04</span><span class="tsep">:</span><span id="lostS">17</span></div>
+          <div class="time-label">Hours lost to manual counts <span class="tick-dot"></span> and still counting</div>
+        </div>
+      </div>
+
+      <!-- pain 2 · missed restock -->
+      <div class="card pain-card pain-2">
+        <div class="pain-head">
+          <h3>Missed restock moments</h3>
+        </div>
+        <p>Low stock slips below the line unseen — until it's a lost sale.</p>
+        <div class="pain-viz viz-bars">
+          <span class="bar" style="height:88%"></span>
+          <span class="bar" style="height:74%"></span>
+          <span class="bar" style="height:80%"></span>
+          <span class="bar low" style="height:46%"></span>
+          <span class="bar low" style="height:38%"></span>
+          <span class="bar out" style="height:14%"></span>
+          <span class="bar out" style="height:7%"></span>
+          <div class="reorder-line"></div><span class="reorder-tag">reorder point</span>
+        </div>
+      </div>
+
+      <!-- patient impact · wide focal -->
+      <div class="card pain-card pain-wide">
+        <div class="pw-copy">
+          <span class="kicker" style="margin-bottom:8px;display:block">The cost lands here</span>
+          <h3>Stockouts reach the patient</h3>
+          <p>A gap nobody could see — the organization, the company, and the patient all pay for it.</p>
+        </div>
+        <div class="viz-ecg">
+          <svg viewBox="0 0 420 84" preserveAspectRatio="none" aria-hidden="true">
+            <path class="ecg-line" d="M0,42 L70,42 L86,42 L96,20 L106,64 L118,42 L150,42 L168,42 L182,28 L196,42 L240,42 L240,42 L420,42"/>
+          </svg>
+          <span class="ecg-cap pill pill-danger">Flatlined · out of stock</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · WHAT ARA DOES ============ -->
+<section class="section bg-white" data-screen-label="What ARA Does">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">What ARA does</div>
+      <h2 class="h2">Inventory data, finally intelligent.</h2>
+      <p class="lead">ARA brings your inventory to life and give you a better view to manage your stock from anywhere, anytime. ARA take you one step ahead to give permission to your supply partners to access their stock at your organization.</p>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:1.62fr 1fr;gap:22px;align-items:stretch">
+      <div class="card card-flush" style="display:flex;flex-direction:column">
+        <div class="browser on-light" style="border-radius:12px 12px 0 0;border-bottom:0;box-shadow:none;border-color:var(--color-neutral-100)">
+          <div class="browser-bar">
+            <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+            <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
+          </div>
+          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard — network inventory health by territory" style="display:block;width:100%">
+        </div>
+        <div style="padding:22px 26px 4px">
+          <span class="kicker">One source of truth</span>
+          <p style="color:var(--color-neutral-600);font-size:16.5px;margin-top:4px">The back-office ERP locked spreadsheet, turned into a living command center.</p>
+        </div>
+      </div>
+
+      <div class="card" style="display:flex;flex-direction:column;justify-content:center;padding:14px 30px">
+        <div class="vrow">
+          <div class="vi ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h4l2-7 4 14 2-7h4"/></svg></div>
+          <div><h4>Live</h4><p>Stock reflects reality the moment it changes.</p></div>
+        </div>
+        <div class="vrow">
+          <div class="vi ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12V7a7 7 0 0 1 14 0"/><rect x="3" y="11" width="18" height="10" rx="2"/></svg></div>
+          <div><h4>Accessible</h4><p>Data that used to be locked in an ERP becomes something any cleared team can act on.</p></div>
+        </div>
+        <div class="vrow">
+          <div class="vi ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <div><h4>Permission-based Shareable</h4><p>Every view is consent-driven. Organizations decide exactly who sees what, and change it anytime.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · WHO IT'S FOR ============ -->
+<section class="section bg-mist" id="who" data-screen-label="Who It's For">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who it's for</div>
+      <h2 class="h2">Built for every side of the shelf.</h2>
+    </div>
+
+    <div class="reveal" style="display:grid;grid-template-columns:1.28fr 1fr;gap:22px;align-items:stretch">
+      <!-- healthcare org (larger) -->
+      <div class="card card-flush" style="display:flex;flex-direction:column">
+        <div style="padding:30px 32px 0">
+          <div class="who-head">
+            <div class="card-icon ci-green" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 8v3M10.5 9.5h3"/></svg></div>
+            <span class="kicker kicker-strong" style="color:var(--color-success)">For healthcare organizations</span>
+          </div>
+          <h3 class="h3" style="font-size:25px">Free to use, and fully in your control</h3>
+          <p style="color:var(--color-neutral-600);font-size:16.5px">Get a clearer, more intelligent view of your own stock. Decide which companies can see it and in return you get fewer stockouts, less manual chasing of suppliers, and a supply chain that finally responds to what you actually need. Your data stays yours.</p>
+        </div>
+        <div style="padding:24px 32px 30px;margin-top:auto">
+          <div class="browser on-light">
+            <div class="browser-bar">
+              <div class="browser-dots"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i></div>
+              <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
+            </div>
+            <img class="browser-screen" src="assets/screens/admin-dashboard.png" alt="ARA organization dashboard — inventory uploads and territory coverage" style="display:block;width:100%">
+          </div>
+        </div>
+      </div>
+
+      <!-- pharma company -->
+      <div class="card" style="display:flex;flex-direction:column">
+        <div class="who-head">
+          <div class="card-icon ci-blue" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l7-7a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></div>
+          <span class="kicker kicker-strong" style="color:var(--color-action)">For pharmaceutical companies</span>
+        </div>
+        <h3 class="h3" style="font-size:25px">See real-time stock across every authorized account</h3>
+        <p style="color:var(--color-neutral-600);font-size:16.5px;margin-bottom:24px">Act before a shelf runs empty, direct your effort where it's genuinely needed, and serve your customers on data instead of guesswork.</p>
+
+        <div style="margin-top:auto;border-top:1px solid var(--color-neutral-100);padding-top:20px">
+          <div class="kicker" style="margin-bottom:14px">My reps · authorized customers &amp; products</div>
+          <div style="display:flex;flex-direction:column;gap:13px">
+            <div>
+              <div style="font-weight:600;color:var(--color-neutral-700);font-size:14.5px;margin-bottom:8px">Mohammed Al-Harbi <span class="pill pill-ok" style="margin-inline-start:6px">Active</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px">
+                <span class="tag">Habib Sahafa Hospital</span>
+                <span class="tag">Dallah Namar Medical</span>
+                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Norvasc</span>
+                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Lipitor</span>
+                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Zithromax</span>
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:600;color:var(--color-neutral-700);font-size:14.5px;margin-bottom:8px">Sara Al-Otaibi <span class="pill pill-ok" style="margin-inline-start:6px">Active</span></div>
+              <div style="display:flex;flex-wrap:wrap;gap:7px">
+                <span class="tag">Salam Pharmacy Chain</span>
+                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Celebrex</span>
+                <span class="tag" style="background:var(--color-success-bg);color:#0f9b67">Diflucan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · HOW IT WORKS ============ -->
+<section class="section bg-white" id="how" data-screen-label="How It Works">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">How it works</div>
+      <h2 class="h2">Three steps to a clear network.</h2>
+    </div>
+
+    <div class="steps reveal">
+      <!-- step 1 share -->
+      <div class="step">
+        <div class="step-no"><b>1</b> Share</div>
+        <h3 class="h3">Connect inventory, on your own terms</h3>
+        <p class="muted" style="font-size:15.5px">Healthcare organizations connect their inventory securely. The data stays theirs; they decide who can see it.</p>
+        <div class="step-visual">
+          <div class="perm-list">
+            <div class="perm-item"><div class="co"><span class="av" style="background:#0673FF">PF</span> Pfizer</div><span class="toggle"></span></div>
+            <div class="perm-item"><div class="co"><span class="av" style="background:#1DB87A">NV</span> Novartis</div><span class="toggle"></span></div>
+            <div class="perm-item"><div class="co"><span class="av" style="background:#8892A4">GS</span> GSK</div><span class="toggle off"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- step 2 standardize -->
+      <div class="step">
+        <div class="step-no"><b>2</b> Standardize</div>
+        <h3 class="h3">One clean, standardized catalog</h3>
+        <p class="muted" style="font-size:15.5px">ARA maps every item to one catalog — so a product means the same thing every time, everywhere.</p>
+        <div class="step-visual">
+          <div class="mapwrap">
+            <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">→</span><span class="std">Lipitor 20mg</span></div>
+            <div class="maprow"><span class="raw">amlodipine_5</span><span class="arr">→</span><span class="std">Norvasc 5mg</span></div>
+            <div class="maprow"><span class="raw">AZITH-250-CAP</span><span class="arr">→</span><span class="std">Zithromax 250mg</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- step 3 see -->
+      <div class="step">
+        <div class="step-no"><b>3</b> See</div>
+        <h3 class="h3">A live view, for cleared teams</h3>
+        <p class="muted" style="font-size:15.5px">Organizations see their own stock in a new light, and companies see only their products, at authorized accounts.</p>
+        <div class="step-visual" style="background:linear-gradient(160deg,#0C285D,#081B42);border-color:#0C285D">
+          <svg viewBox="0 0 220 180" width="100%" height="168" fill="none" aria-hidden="true">
+            <g stroke="#28CDFC" stroke-opacity="0.18">
+              <circle cx="110" cy="90" r="42"/><circle cx="110" cy="90" r="72"/>
+            </g>
+            <g stroke="#28CDFC" stroke-opacity="0.30" stroke-width="1">
+              <line x1="110" y1="90" x2="110" y2="28"/><line x1="110" y1="90" x2="178" y2="70"/>
+              <line x1="110" y1="90" x2="160" y2="150"/><line x1="110" y1="90" x2="55" y2="148"/>
+              <line x1="110" y1="90" x2="40" y2="62"/>
+            </g>
+            <circle cx="110" cy="90" r="15" fill="#0673FF"/>
+            <circle cx="110" cy="90" r="15" fill="none" stroke="#28CDFC" stroke-width="1.5"/>
+            <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#fff" text-anchor="middle">
+              <text x="110" y="93">ARA</text>
+            </g>
+            <g>
+              <circle cx="110" cy="28" r="8" fill="#0C285D" stroke="#1DB87A" stroke-width="2"/><circle cx="110" cy="28" r="3" fill="#1DB87A"/>
+              <circle cx="178" cy="70" r="8" fill="#0C285D" stroke="#F5A623" stroke-width="2"/><circle cx="178" cy="70" r="3" fill="#F5A623"/>
+              <circle cx="160" cy="150" r="8" fill="#0C285D" stroke="#EF4444" stroke-width="2"/><circle cx="160" cy="150" r="3" fill="#EF4444"/>
+              <circle cx="55" cy="148" r="8" fill="#0C285D" stroke="#1DB87A" stroke-width="2"/><circle cx="55" cy="148" r="3" fill="#1DB87A"/>
+              <circle cx="40" cy="62" r="8" fill="#0C285D" stroke="#28CDFC" stroke-width="2"/><circle cx="40" cy="62" r="3" fill="#28CDFC"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 · BUILT ON TRUST ============ -->
+<section class="section bg-navy" data-screen-label="Built on Trust">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Built on trust</div>
+      <h2 class="h2">Your data, your terms.</h2>
+    </div>
+    <div class="pillars reveal">
+      <div class="pillar">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg></div>
+        <h3 class="h3">You own your data</h3>
+        <p>Your inventory stays yours. You decide which companies can see it, and you can change that at any time.</p>
+      </div>
+      <div class="pillar">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v5c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3 class="h3">Enterprise-grade access control</h3>
+        <p>Every user sees only what they're authorized to — enforced at the database level.</p>
+      </div>
+      <div class="pillar">
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.3"/><path d="M21 4v5h-5"/></svg></div>
+        <h3 class="h3">Always current</h3>
+        <p>Everyone works from the same live data, the moment it changes. No stale reports, no guesswork.</p>
+      </div>
+    </div>
+    <div class="divider-grad reveal" style="margin-top:56px"></div>
+  </div>
+</section>
+
+<!-- ============ 7 · FINAL CTA ============ -->
+<section class="section bg-navy-dark" data-screen-label="Final CTA">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <div class="divider-grad"></div>
+      <h2 class="h2" style="font-size:clamp(34px,4.4vw,56px)">Ready to see what's available instantly?</h2>
+      <p class="lead" style="margin:0 auto 36px;color:rgba(255,255,255,0.78)">Whether you're a healthcare organization or a company that supplies one, ARA is live and ready today. Sign in to your account, or reach us to bring your organization on board.</p>
+      <div class="btn-row" style="justify-content:center">
+        <a class="btn btn-primary" href="https://app.arasolutions.io">Sign in
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn-orange" href="mailto:admin@arasolutions.io">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 8 · FOOTER ============ -->
+<footer class="footer bg-navy-dark" style="border-top:1px solid rgba(255,255,255,0.08)" data-screen-label="Footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <a class="brand" href="#top"><img src="assets/ara-logo-mark.png" alt="ARA" style="width:40px;height:40px;border-radius:9px"><span class="brand-name">ARA<span class="ar">أرى</span></span></a>
+        <p class="footer-tag">See what's available. Instantly.</p>
+        <a href="mailto:admin@arasolutions.io" style="color:var(--color-sky);font-family:var(--font-mono);font-size:14px;text-decoration:none;display:inline-block;margin-top:18px">admin@arasolutions.io</a>
+      </div>
+      <div>
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#solve">What We Solve?</a></li>
+          <li><a href="#who">Who It's For?</a></li>
+          <li><a href="#how">How It Works?</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Get started</h5>
+        <ul>
+          <li><a href="https://app.arasolutions.io">Sign in</a></li>
+          <li><a href="mailto:admin@arasolutions.io">Get in touch</a></li>
+          <li><a href="#top">Back to top</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 ARA. Pharmaceutical inventory intelligence for Saudi Arabia.</span>
+      <span class="mono" style="color:rgba(255,255,255,0.4)">Riyadh · KSA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var nav = document.getElementById('nav');
+  function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+
+  // language toggle (visual)
+  document.querySelectorAll('.lang span').forEach(function(s){
+    s.addEventListener('click', function(){
+      document.querySelectorAll('.lang span').forEach(function(x){x.classList.remove('on');});
+      s.classList.add('on');
+    });
+  });
+
+  // reveal on scroll
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // "lights on" — scroll-driven brightening of the statement section
+  var statement = document.querySelector('.statement');
+  if (statement) {
+    var ticking = false;
+    function lights(){
+      var r = statement.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      var p = (vh - r.top) / (vh * 0.72);
+      p = Math.max(0, Math.min(1, p));
+      statement.style.setProperty('--lit', reduce ? 1 : p.toFixed(3));
+      ticking = false;
+    }
+    lights();
+    window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(lights); } }, {passive:true});
+    window.addEventListener('resize', lights);
+  }
+
+  // mouse-tracking 3D tilt on the hero screenshot
+  var browser = document.querySelector('.hero-browser');
+  if (browser && !reduce && window.matchMedia('(hover: hover)').matches) {
+    var rect = null;
+    browser.addEventListener('mouseenter', function(){ rect = browser.getBoundingClientRect(); });
+    browser.addEventListener('mousemove', function(e){
+      if (!rect) rect = browser.getBoundingClientRect();
+      var px = (e.clientX - rect.left) / rect.width;
+      var py = (e.clientY - rect.top) / rect.height;
+      var ry = (px - 0.5) * 18;
+      var rx = (0.5 - py) * 13;
+      browser.style.transform =
+        'perspective(1500px) rotateY(' + ry.toFixed(2) + 'deg) rotateX(' + rx.toFixed(2) + 'deg) translateY(-8px) scale(1.025)';
+    });
+    browser.addEventListener('mouseleave', function(){
+      rect = null;
+      browser.style.transform = '';
+    });
+  }
+
+  // ---- Section 3 · live alert feed + time-lost counter ----
+  var alertBody = document.getElementById('alertBody');
+  var pool = [
+    ['Augmentin','Branch 4 — Olaya','danger','Out of stock','0'],
+    ['Ventolin','OPD Dispensary','warn','Low stock','8'],
+    ['Glucophage','Main Pharmacy','danger','Out of stock','0'],
+    ['Concor','Ward Store — 2','warn','Low stock','11'],
+    ['Nexium','Branch 1 — Malaz','danger','Out of stock','0'],
+    ['Plavix','Cardiology Unit','warn','Low stock','6'],
+    ['Crestor','Dispensary','danger','Out of stock','0'],
+    ['Januvia','OPD Dispensary','warn','Low stock','9']
+  ];
+  function makeRow(a){
+    var tr = document.createElement('tr');
+    tr.className = 'alert-new';
+    var pillClass = a[2] === 'danger' ? 'pill-danger' : 'pill-warn';
+    tr.innerHTML = '<td class="prod">'+a[0]+'</td><td>'+a[1]+'</td>'+
+      '<td><span class="pill '+pillClass+'">'+a[3]+'</span></td>'+
+      '<td class="mono" style="text-align:right">'+a[4]+'</td>';
+    return tr;
+  }
+  if (alertBody && !reduce) {
+    var pi = 0, started = false;
+    var countEl = document.getElementById('unresolvedCount');
+    var pill = document.getElementById('unresolvedPill');
+    function pushAlert(){
+      var a = pool[pi % pool.length]; pi++;
+      alertBody.insertBefore(makeRow(a), alertBody.firstChild);
+      while (alertBody.children.length > 5) alertBody.removeChild(alertBody.lastChild);
+      if (a[2] === 'danger' && countEl) {
+        countEl.textContent = (parseInt(countEl.textContent, 10) + 1);
+        pill.classList.add('bump');
+        setTimeout(function(){ pill.classList.remove('bump'); }, 360);
+      }
+    }
+    var feedObs = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting && !started) {
+          started = true;
+          setTimeout(pushAlert, 1400);
+          setInterval(pushAlert, 3600);
+        }
+      });
+    }, {threshold: 0.3});
+    feedObs.observe(document.querySelector('.focal-alerts'));
+  }
+
+  // ticking "hours lost" counter
+  var lostH = document.getElementById('lostH');
+  if (lostH && !reduce) {
+    var lostM = document.getElementById('lostM'), lostS = document.getElementById('lostS');
+    var h = 128, m = 4, s = 17, running = false;
+    function pad(n){ return n < 10 ? '0'+n : ''+n; }
+    function tick(){
+      s += 1; if (s >= 60){ s = 0; m += 1; } if (m >= 60){ m = 0; h += 1; }
+      lostH.textContent = h; lostM.textContent = pad(m); lostS.textContent = pad(s);
+    }
+    var clockObs = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting && !running){ running = true; setInterval(tick, 1000); }
+      });
+    }, {threshold: 0.4});
+    clockObs.observe(document.querySelector('.viz-time'));
+  }
+})();
+</script>
+</body>
+</html>
