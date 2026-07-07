@@ -2,5 +2,9 @@
 @font-face { font-family:'IBM Plex Mono'; font-weight:400; src:url('.devtest-fonts/PlexMono-400.ttf'); }
 @font-face { font-family:'IBM Plex Mono'; font-weight:500; src:url('.devtest-fonts/PlexMono-500.ttf'); }
 @font-face { font-family:'IBM Plex Mono'; font-weight:600; src:url('.devtest-fonts/PlexMono-600.woff2'); }
-@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:400; src:url('.devtest-fonts/PlexArabic-400.ttf'); }
-@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:500; src:url('.devtest-fonts/PlexArabic-500.ttf'); }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:400; src:url('.devtest-fonts/PlexArabic-400.ttf'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+060C, U+061F; }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:500; src:url('.devtest-fonts/PlexArabic-500.ttf'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+060C, U+061F; }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:700; src:url('.devtest-fonts/PlexArabic-700.woff2') format('woff2'); unicode-range: U+0600-06FF, U+0750-077F, U+FB50-FDFF, U+FE70-FEFF, U+060C, U+061F; }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:400; src:url('.devtest-fonts/PlexArabic-400-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:500; src:url('.devtest-fonts/PlexArabic-500-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }
+@font-face { font-family:'IBM Plex Sans Arabic'; font-weight:700; src:url('.devtest-fonts/PlexArabic-700-latin.woff2') format('woff2'); unicode-range: U+0000-00FF, U+2000-206F; }

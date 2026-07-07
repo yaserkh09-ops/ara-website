@@ -231,6 +231,7 @@ h1.display {
 .nav.scrolled .nav-signin { color: var(--color-neutral-600); }
 .nav.scrolled .nav-signin:hover { color: var(--color-action); }
 .nav-cta { padding: 10px 18px; font-size: 14px; }
+.nav-cta .cta-s { display: none; } /* short label swaps in on phones */
 
 /* language toggle */
 .lang {
@@ -240,25 +241,19 @@ h1.display {
   font-family: var(--font-mono); font-size: 12px; font-weight: 500;
 }
 .nav.scrolled .lang { border-color: var(--color-neutral-200); background: var(--color-neutral-50); }
-.lang span {
+.lang span, .lang a {
   padding: 5px 13px; border-radius: 999px; color: rgba(255,255,255,0.62);
-  transition: all .15s ease; cursor: pointer;
+  transition: all .15s ease; text-decoration: none;
 }
-.nav.scrolled .lang span { color: var(--color-neutral-400); }
-.lang span.on { background: var(--color-sky); color: var(--color-navy); font-weight: 700; }
-.nav.scrolled .lang span.on { background: var(--color-action); color: #fff; }
-/* Arabic — coming soon (honest non-control) */
-.lang .soon {
-  cursor: default; color: rgba(255,255,255,0.48);
-  font-family: var(--font-arabic); font-size: 13px;
-  display: inline-flex; align-items: center; gap: 7px;
-}
-.lang .soon b {
-  font-weight: 500; font-size: 11.5px; padding: 2px 8px; border-radius: 999px;
-  background: rgba(40,205,252,0.14); color: var(--color-sky);
-}
-.nav.scrolled .lang .soon { color: var(--color-neutral-400); }
-.nav.scrolled .lang .soon b { background: var(--color-action-bg); color: var(--color-action); }
+.nav.scrolled .lang span, .nav.scrolled .lang a { color: var(--color-neutral-400); }
+.lang .on { background: var(--color-sky); color: var(--color-navy); font-weight: 700; }
+.nav.scrolled .lang .on { background: var(--color-action); color: #fff; }
+/* the other language — a real link since both versions are live */
+.lang a.alt:hover, .lang a.alt:focus-visible { color: #fff; }
+.nav.scrolled .lang a.alt:hover, .nav.scrolled .lang a.alt:focus-visible { color: var(--color-action); }
+.lang a.alt:focus-visible { outline: 2px solid var(--color-sky); outline-offset: 2px; }
+.nav.scrolled .lang a.alt:focus-visible { outline-color: var(--color-action); }
+.lang [lang="ar"] { font-family: var(--font-arabic); font-size: 13px; line-height: 1.2; }
 
 /* ---------- HERO ---------- */
 .hero {
@@ -268,9 +263,23 @@ h1.display {
   display: flex; align-items: center;
 }
 .hero .wrap { width: 100%; }
-.hero-rings {
-  position: absolute; top: -8%; right: -6%; width: 760px; height: 760px;
-  pointer-events: none; opacity: 0.9;
+/* grid pulses — points travel the background grid between intersections;
+   same mask as .hero-grid so a pulse never glows where no line is visible */
+.hero-pulses {
+  position: absolute; inset: 0; pointer-events: none;
+  mask-image: radial-gradient(120% 90% at 30% 20%, #000 0%, transparent 75%);
+}
+.hero-pulses .pulse {
+  position: absolute; top: -2.5px; left: -2.5px; width: 5px; height: 5px;
+  border-radius: 50%; opacity: 0;
+  animation: pulseLife linear both;
+  will-change: transform, opacity;
+}
+@keyframes pulseLife {
+  0% { opacity: 0; }
+  12% { opacity: 0.85; }
+  72% { opacity: 0.7; }
+  100% { opacity: 0; }
 }
 .hero-meta .dot { background: var(--color-sky); opacity: 0.8; }
 .hero-grid {
@@ -573,7 +582,7 @@ h1.display {
 .viz-bars .bar.low { background: var(--color-warning); }
 .viz-bars .bar.out { background: var(--color-danger); }
 .viz-bars .reorder-line { position: absolute; left: 0; right: 0; top: 52px; border-top: 1.5px dashed var(--color-neutral-300); }
-.viz-bars .reorder-tag { position: absolute; right: 0; top: 38px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-neutral-400); background: #fff; padding: 0 5px; }
+.viz-bars .reorder-tag { position: absolute; inset-inline-end: 0; top: 38px; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--color-neutral-400); background: #fff; padding: 0 5px; }
 
 /* viz: patient-impact ECG flatline (wide) */
 .pain-wide { display: grid; grid-template-columns: 1.05fr 1fr; gap: 30px; align-items: center; background: linear-gradient(180deg,#fff,#fdfbfa); }
@@ -584,7 +593,7 @@ h1.display {
 .viz-ecg .ecg-line { stroke: var(--color-danger); stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 620; stroke-dashoffset: 620; }
 .solve-bento.in .viz-ecg .ecg-line, .reveal.in .viz-ecg .ecg-line { animation: ecgDraw 2.6s ease-out .2s forwards; }
 @keyframes ecgDraw { to { stroke-dashoffset: 0; } }
-.viz-ecg .ecg-cap { position: absolute; right: 4px; bottom: -6px; }
+.viz-ecg .ecg-cap { position: absolute; inset-inline-end: 4px; bottom: -6px; }
 
 @media (max-width: 880px) {
   .solve-bento { grid-template-columns: 1fr; grid-template-areas: "focal" "pain1" "pain2" "wide"; }
@@ -616,8 +625,8 @@ h1.display {
 .perm-item .av { width: 26px; height: 26px; border-radius: 6px; display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color:#fff; }
 .toggle { width: 38px; height: 22px; border-radius: 999px; background: var(--color-success); position: relative; flex: none; }
 .toggle.off { background: var(--color-neutral-200); }
-.toggle::after { content:""; position: absolute; top: 3px; right: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.toggle.off::after { right: auto; left: 3px; }
+.toggle::after { content:""; position: absolute; top: 3px; inset-inline-end: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.toggle.off::after { inset-inline-end: auto; inset-inline-start: 3px; }
 
 /* standardize mapping diagram (step 2) */
 .mapwrap { width: 100%; display: flex; flex-direction: column; gap: 10px; }
@@ -875,7 +884,7 @@ h1.display {
 .reveal.in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-rings .packets { display: none; }
+  .hero-pulses { display: none; }
 }
 
 /* ---------- CONSOLIDATED COMPONENT CLASSES (formerly inline styles) ---------- */
@@ -937,11 +946,47 @@ h1.display {
   font-family: 'IBM Plex Mono', 'IBM Plex Sans Arabic', monospace;
 }
 
+/* ---------- RTL / ARABIC (ar/index.html sets dir="rtl" lang="ar";
+   the token sheet already swaps the family to IBM Plex Sans Arabic) ---------- */
+/* Arabic is a joined script: no letter-spacing, more generous leading */
+[dir="rtl"] body { line-height: 1.75; }
+[dir="rtl"] h1.display { line-height: 1.28; }
+[dir="rtl"] .h2, [dir="rtl"] .statement-head { line-height: 1.34; }
+[dir="rtl"] .h3, [dir="rtl"] .pain-card h3 { line-height: 1.5; }
+[dir="rtl"] .lead, [dir="rtl"] .statement-body { line-height: 1.85; }
+[dir="rtl"] h1.display, [dir="rtl"] .h2, [dir="rtl"] .h3, [dir="rtl"] .h3-lg,
+[dir="rtl"] .statement-head, [dir="rtl"] .pain-card h3, [dir="rtl"] .brand-name,
+[dir="rtl"] .mini-table thead th { letter-spacing: 0; }
+
+/* microcopy that is mono in English renders in Plex Sans Arabic here —
+   Plex Mono has no Arabic glyphs, and joined script takes no tracking */
+[dir="rtl"] .eyebrow, [dir="rtl"] .kicker, [dir="rtl"] .step-no,
+[dir="rtl"] .solve-lead .emph, [dir="rtl"] .api-note, [dir="rtl"] .concept-tag,
+[dir="rtl"] .om-tag, [dir="rtl"] .om-stats span, [dir="rtl"] .footer h5,
+[dir="rtl"] .feed-foot .mono, [dir="rtl"] .hero-shot-note .mono,
+[dir="rtl"] .vrow .mech, [dir="rtl"] .em-label, [dir="rtl"] .em-head span:first-child,
+[dir="rtl"] .stat-num .u {
+  font-family: var(--font-arabic); letter-spacing: 0;
+}
+
+/* data islands stay left-to-right: code, URLs, SKU codes, the clock */
+[dir="rtl"] .api-snippet pre, [dir="rtl"] .api-bar, [dir="rtl"] .browser-url,
+[dir="rtl"] .maprow .raw, [dir="rtl"] .maprow .std,
+[dir="rtl"] .footer-email, [dir="rtl"] .aside-link { direction: ltr; }
+[dir="rtl"] .time-clock { direction: ltr; justify-content: flex-end; }
+
+/* mirrored composition */
+[dir="rtl"] .hero-grid, [dir="rtl"] .hero-pulses {
+  mask-image: radial-gradient(120% 90% at 70% 20%, #000 0%, transparent 75%);
+}
+[dir="rtl"] .hero-browser { transform: perspective(1500px) rotateY(7deg) rotateX(2.5deg); }
+[dir="rtl"] svg.arr { transform: scaleX(-1); }
+[dir="rtl"] .nav-links a::after { transform-origin: 100% 50%; }
+
 /* ---------- RESPONSIVE (mobile stacking) ---------- */
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 44px; }
-  .hero-browser { transform: none; }
-  .hero-rings { display: none; } /* stacked hero copy runs full width — orbit packets collided with it */
+  .hero-browser, [dir="rtl"] .hero-browser { transform: none; }
   .nav-links { display: none; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 28px 0; }
   .stat:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; }
@@ -952,7 +997,7 @@ h1.display {
   .nav-inner { padding: 14px 22px; gap: 16px; }
   .browser-url { min-width: 0; flex: 1; padding: 5px 12px; }
   .nav-signin { display: none; }
-  .lang .soon { display: none; }
+  .lang span, .lang a { padding: 4px 9px; } /* toggle stays usable on phones — both languages are live */
   .nav-cta { padding: 9px 14px; font-size: 13px; }
   .cta-split { grid-template-columns: 1fr; }
   .bento-2, .bento-3, .steps, .pillars { grid-template-columns: 1fr; }
@@ -987,6 +1032,11 @@ h1.display {
   .mini-table .pill { font-size: 11px; padding: 3px 8px; }
   .focal-alerts .feed-head { flex-direction: column; align-items: flex-start; gap: 10px; }
   .focal-alerts .feed-foot { display: block; } /* label + note flow as one sentence */
+  /* narrow nav: wordmark's Arabic twin yields to the live language toggle */
+  .brand-name .ar { display: none; }
+  .nav-inner { gap: 12px; }
+  .nav-cta .cta-l { display: none; }
+  .nav-cta .cta-s { display: inline; }
   .stat { padding-block: 8px; padding-inline: 16px 12px; } /* narrow cells: give labels their line length back */
   .hero .btn-row { flex-direction: column; align-items: stretch; }
   .hero .btn-row .btn { justify-content: center; }

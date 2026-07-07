@@ -1,5 +1,46 @@
 # ARA Landing Page v2 — CHANGES
 
+## v4 — Founder revisions: hero grid pulses + full Arabic site
+
+Two founder-requested changes, implemented and verified on both pages.
+
+**Hero background rebuilt.** The orbit circles and their moving dots are
+gone (SVG, its SMIL animations, and the pause JS all removed). In their
+place: grid pulses — a point surfaces at one intersection of the existing
+background grid, travels along the line, and fades out at another
+intersection four to six blocks away. Origins, directions, and speeds are
+randomized; at most two or three points are in flight at once; the pulses
+share the grid's own mask so a point never glows where no line is visible.
+Reduced motion disables the layer entirely (CSS `display:none` backstop +
+the JS never spawns and cleans up on live preference change).
+
+**Full Arabic version — العربية متاحة الآن.** New `ar/index.html`: the
+complete page professionally translated into Modern Standard Arabic with
+`dir="rtl"` — headline, every section, FAQ, footer, the live alert feed
+(Arabic locations and statuses, INN drug names kept in Latin per Saudi
+pharmacy practice), Arabic mailto templates (subject + CRLF body), and
+Arabic image alt text. The layout mirrors automatically thanks to the
+logical CSS properties previous versions used; a new RTL section in
+landing.css adds what a joined script needs: Plex Sans Arabic for the
+mono-voice microcopy (Plex Mono has no Arabic), zero letter-spacing,
+taller leading, mirrored hero mask/tilt/arrows/underlines, and
+left-to-right islands for code, URLs, SKU codes, and the ticking clock.
+The nav toggle is now a real EN ⇄ عربي switch on both pages (keyboard
+focusable, visible on phones — a too-wide collision at 375px was caught in
+verification and fixed by short-labelling the Arabic nav CTA and dropping
+the wordmark's أرى twin on small screens). Every "Arabic coming soon"
+state retired: trust pillar now reads "in Arabic and English", hreflang
+alternates on both pages, canonical + og:locale on the Arabic page.
+`.devtest-fonts.css` gained Arabic 700/latin-subset entries so local
+verification renders faithfully.
+
+**Verified (both EN and AR)** — 375/768/1440 with zero horizontal
+overflow; reduced-motion leaves no pulse, no reveal-hiding, nothing
+moving; FAQ opens with Enter and focus is visible; the language toggle is
+in the tab order on both pages; no console errors. Note: the two app
+screenshots remain English-UI captures (the product itself is
+English-first today); swap-in Arabic captures whenever the app ships them.
+
 ## v3 — Final judge pass
 
 A fresh session judged the rendered page as three people — a skeptical

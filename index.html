@@ -6,6 +6,9 @@
 <title>ARA — See what's available. Instantly.</title>
 <meta name="description" content="ARA gives Saudi hospitals, pharmacies, and the companies that supply them one live, permission-based view of pharmaceutical stock — so gaps are seen and solved before they reach the patient.">
 <link rel="canonical" href="https://arasolutions.io/">
+<link rel="alternate" hreflang="en" href="https://arasolutions.io/">
+<link rel="alternate" hreflang="ar" href="https://arasolutions.io/ar/">
+<link rel="alternate" hreflang="x-default" href="https://arasolutions.io/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ARA">
 <meta property="og:title" content="ARA — See what's available. Instantly.">
@@ -44,9 +47,9 @@
       <a href="#faq">FAQ</a>
     </div>
     <div class="nav-right">
-      <div class="lang" role="note" aria-label="Language: English. Arabic version coming soon.">
-        <span class="on">EN</span>
-        <span class="soon" lang="ar" title="العربية — قريباً · Arabic coming soon">العربية <b>قريباً</b></span>
+      <div class="lang" role="group" aria-label="Language">
+        <span class="on" aria-current="true">EN</span>
+        <a class="alt" href="ar/" lang="ar" hreflang="ar" aria-label="النسخة العربية">عربي</a>
       </div>
       <a class="nav-signin" href="https://app.arasolutions.io">Sign in</a>
       <a class="btn btn-primary nav-cta" href="mailto:admin@arasolutions.io?subject=Demo%20request%20%E2%80%94%20%5BYour%20organization%5D&amp;body=Hello%20ARA%20team%2C%0D%0A%0D%0AOrganization%3A%20%0D%0AWe%20are%20a%3A%20healthcare%20organization%20%2F%20pharmaceutical%20company%0D%0ACity%3A%20%0D%0AWhat%20we%27d%20like%20to%20see%3A%20%0D%0A%0D%0AThank%20you">Request a demo</a>
@@ -61,36 +64,9 @@
 <header class="hero bg-navy" data-screen-label="Hero">
   <div class="hero-bg" aria-hidden="true">
   <div class="hero-grid"></div>
-  <svg class="hero-rings" viewBox="0 0 760 760" fill="none" aria-hidden="true">
-    <defs>
-      <path id="orbit-a" d="M260,380 a120,120 0 1,0 240,0 a120,120 0 1,0 -240,0"/>
-      <path id="orbit-b" d="M180,380 a200,200 0 1,0 400,0 a200,200 0 1,0 -400,0"/>
-      <path id="orbit-c" d="M95,380 a285,285 0 1,0 570,0 a285,285 0 1,0 -570,0"/>
-    </defs>
-    <g class="rings" stroke="#28CDFC">
-      <circle cx="380" cy="380" r="120" stroke-opacity="0.16"/>
-      <circle cx="380" cy="380" r="200" stroke-opacity="0.16"/>
-      <circle cx="380" cy="380" r="285" stroke-opacity="0.16"/>
-      <circle cx="380" cy="380" r="370" stroke-opacity="0.10"/>
-    </g>
-    <!-- network nodes — static, cool brand hues only (alert colors are reserved for real alerts) -->
-    <g class="nodes">
-      <circle cx="380" cy="180" r="4.5" fill="#28CDFC" fill-opacity="0.9"/>
-      <circle cx="580" cy="380" r="4.5" fill="#6FA8FF" fill-opacity="0.8"/>
-      <circle cx="245" cy="540" r="4.5" fill="#28CDFC" fill-opacity="0.55"/>
-      <circle cx="180" cy="300" r="3.5" fill="#FFFFFF" fill-opacity="0.45"/>
-      <circle cx="520" cy="565" r="3.5" fill="#0673FF" fill-opacity="0.85"/>
-    </g>
-    <!-- central hub -->
-    <circle cx="380" cy="380" r="7" fill="#0673FF"/>
-    <circle cx="380" cy="380" r="7" fill="none" stroke="#28CDFC" stroke-width="1.6" stroke-opacity="0.9"/>
-    <!-- the one moving system: three slow packets on the orbits -->
-    <g class="packets">
-      <circle r="4" fill="#28CDFC"><animateMotion dur="16s" repeatCount="indefinite"><mpath href="#orbit-b"/></animateMotion></circle>
-      <circle r="3.5" fill="#6FA8FF"><animateMotion dur="12s" begin="2s" repeatCount="indefinite"><mpath href="#orbit-a"/></animateMotion></circle>
-      <circle r="3.5" fill="#FFFFFF" fill-opacity="0.7"><animateMotion dur="22s" begin="5s" repeatCount="indefinite"><mpath href="#orbit-c"/></animateMotion></circle>
-    </g>
-  </svg>
+  <!-- grid pulses: points that surface at one grid intersection, travel the
+       line, and fade out at another intersection a few blocks away (JS below) -->
+  <div class="hero-pulses"></div>
   </div>
   <div class="wrap hero-inner">
     <div class="reveal in">
@@ -501,7 +477,7 @@
       <div class="pillar">
         <div class="pic"><svg viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="13" r="3" fill="currentColor" stroke="none"/><circle cx="19" cy="13" r="6.5"/><circle cx="7" cy="9" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><circle cx="9" cy="24" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><circle cx="26" cy="25" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><path d="M8.5 9.8l4.2 1.7M10.3 22.4l4.4-5.4M24.9 23.3l-2.7-4.2" opacity="0.5"/></svg></div>
         <h3 class="h3">Built for Saudi healthcare</h3>
-        <p>Built in Riyadh, for the Saudi market — Arabic coming soon, and designed around how Saudi healthcare actually buys, stocks, and supplies.</p>
+        <p>Built in Riyadh, for the Saudi market — in Arabic and English, and designed around how Saudi healthcare actually buys, stocks, and supplies.</p>
       </div>
     </div>
     <div class="statband mt-56 reveal">
@@ -648,15 +624,56 @@
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;
 
-  // SMIL animations in the hero SVG ignore prefers-reduced-motion — pause them explicitly
-  var heroSvg = document.querySelector('.hero-rings');
-  function syncSmil(matches) {
-    if (!heroSvg || !heroSvg.pauseAnimations) return;
-    if (matches) heroSvg.pauseAnimations(); else heroSvg.unpauseAnimations();
-  }
-  syncSmil(reduce);
-  if (reduceQuery.addEventListener) {
-    reduceQuery.addEventListener('change', function(e){ syncSmil(e.matches); });
+  // grid pulses — a point surfaces at one grid intersection, travels the
+  // line, and dies at another intersection 4–6 blocks away
+  var pulseLayer = document.querySelector('.hero-pulses');
+  if (pulseLayer) {
+    var CELL = 56; // must match .hero-grid background-size
+    var PULSE_COLORS = ['#28CDFC', '#6FA8FF', 'rgba(255,255,255,0.75)'];
+    var pulseTimer = null;
+    function spawnPulse() {
+      if (document.hidden) return;
+      var cols = Math.floor(pulseLayer.clientWidth / CELL);
+      var rows = Math.floor(pulseLayer.clientHeight / CELL);
+      if (cols < 7 || rows < 7) return;
+      var len = 4 + Math.floor(Math.random() * 3);            // 4–6 blocks
+      var horiz = Math.random() < 0.5;
+      var dir = Math.random() < 0.5 ? -1 : 1;
+      // origin intersection, clamped so the whole run stays on the grid
+      var cx = 1 + Math.floor(Math.random() * (cols - 1 - (horiz ? len : 0)));
+      var cy = 1 + Math.floor(Math.random() * (rows - 1 - (horiz ? 0 : len)));
+      if (dir === -1) { if (horiz) cx += len; else cy += len; }
+      var dur = len * 0.85 + Math.random() * 0.6;             // ~4–6s
+      var el = document.createElement('span');
+      el.className = 'pulse';
+      var c = PULSE_COLORS[Math.floor(Math.random() * PULSE_COLORS.length)];
+      el.style.background = c;
+      el.style.boxShadow = '0 0 10px ' + c;
+      el.style.transform = 'translate(' + (cx * CELL) + 'px,' + (cy * CELL) + 'px)';
+      el.style.transition = 'transform ' + dur.toFixed(2) + 's linear';
+      el.style.animationDuration = dur.toFixed(2) + 's';
+      pulseLayer.appendChild(el);
+      // next frame: send it to the destination intersection
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){
+        var dx = (cx + (horiz ? len * dir : 0)) * CELL;
+        var dy = (cy + (horiz ? 0 : len * dir)) * CELL;
+        el.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+      }); });
+      setTimeout(function(){ if (el.parentNode) el.parentNode.removeChild(el); }, dur * 1000 + 100);
+    }
+    function syncPulses(off) {
+      if (off) {
+        if (pulseTimer) { clearInterval(pulseTimer); pulseTimer = null; }
+        pulseLayer.textContent = '';
+      } else if (!pulseTimer) {
+        spawnPulse();
+        pulseTimer = setInterval(spawnPulse, 2100);
+      }
+    }
+    syncPulses(reduce);
+    if (reduceQuery.addEventListener) {
+      reduceQuery.addEventListener('change', function(e){ syncPulses(e.matches); });
+    }
   }
 
   // "lights on" — scroll-driven brightening of the statement section
