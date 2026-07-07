@@ -299,7 +299,8 @@ h1.display {
   border: 1px solid rgba(255,255,255,0.10);
   box-shadow: 0 40px 90px -30px rgba(2,10,30,0.65), 0 12px 30px -12px rgba(2,10,30,0.4);
 }
-.browser.on-light {
+/* shared on-light panel elevation (browser frames + the org-mock panel) */
+.browser.on-light, .org-mock {
   border: 1px solid var(--color-neutral-100);
   box-shadow: 0 30px 60px -28px rgba(12,40,93,0.34), 0 8px 22px -12px rgba(12,40,93,0.18);
 }
@@ -341,6 +342,9 @@ h1.display {
   color: rgba(255,255,255,0.72);
 }
 .hero-browser .browser-screen { aspect-ratio: 16/10; object-fit: cover; object-position: top left; }
+/* honesty label under the hero screenshot — quiet, same voice as the feed-foot */
+.hero-shot-note { margin-top: 16px; font-size: 13px; color: rgba(255,255,255,0.55); }
+.hero-shot-note .mono { color: rgba(255,255,255,0.72); }
 
 /* ---------- STATEMENT ("lights on" reveal into white) ---------- */
 .statement {
@@ -457,6 +461,8 @@ h1.display {
 .pill-danger  { background: var(--color-danger-bg);  color: #d33; border: 1px solid var(--color-danger-border); }
 .pill-warn    { background: var(--color-warning-bg); color: #c77f10; border: 1px solid var(--color-warning-border); }
 .pill-ok      { background: var(--color-success-bg); color: #0f9b67; border: 1px solid var(--color-success-border); }
+/* zero-count states stay neutral — alert colors are reserved for actual alerts */
+.pill-zero    { background: var(--color-neutral-50); color: var(--color-neutral-500); border: 1px solid var(--color-neutral-200); }
 .tag {
   display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 500;
   padding: 4px 10px; border-radius: 8px; background: var(--color-action-bg); color: var(--color-action);
@@ -470,13 +476,6 @@ h1.display {
 .vrow .vi svg { width: 22px; height: 22px; stroke-width: 2; }
 .vrow h4 { font-size: 17px; font-weight: 700; color: var(--color-navy); margin: 2px 0 4px; }
 .vrow p { font-size: 14px; }
-
-/* labeled screenshot caption */
-.shot-cap {
-  display: flex; align-items: center; gap: 9px; padding: 16px 4px 0;
-  font-size: 13px; color: var(--color-neutral-400);
-}
-.shot-cap .mono { color: var(--color-neutral-500); }
 
 /* ---------- WHAT WE SOLVE · visual-first bento ---------- */
 .solve-lead { max-width: 720px; }
@@ -754,8 +753,14 @@ h1.display {
 .em-val { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.70); text-align: end; font-variant-numeric: tabular-nums; }
 @media (max-width: 880px) { .intel-grid { grid-template-columns: 1fr; } }
 
-/* ---------- ORG DASHBOARD MOCK (browser-frame stand-in) ---------- */
-.org-mock { background: var(--color-neutral-50); }
+/* ---------- ORG DASHBOARD MOCK (frameless panel — it is a mock, so it
+   carries no browser chrome or URL bar; the om-band header + dashed
+   Illustrative tag are its honesty frame; elevation shared with
+   .browser.on-light above) ---------- */
+.org-mock {
+  background: var(--color-neutral-50);
+  border-radius: var(--radius-xl); overflow: hidden;
+}
 .om-band {
   display: flex; justify-content: space-between; align-items: center; gap: 10px;
   background: linear-gradient(160deg, #0C285D, #0A2150); color: #fff;
@@ -860,6 +865,8 @@ h1.display {
 .footer ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
 .footer ul a { color: rgba(255,255,255,0.74); text-decoration: none; font-size: 15px; }
 .footer ul a:hover { color: #fff; }
+/* legal pages not written yet — honest non-links, same pattern as the AR toggle */
+.footer-soon { color: rgba(255,255,255,0.55); font-size: 15px; cursor: default; } /* 0.55 = 6:1 on #061634 (AA); still quieter than live links */
 .footer-bottom { padding-top: 26px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   color: rgba(255,255,255,0.62); font-size: 13px; }
 
@@ -934,6 +941,7 @@ h1.display {
 @media (max-width: 1024px) {
   .hero-inner { grid-template-columns: 1fr; gap: 44px; }
   .hero-browser { transform: none; }
+  .hero-rings { display: none; } /* stacked hero copy runs full width — orbit packets collided with it */
   .nav-links { display: none; }
   .stats { grid-template-columns: repeat(2, 1fr); gap: 28px 0; }
   .stat:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; }
@@ -966,8 +974,9 @@ h1.display {
 
 /* visual-audit mobile refinements */
 @media (max-width: 760px) {
-  .hero-rings { display: none; } /* orbit dots collided with stacked copy */
   .footer-top > div:first-child { grid-column: 1 / -1; padding-bottom: 8px; }
+  /* narrow cards: wrap the API sample instead of clipping the payoff line */
+  .api-snippet pre { white-space: pre-wrap; overflow-wrap: anywhere; }
 }
 @media (max-width: 480px) {
   /* phones: drop the location column; product + status + qty tell the story */
@@ -977,6 +986,8 @@ h1.display {
   .mini-table thead th { padding: 0 8px 10px; }
   .mini-table .pill { font-size: 11px; padding: 3px 8px; }
   .focal-alerts .feed-head { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .focal-alerts .feed-foot { display: block; } /* label + note flow as one sentence */
+  .stat { padding-block: 8px; padding-inline: 16px 12px; } /* narrow cells: give labels their line length back */
   .hero .btn-row { flex-direction: column; align-items: stretch; }
   .hero .btn-row .btn { justify-content: center; }
 }

@@ -1,5 +1,81 @@
 # ARA Landing Page v2 — CHANGES
 
+## v3 — Final judge pass
+
+A fresh session judged the rendered page as three people — a skeptical
+hospital procurement director, a pharma commercial director, and a design
+director — plus dedicated mobile and truth audits, with every finding
+adversarially verified before any edit. All verdicts were positive; the
+edits below are the surgical remainder. (The account design skills would
+not load in this session — "Unknown skill" — so their stated methodologies
+were applied manually, as the handoff instructed.)
+
+**Shelved ideas, decided.** (a) Frameless screenshot: ACCEPTED, narrowed —
+the "Who it's for" org mock lost its browser chrome and fake URL bar (it is
+a mock, not an app screenshot; the chrome implied otherwise) and became a
+standalone panel; the floating alert-chip half of the idea was rejected.
+The two real screenshots keep their frames — repetition of two is rhythm,
+not monotony. (b) Mono seam annotations: REJECTED — mono eyebrows already
+sit at every seam; a second mono layer would spend an already-spent voice.
+
+**Trust & truth** — footer Privacy/Terms are no longer dead `href="#"`
+links; they read "coming soon" as muted non-links (same honesty pattern as
+the AR toggle). The two real app screenshots — the only data-bearing
+visuals without an honesty label — now carry one ("Demo data — all
+organizations shown are fictional" under the hero; "Shown with illustrative
+data." in the platform caption). The org mock no longer lists two canon
+customer organizations as one org's "branches" (now Main Hospital /
+Al Rawdah Branch — no more implied cross-org visibility). "Rawasi Pharmacy
+Chain" → canon "Rawasi Pharmacy"; alert-feed "Branch 1 — Malaz" renumbered
+to Branch 3 (the hero screenshot's Branch 1 is Tahlia). "The integration is
+this small" → "The payload is this small" (what's shown is a payload).
+
+**Copy** — FAQ cost answer: "pay nothing to join" → "pay nothing" (the
+hedge read as free-to-join-paid-to-use), and the pharma side now gets
+"we'll walk you through how the partnership works." The platform lead
+gains one mirror sentence for the paying side ("Companies see the same
+picture in reverse…"). "Built for every side of the shelf" → "both sides"
+(the exact phrase performed twice in H2s two sections apart).
+
+**Design** — zero-count pills in the org mock ("Low 0", "Out 0") no longer
+spend semantic amber/red; a neutral `.pill-zero` keeps alert colors for the
+one real alert ("Out 1").
+
+**Mobile/tablet** — the hero's orbit rings now hide up to 1024px (packets
+drifted over the stacked copy and CTA at 768); the Push API snippet wraps
+instead of clipping mid-word at 375 (the "mapped to Atorvastatin 20 mg"
+payoff line was being cut); the alert-feed footer flows as one sentence at
+375; facts-strip cells get their line length back at 375.
+
+**Consistency** — footer demo mailto now carries the same pre-filled body
+as the other three demo CTAs; FAQ added to the footer Product column;
+duplicate "5" section comment renumbered.
+
+**Code review on the diff (8 angles, adversarially verified)** — caught and
+fixed before commit: the new footer "coming soon" text was 4.43:1 contrast
+(just under AA) and was brightened to 6:1; all five demo mailto bodies now
+encode line breaks as %0D%0A per RFC 6068 (bare %0A can render the template
+as one run-on line in classic Outlook — a pre-existing issue the footer edit
+would have propagated); the org panel now shares .browser.on-light's
+elevation rule instead of duplicating the shadow; a dead .shot-cap rule pair
+and a redundant single-use .org-panel class were removed.
+
+**Deliberately left** — "encrypted in transit" in the security FAQ: a
+truth audit flagged it as outside the handoff's vetted-claims list, but it
+is in the founder-approved spec (REVISION_PLAN §2.11) and describes
+standard HTTPS; founder should confirm the app serves only over TLS, else
+say the word and it comes out. Also left: hosting-location/PDPL language
+(nothing verifiable to say yet), pixel-retouching "Rawasi Pharmacy Chain"
+inside company-dashboard.png (out of scope for this pass), and the founder
+still owes a real org-admin screenshot to replace the inline mock.
+
+**Verified** — 375/768/1440 render with zero horizontal overflow; FAQ
+keyboard nav (Tab/Enter, visible focus); reduced-motion neutralizes
+everything (SMIL paused, packets hidden, reveals/bars/ECG in final state,
+feed and clock static); no console errors (the only failures in the
+sandbox are its own Google Fonts block); footer legal placeholders are no
+longer in the tab order.
+
 ## v2.2 — Design audit + typography system
 
 Three parallel audits (visual/layout, typography, microcopy) ran against the
