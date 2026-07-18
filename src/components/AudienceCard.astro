@@ -1,14 +1,16 @@
 ---
-// §4 audience card. The organizations cell is the weighted (priority) one.
+// §4 audience card — one card per named solution; the audience line sits
+// above the solution name. The organizations cell is the weighted one.
 interface Props {
-  label: string;
+  label: string; // audience kicker ("For healthcare organizations")
+  solution: string; // solution name (card title)
   body: string;
   emphasis?: boolean;
   tag: string;
   icon: 'org' | 'company';
   class?: string;
 }
-const { label, body, emphasis = false, tag, icon, class: className = '' } = Astro.props;
+const { label, solution, body, emphasis = false, tag, icon, class: className = '' } = Astro.props;
 ---
 
 <article
@@ -35,7 +37,10 @@ const { label, body, emphasis = false, tag, icon, class: className = '' } = Astr
     </span>
     <span class="acard__tag tnum">{tag}</span>
   </div>
-  <h3 class="acard__label">{label}</h3>
+  <div class="acard__titles">
+    <p class="acard__kicker">{label}</p>
+    <h3 class="acard__label">{solution}</h3>
+  </div>
   <p class="acard__body">{body}</p>
   <span class="acard__bar grad-signature" aria-hidden="true"></span>
 </article>
@@ -97,6 +102,18 @@ const { label, body, emphasis = false, tag, icon, class: className = '' } = Astr
     font-family: var(--font-arabic);
     text-transform: none;
     letter-spacing: 0;
+  }
+  .acard__titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .acard__kicker {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-action);
   }
   .acard__label {
     margin: 0;

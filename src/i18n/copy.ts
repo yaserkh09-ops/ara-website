@@ -1,8 +1,15 @@
 /**
- * ARA marketing copy — LOCKED, bilingual (EN default / AR full-RTL).
+ * ARA marketing copy — bilingual (EN default / AR full-RTL).
  *
- * Every on-page string is transcribed VERBATIM from `ara-website-copy.md`.
- * Do not rewrite, shorten, translate, or "improve" any of it.
+ * Baseline strings were transcribed from `ara-website-copy.md`. The
+ * WEBSITE_FINALIZE pass (2026-07-18) then applied the ratified revisions:
+ * the two named solutions (Intelligent Inventory Management — paid by
+ * healthcare organizations · Network Visibility & Management — paid by
+ * pharmaceutical companies), the authorized pricing language (joining a
+ * company's network is free for the institution — the company pays; access
+ * is granted, scoped, and revocable), "ARA Solutions · أرى" on textual brand
+ * surfaces, and bilingual copy fixes. Business-model language here must not
+ * change without a ratified ruling.
  *
  * The `ar` object is typed against `en` (`Copy`), so the build fails if a key
  * is missing in either locale — keeping the two languages structurally in sync.
@@ -21,6 +28,11 @@ export const site = {
   signInUrl: 'https://app.arasolutions.io',
   contactEmail: 'admin@arasolutions.io',
   contactHref: 'mailto:admin@arasolutions.io',
+  /** Legal pages (English-only this release), linked from both footers. */
+  legal: {
+    privacy: '/privacy-policy',
+    terms: '/terms',
+  },
   /** Section anchors used by nav + in-page jumps. */
   anchors: {
     whatWeSolve: 'what-we-solve',
@@ -36,7 +48,7 @@ const en = {
   meta: {
     lang: 'en',
     dir: 'ltr' as 'ltr' | 'rtl',
-    title: 'ARA | أرى — Inventory Intelligence Solution',
+    title: 'ARA Solutions · أرى — Inventory Intelligence Solution',
     // [micro-copy] meta description — drawn from the hero subhead's promise.
     description:
       "ARA gives healthcare organizations a more reliable supply, and gives the companies that serve them real-time visibility into what's actually in stock.",
@@ -91,7 +103,7 @@ const en = {
   solution: {
     eyebrow: 'What ARA does',
     heading: 'Inventory data, finally made intelligent.',
-    body: 'ARA connects the inventory inside each organization and makes it live, accessible, and shareable — always on a permission basis. Customers get a supply chain that can finally see and respond to what they need. Companies get real-time visibility into stock for their products. The same data that used to sit blind in a back office becomes something everyone can act on.',
+    body: 'One platform, two solutions. Intelligent Inventory Management gives healthcare organizations a live, intelligent view of their own stock. Network Visibility & Management gives the companies that supply them real-time visibility into stock for their products — always on a permission basis, and only where an organization has granted access. The same data that used to sit blind in a back office becomes something everyone can act on.',
     // value cells — words pulled from the body line above ("live, accessible … permission basis")
     values: [
       { label: 'Live' },
@@ -106,11 +118,13 @@ const en = {
     heading: 'Built for every side of the shelf.',
     organizations: {
       label: 'For healthcare organizations',
-      body: 'Free to use, and fully in your control. Get a clearer, more intelligent view of your own stock. Decide which companies can see it — and in return you get fewer stockouts, less manual chasing of suppliers, and a supply chain that finally responds to what you actually need. Your data stays yours.',
+      solution: 'Intelligent Inventory Management',
+      body: "A paid subscription for hospitals and pharmacies: a clearer, more intelligent view of your own stock — fewer stockouts, less manual chasing of suppliers, and a supply chain that finally responds to what you actually need. And joining a company's network costs you nothing — the company pays; you only grant access, and you can revoke it at any time. Your data stays yours.",
     },
     companies: {
       label: 'For pharmaceutical companies',
-      body: "See real-time stock for your products across every account you're authorized to reach. Act before a shelf runs empty, direct your effort where it's genuinely needed, and serve your customers on data instead of guesswork.",
+      solution: 'Network Visibility & Management',
+      body: "A paid subscription that shows real-time stock for your products at every account that has authorized you. Act before a shelf runs empty, direct your effort where it's genuinely needed, and serve your customers with data instead of guesswork.",
     },
   },
 
@@ -171,7 +185,9 @@ const en = {
     tagline: "See what's available. Instantly.",
     contactLabel: 'Contact',
     quickLinksLabel: 'Quick links',
-    legal: '© 2026 ARA. Pharmaceutical inventory intelligence for Saudi Arabia.',
+    legal: '© 2026 ARA Solutions · أرى. Pharmaceutical inventory intelligence for Saudi Arabia.',
+    privacy: 'Privacy Policy',
+    terms: 'Terms of Service',
   },
 
   // Non-copy-file UI strings (minimal, in-voice). [micro-copy] = for review.
@@ -207,7 +223,7 @@ const en = {
     },
     // Honest value strip — short claims drawn from the locked copy. [micro-copy]
     proof: [
-      'Free for healthcare organizations',
+      "Free to join a company's network",
       'Real-time visibility',
       'Permission-based by design',
       'Enterprise-grade access control',
@@ -230,7 +246,7 @@ const ar: Copy = {
   meta: {
     lang: 'ar',
     dir: 'rtl',
-    title: 'ARA | أرى — منصة ذكاء المخزون',
+    title: 'ARA Solutions · أرى — منصة ذكاء المخزون',
     // [micro-copy] meta description — drawn from the hero subhead.
     description:
       'تمنح ARA المنشآت الصحية سلسلة إمدادٍ أكثر موثوقية، وتمنح الشركات التي تخدمها رؤيةً لحظيةً لما هو متوفرٌ فعلًا في المخزون.',
@@ -259,7 +275,7 @@ const ar: Copy = {
   problem: {
     eyebrow: 'المشكلة',
     heading: 'اليوم، البيانات ليست ذكية.',
-    body: 'بالنسبة للمنشآت الصحية، نفاد الدواء خطرٌ يوميّ — وعمليةٌ يدوية. تبقى بيانات المخزون محتجزةً داخل نظام تخطيط الموارد (ERP) في كل منشأة، يصعب الوصول إليها وتغيب عن أعين الشركات القادرة على التصرّف. فينفد منتجٌ حيويّ دون أن ينتبه أحد، حتى يصبح المريض في الانتظار. أما الشركات المورّدة لهذا الدواء فكانت لتتحرّك — لو أنها تستطيع الرؤية. إنها مشكلة رؤية، وكلفتها تطال الجميع.',
+    body: 'بالنسبة للمنشآت الصحية، نفاد الدواء خطرٌ يوميٌّ — وعمليةٌ يدويةٌ. تبقى بيانات المخزون محتجزةً داخل نظام تخطيط الموارد (ERP) في كل منشأة، يصعب الوصول إليها وتغيب عن أعين الشركات القادرة على التصرّف. فينفد منتجٌ حيويّ دون أن ينتبه أحد، حتى يصبح المريض في الانتظار. أما الشركات المورّدة لهذا الدواء فكانت لتتحرّك — لو أنها تستطيع الرؤية. إنها مشكلة رؤية، وكلفتها تطال الجميع.',
     points: [
       {
         title: 'إدارة المخزون تستهلك الوقت',
@@ -279,7 +295,7 @@ const ar: Copy = {
   solution: {
     eyebrow: 'ماذا تفعل ARA',
     heading: 'بيانات المخزون، وقد أصبحت ذكيةً أخيرًا.',
-    body: 'تربط ARA المخزون داخل كل منشأة وتجعله حيًّا، وسهل الوصول، وقابلًا للمشاركة — دائمًا وفق الأذونات. تحصل المنشآت على سلسلة إمدادٍ قادرةٍ أخيرًا على رؤية ما تحتاجه والاستجابة له. وتحصل الشركات على رؤيةٍ لحظيةٍ لمخزون منتجاتها. فتتحوّل البياناتُ التي كانت حبيسة المكاتب الخلفية إلى معلومةٍ يستطيع الجميع التصرّف بناءً عليها.',
+    body: 'منصةٌ واحدة وحلّان. تمنح «الإدارة الذكية للمخزون» المنشآت الصحية رؤيةً حيّةً وذكيةً لمخزونها، وتمنح «رؤية الشبكة وإدارتها» الشركات المورّدة رؤيةً لحظيةً لمخزون منتجاتها — دائمًا وفق الأذونات، ولا يظهر إلا ما سمحت به المنشأة. فتتحوّل البياناتُ التي كانت حبيسة المكاتب الخلفية إلى معلومةٍ يستطيع الجميع التصرّف بناءً عليها.',
     values: [
       { label: 'حيّة' },
       { label: 'سهلة الوصول' },
@@ -292,11 +308,13 @@ const ar: Copy = {
     heading: 'مصمَّمةٌ لكل أطراف المنظومة.',
     organizations: {
       label: 'للمنشآت الصحية',
-      body: 'مجانية الاستخدام، وتحت سيطرتك بالكامل. احصل على رؤيةٍ أوضح وأذكى لمخزونك، وأنت من يقرّر أي الشركات يمكنها رؤيته — وفي المقابل: نفادٌ أقل، ومطاردةٌ يدويةٌ أقل للموردين، وسلسلة إمدادٍ تستجيب أخيرًا لما تحتاجه فعلًا. بياناتك تبقى ملكك.',
+      solution: 'الإدارة الذكية للمخزون',
+      body: 'اشتراكٌ مدفوعٌ للمستشفيات والصيدليات: رؤيةٌ أوضح وأذكى لمخزونك — نفادٌ أقل، ومطاردةٌ يدويةٌ أقل للموردين، وسلسلة إمدادٍ تستجيب أخيرًا لما تحتاجه فعلًا. أما الانضمام إلى شبكة أي شركةٍ فلا يكلّفك شيئًا — الشركة هي من يدفع، وأنت فقط تمنح صلاحية وصولٍ يمكنك سحبها في أي وقت. بياناتك تبقى ملكك.',
     },
     companies: {
       label: 'لشركات الأدوية',
-      body: 'اطّلع على مخزون منتجاتك لحظيًا في كل حسابٍ مصرّحٍ لك بالوصول إليه. تحرّك قبل أن يفرغ الرف، ووجّه جهدك إلى حيث تمسّ الحاجة فعلًا، واخدم عملاءك بالبيانات بدلًا من التخمين.',
+      solution: 'رؤية الشبكة وإدارتها',
+      body: 'اشتراكٌ مدفوعٌ يعرض لك مخزون منتجاتك لحظيًا في كل حسابٍ منحك صلاحية الوصول. تحرّك قبل أن يفرغ الرف، ووجّه جهدك إلى حيث تمسّ الحاجة فعلًا، واخدم عملاءك بالبيانات بدلًا من التخمين.',
     },
   },
 
@@ -333,7 +351,7 @@ const ar: Copy = {
       },
       {
         title: 'تحكّمٌ في الوصول بمعايير المؤسسات',
-        body: 'كل مستخدمٍ لا يرى إلا ما صُرّح له به — مفروضًا على مستوى قاعدة البيانات.',
+        body: 'كل مستخدمٍ لا يرى إلا ما صُرّح له به — وهذا مفروضٌ على مستوى قاعدة البيانات.',
       },
       {
         title: 'محدّثةٌ دائمًا',
@@ -353,7 +371,9 @@ const ar: Copy = {
     tagline: 'شاهد المتوفر. فورًا.',
     contactLabel: 'التواصل',
     quickLinksLabel: 'روابط سريعة',
-    legal: '© ٢٠٢٦ ARA. ذكاء المخزون الدوائي للمملكة العربية السعودية.',
+    legal: '© ٢٠٢٦ ARA Solutions · أرى. ذكاء المخزون الدوائي للمملكة العربية السعودية.',
+    privacy: 'سياسة الخصوصية',
+    terms: 'شروط الاستخدام',
   },
 
   ui: {
@@ -386,7 +406,7 @@ const ar: Copy = {
       private: 'خاص',
     },
     proof: [
-      'مجانية للمنشآت الصحية',
+      'الانضمام إلى شبكات الشركات مجانيٌّ للمنشآت',
       'رؤية لحظية',
       'قائمة على الأذونات',
       'تحكّمٌ في الوصول بمعايير المؤسسات',
