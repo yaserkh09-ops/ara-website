@@ -10,10 +10,16 @@ interface Props {
 }
 const { locale, c } = Astro.props;
 
+// Match SiteNav: pure `#hash` on the locale's home page, absolute elsewhere.
+const home = localeHome(locale);
+const norm = (p: string) => p.replace(/\/+$/, '') || '/';
+const onHome = norm(Astro.url.pathname) === norm(home);
+const sectionHref = (id: string) => (onHome ? anchor(id) : `${home}${anchor(id)}`);
+
 const links = [
-  { label: c.nav.links.whatWeSolve, href: anchor(site.anchors.whatWeSolve) },
-  { label: c.nav.links.whoItsFor, href: anchor(site.anchors.whoItsFor) },
-  { label: c.nav.links.howItWorks, href: anchor(site.anchors.howItWorks) },
+  { label: c.nav.links.whatWeSolve, href: sectionHref(site.anchors.whatWeSolve) },
+  { label: c.nav.links.whoItsFor, href: sectionHref(site.anchors.whoItsFor) },
+  { label: c.nav.links.howItWorks, href: sectionHref(site.anchors.howItWorks) },
 ];
 ---
 
@@ -41,6 +47,11 @@ const links = [
 
   <div class="footer__legal-row">
     <p class="footer__legal">{c.footer.legal}</p>
+    <div class="footer__legal-links">
+      <a href={site.legal.privacy} class="footer__legal-link">{c.footer.privacy}</a>
+      <span class="footer__legal-dot" aria-hidden="true">·</span>
+      <a href={site.legal.terms} class="footer__legal-link">{c.footer.terms}</a>
+    </div>
   </div>
 
   <div class="footer__bar grad-signature" aria-hidden="true"></div>
@@ -111,6 +122,11 @@ const links = [
   }
 
   .footer__legal-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
     max-inline-size: 1200px;
     margin-inline: auto;
     padding-inline: clamp(1.25rem, 5vw, 3rem);
@@ -122,6 +138,22 @@ const links = [
     margin: 0;
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.5);
+  }
+  .footer__legal-links {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .footer__legal-link {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.15s ease;
+  }
+  .footer__legal-link:hover {
+    color: var(--color-white);
+  }
+  .footer__legal-dot {
+    color: rgba(255, 255, 255, 0.35);
   }
 
   .footer__bar {

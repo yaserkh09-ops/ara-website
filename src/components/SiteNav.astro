@@ -12,10 +12,17 @@ interface Props {
 }
 const { locale, c } = Astro.props;
 
+// On the locale's home page links stay pure `#hash` (smooth scroll + scrollspy);
+// on standalone pages (legal) they navigate home first.
+const home = localeHome(locale);
+const norm = (p: string) => p.replace(/\/+$/, '') || '/';
+const onHome = norm(Astro.url.pathname) === norm(home);
+const sectionHref = (id: string) => (onHome ? anchor(id) : `${home}${anchor(id)}`);
+
 const links = [
-  { label: c.nav.links.whatWeSolve, href: anchor(site.anchors.whatWeSolve) },
-  { label: c.nav.links.whoItsFor, href: anchor(site.anchors.whoItsFor) },
-  { label: c.nav.links.howItWorks, href: anchor(site.anchors.howItWorks) },
+  { label: c.nav.links.whatWeSolve, href: sectionHref(site.anchors.whatWeSolve) },
+  { label: c.nav.links.whoItsFor, href: sectionHref(site.anchors.whoItsFor) },
+  { label: c.nav.links.howItWorks, href: sectionHref(site.anchors.howItWorks) },
 ];
 ---
 

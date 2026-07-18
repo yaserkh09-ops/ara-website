@@ -18,10 +18,17 @@ import SiteFooter from '../components/SiteFooter.astro';
 interface Props {
   locale: Locale;
   c: Copy;
+  /** Page-specific overrides (legal pages); default to the locale meta. */
+  title?: string;
+  description?: string;
+  /** The hreflang alternates point at the two home routes — suppress on standalone pages. */
+  homeAlternates?: boolean;
 }
 
-const { locale, c } = Astro.props;
-const { lang, dir, title, description } = c.meta;
+const { locale, c, homeAlternates = true } = Astro.props;
+const { lang, dir } = c.meta;
+const title = Astro.props.title ?? c.meta.title;
+const description = Astro.props.description ?? c.meta.description;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
@@ -39,7 +46,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
     <!-- Open Graph / social -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ARA | أرى" />
+    <meta property="og:site_name" content="ARA Solutions · أرى" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -47,10 +54,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <meta property="og:locale" content={lang === 'ar' ? 'ar_SA' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Alternate language versions -->
-    <link rel="alternate" hreflang="en" href={new URL('/', Astro.site).href} />
-    <link rel="alternate" hreflang="ar" href={new URL('/ar/', Astro.site).href} />
-    <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+    <!-- Alternate language versions (home routes only) -->
+    {
+      homeAlternates && (
+        <>
+          <link rel="alternate" hreflang="en" href={new URL('/', Astro.site).href} />
+          <link rel="alternate" hreflang="ar" href={new URL('/ar/', Astro.site).href} />
+          <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+        </>
+      )
+    }
 
     <!-- Add .js / .motion to <html> before paint: scopes reveal hidden-states
          so no-JS AND reduced-motion users always see full content (no FOUC). -->
