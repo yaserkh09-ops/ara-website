@@ -94,7 +94,29 @@
           <div class="browser-dots"><i></i><i></i><i></i></div>
           <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
         </div>
-        <img class="browser-screen" src="assets/screens/rep-dashboard.png" alt="ARA representative dashboard with live low-stock and out-of-stock alerts across authorized accounts" width="2880" height="1800" fetchpriority="high">
+        <div class="appmock" role="img" aria-label="Illustrative mock of an ARA representative dashboard: stat tiles and live low-stock alerts at authorized accounts">
+          <div class="am-side" aria-hidden="true">
+            <div class="am-logo"><img src="assets/ara-logo-mark.png" alt="">ARA</div>
+            <span class="am-nav on">Dashboard</span><span class="am-nav">Network view</span><span class="am-nav">My products</span><span class="am-nav">My accounts</span><span class="am-nav">Alerts</span>
+          </div>
+          <div class="am-main" aria-hidden="true">
+            <div class="am-band"><span>Good afternoon, Rakan</span><span class="am-chip">13 alerts</span></div>
+            <div class="am-stats">
+              <div><b>5</b><span>Products to monitor</span></div>
+              <div><b>3</b><span>Assigned accounts</span></div>
+              <div><b>Riyadh</b><span>My territory</span></div>
+              <div><b>0</b><span>Pending requests</span></div>
+            </div>
+            <div class="am-tablehead">Recent unresolved alerts</div>
+            <table class="am-table"><tbody>
+              <tr><td>Sitagliptin 100 mg</td><td>Qimam Medical Group · OPD</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono">SKU-4821</td></tr>
+              <tr><td>Amlodipine 5 mg</td><td>Al Wadi General Hospital · ICU</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono">SKU-1174</td></tr>
+              <tr><td>Atorvastatin 20 mg</td><td>Rawasi Pharmacy · Tahlia</td><td><span class="pill pill-warn">Low stock</span></td><td class="mono">SKU-2093</td></tr>
+              <tr><td>Celecoxib 200 mg</td><td>Rawasi Pharmacy · Malaz</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono">SKU-3307</td></tr>
+            </tbody></table>
+            <div class="am-note">Illustrative interface · demo data</div>
+          </div>
+        </div>
       </div>
       <div class="hero-shot-note"><span class="mono">Demo data</span> · all organizations shown are fictional</div>
     </div>
@@ -205,7 +227,29 @@
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
           </div>
-          <img class="browser-screen" src="assets/screens/company-dashboard.png" alt="ARA company dashboard showing network inventory health by territory with recent unresolved alerts" width="2940" height="1662" loading="lazy">
+          <div class="appmock" role="img" aria-label="Illustrative mock of an ARA company dashboard: network stat tiles and inventory health by territory">
+            <div class="am-side" aria-hidden="true">
+              <div class="am-logo"><img src="assets/ara-logo-mark.png" alt="">ARA</div>
+              <span class="am-nav on">Dashboard</span><span class="am-nav">My products</span><span class="am-nav">Network inventory</span><span class="am-nav">My reps</span><span class="am-nav">Requests</span>
+            </div>
+            <div class="am-main" aria-hidden="true">
+              <div class="am-band"><span>Amal Pharma · Company admin</span><span class="am-chip">19 alerts</span></div>
+              <div class="am-stats">
+                <div><b>3</b><span>My reps</span></div>
+                <div><b>14</b><span>My products</span></div>
+                <div><b>3</b><span>Network customers</span></div>
+                <div><b>19</b><span>Active alerts</span></div>
+              </div>
+              <div class="am-tablehead">Inventory by territory</div>
+              <table class="am-table"><tbody>
+                <tr><td>Riyadh Central</td><td>Qimam Medical Group</td><td><span class="pill pill-warn">7 alerts</span></td><td class="mono">upd 09:41</td></tr>
+                <tr><td>Riyadh South</td><td>Rawasi Pharmacy</td><td><span class="pill pill-warn">5 alerts</span></td><td class="mono">upd 09:12</td></tr>
+                <tr><td>Jeddah West</td><td>Al Wadi General Hospital</td><td><span class="pill pill-danger">8 alerts</span></td><td class="mono">upd 08:57</td></tr>
+                <tr><td>Dammam</td><td>Bayan Medical</td><td><span class="pill pill-ok">Clear</span></td><td class="mono">upd 09:03</td></tr>
+              </tbody></table>
+              <div class="am-note">Illustrative interface · demo data</div>
+            </div>
+          </div>
         </div>
         <div class="panel-caption">
           <span class="kicker">One source of truth</span>
@@ -237,7 +281,7 @@
   <div class="wrap">
     <div class="section-head">
       <div class="eyebrow">Intelligence</div>
-      <h2 class="h2">First the network sees. Then it thinks.</h2>
+      <h2 class="h2">The network sees today. Thinking comes next.</h2>
     </div>
     <div class="intel-grid reveal">
       <div class="intel-card">
@@ -253,8 +297,8 @@
       </div>
       <div class="intel-card roadmap">
         <span class="kicker intel-kicker">Next · where ARA is going</span>
-        <h3 class="h3">The network starts to think.</h3>
-        <p>The same data that shows what's on the shelf can learn what belongs there: expiry watch, demand signals, and reorder recommendations that know the whole network rather than one store. We're building this now, and we label it as in development on purpose.</p>
+        <h3 class="h3">What's ahead: the network starts to think.</h3>
+        <p>The same data that shows what's on the shelf could learn what belongs there: expiry watch, demand signals, and reorder recommendations that know the whole network rather than one store. None of it is live yet. We're building it now, and we label it as in development on purpose.</p>
         <div class="expiry-mock" aria-hidden="true">
           <div class="em-head"><span>Expiry watch · units at risk</span><span class="concept-tag">Concept preview</span></div>
           <div class="em-row"><span class="em-label">0–30 days</span><div class="em-bar"><i class="em-red" style="width:52%"></i></div><span class="em-val">7.4k</span></div>
