@@ -72,20 +72,14 @@
     <div class="reveal in">
       <p class="eyebrow">Pharmaceutical inventory intelligence</p>
       <h1 class="display">Never caught short.<br><span class="gradient-text">Never sold blind.</span></h1>
-      <p class="lead hero-sub">ARA gives hospitals, pharmacies, and the companies that supply them one live view of pharmaceutical stock, so gaps get fixed before they reach the patient.</p>
+      <p class="lead hero-sub">ARA brings your data to life: a unified live view of your stock, and the features to solve supply chain obstacles so nothing affects your patients' experience.</p>
       <div class="btn-row">
         <a class="btn btn-primary" href="mailto:admin@arasolutions.io?subject=Demo%20request%20%E2%80%94%20%5BYour%20organization%5D&amp;body=Hello%20ARA%20team%2C%0D%0A%0D%0AOrganization%3A%20%0D%0AWe%20are%20a%3A%20healthcare%20organization%20%2F%20pharmaceutical%20company%0D%0ACity%3A%20%0D%0AWhat%20we%27d%20like%20to%20see%3A%20%0D%0A%0D%0AThank%20you">Request a demo
           <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M5 12h14"/><path class="arr-head" d="M13 6l6 6-6 6"/></svg>
         </a>
-        <a class="btn btn-ghost-light" href="#how">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>
-          See how it works
+        <a class="btn btn-ghost-light" href="mailto:admin@arasolutions.io">
+          Contact us
         </a>
-      </div>
-      <div class="hero-meta">
-        <div><span class="dot"></span>Free to join a company's network</div>
-        <div><span class="dot"></span>Works alongside your ERP</div>
-        <div><span class="dot"></span>Built in Riyadh</div>
       </div>
     </div>
     <div class="reveal in reveal-d1">
@@ -94,7 +88,8 @@
           <div class="browser-dots"><i></i><i></i><i></i></div>
           <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
         </div>
-        <div class="appmock" role="img" aria-label="Illustrative mock of an ARA representative dashboard: stat tiles and live low-stock alerts at authorized accounts">
+        <!-- TODO: swap this code-drawn mock for the real capture "dashboard--lawamea" (organization dashboard, 16:10, ~2000x1250) once supplied as a file -->
+        <div class="appmock" role="img" aria-label="Illustrative mock of an ARA organization dashboard: stat tiles and live low-stock alerts across branches">
           <div class="am-side" aria-hidden="true">
             <div class="am-logo"><img src="assets/ara-logo-mark.png" alt="">ARA</div>
             <span class="am-nav on">Dashboard</span><span class="am-nav">Network view</span><span class="am-nav">My products</span><span class="am-nav">My accounts</span><span class="am-nav">Alerts</span>
@@ -127,8 +122,8 @@
 <section class="statement" data-screen-label="Statement">
   <div class="wrap">
     <div class="statement-inner">
-      <h2 class="statement-head">Availability is a shared problem.<br>Visibility should be too.</h2>
-      <p class="statement-body">Hospitals see their shelves. Companies see their warehouses. Nobody sees the gap in between, and that's where stockouts live. ARA connects both sides to the same live picture of stock, permission by permission.</p>
+      <h2 class="statement-head">Availability is a shared problem.<br>Visibility is the shared solution.</h2>
+      <p class="statement-body">Hospitals see their shelves. Companies see their warehouses. Nobody sees the gap in between. That's where stockouts live. ARA gives your organization one live picture of stock across every branch, and lets you extend that view to your suppliers, permission by permission.</p>
     </div>
   </div>
 </section>
@@ -139,14 +134,14 @@
     <div class="section-head">
       <div class="eyebrow">The problem</div>
       <h2 class="h2">Stockouts stay invisible until they reach the patient.</h2>
-      <p class="lead solve-lead">Between the shelf and the warehouse sits a blind spot. Stock runs low quietly, reorders travel by phone call and spreadsheet, and everyone finds out at the worst possible moment.<span class="emph">Manual work, and it costs you every day.</span></p>
+      <p class="lead solve-lead">Between the shelf and the warehouse sits a blind spot. Stock runs low quietly, reorders travel by phone call and spreadsheet, and everyone finds out at the worst possible moment.<span class="emph">Manual work that costs you every day.</span></p>
     </div>
 
     <div class="reveal solve-bento">
       <!-- FOCAL POINT · live alert feed -->
       <div class="card focal-alerts">
         <div class="feed-head">
-          <div class="feed-title"><span class="live-dot"></span><span class="kicker">Live alert feed · the gap, made visible</span></div>
+          <div class="feed-title"><span class="live-dot"></span><span class="kicker">Live alert feed</span></div>
           <span class="pill pill-danger" id="unresolvedPill"><span id="unresolvedCount">13</span> unresolved</span>
         </div>
         <div class="table-scroll"><table class="mini-table" id="alertTable">
@@ -160,18 +155,17 @@
             <tr><td class="prod">Metformin 500 mg</td><td>Branch 3 — Malaz</td><td><span class="pill pill-danger">Out of stock</span></td><td class="mono num">0</td></tr>
           </tbody>
         </table></div>
-        <div class="feed-foot"><span class="mono">Illustrative data</span> · this is what the blind spot looks like once you can see it</div>
+        <div class="feed-foot"><span class="mono">Illustrative data</span></div>
       </div>
 
       <!-- pain 1 · time-consuming -->
       <div class="card pain-card pain-1">
         <div class="pain-head">
-          <h3>Counted by hand, chased by phone</h3>
+          <h3>Manual work, time consuming</h3>
         </div>
         <p>Manual checks and reorder calls eat hours every week, time that should go to patients.</p>
         <div class="pain-viz viz-time">
           <div class="time-clock"><span id="lostH">128</span><span class="tsep">:</span><span id="lostM">04</span><span class="tsep">:</span><span id="lostS">17</span></div>
-          <div class="time-label"><span class="tick-dot"></span><span>Illustrative · the meter runs while stock is counted by hand</span></div>
         </div>
       </div>
 
@@ -215,9 +209,9 @@
 <section class="section bg-white" id="platform" data-screen-label="What ARA Does">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">The platform</div>
-      <h2 class="h2">One live picture of stock, for every side of the shelf.</h2>
-      <p class="lead">ARA turns inventory records into a live, shareable view. See your own stock from anywhere, the moment it changes, and grant each company permission to see the products they supply you and nothing else. Companies see the same picture in reverse: their products, at every account that's cleared them.</p>
+      <div class="eyebrow">Our solution</div>
+      <h2 class="h2">One live picture of stock. A growing set of solutions built on it.</h2>
+      <p class="lead">ARA turns inventory records into one live, shareable picture. See your own stock from anywhere at any time, and grant each company permission to see their own products. And with network-verified digital visiting cards, ARA helps you manage rep visits better.</p>
     </div>
 
     <div class="reveal platform-grid">
@@ -227,6 +221,7 @@
             <div class="browser-dots"><i></i><i></i><i></i></div>
             <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
           </div>
+          <!-- TODO: swap this code-drawn mock for the real capture "inventory" (inventory table view, 16:10, ~2000x1250) once supplied as a file -->
           <div class="appmock" role="img" aria-label="Illustrative mock of an ARA company dashboard: network stat tiles and inventory health by territory">
             <div class="am-side" aria-hidden="true">
               <div class="am-logo"><img src="assets/ara-logo-mark.png" alt="">ARA</div>
@@ -253,22 +248,22 @@
         </div>
         <div class="panel-caption">
           <span class="kicker">One source of truth</span>
-          <p>The spreadsheet locked in a back-office ERP, turned into a living command center. Shown with illustrative data.</p>
+          <p>The spreadsheet locked in a back-office ERP, turned into a living command center.</p>
         </div>
       </div>
 
       <div class="card value-stack">
         <div class="vrow">
           <div class="vi ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14l3.5-1 2.5-6 3 10 2.5-7 1.5 4h3"/><circle cx="21" cy="14" r="2.1" fill="currentColor" stroke="none"/></svg></div>
-          <div><h4>Live</h4><p>Stock reflects reality the moment it changes.</p><span class="mech">Push API · your ERP sends each stock change as it happens</span></div>
+          <div><h4>Live</h4><p>Push API that reflects changes live as they happen.</p></div>
         </div>
         <div class="vrow">
           <div class="vi ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><circle cx="6.2" cy="6.5" r="0.9" fill="currentColor" stroke="none"/><path d="M6.5 13.5h7M6.5 16.5h9"/></svg></div>
-          <div><h4>Accessible</h4><p>Data that lived in the ERP back office becomes a view every cleared team can act on.</p><span class="mech">Web app · no installs, works on any branch computer</span></div>
+          <div><h4>Accessible</h4><p>Web app with no installs that works on any device, at any branch.</p></div>
         </div>
         <div class="vrow">
           <div class="vi ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="7" r="2.3"/><path d="M12 7h4.5"/><path d="M18.8 5.9l1.5 1.5 2.5-2.8"/><g opacity="0.55"><circle cx="6.5" cy="17" r="2.3"/><path d="M12 17h4.5"/><path d="M19.2 15.5l3 3M22.2 15.5l-3 3"/></g></svg></div>
-          <div><h4>Permission-based</h4><p>Nothing is shared without your consent. You decide who sees what, and you can change it at any time.</p><span class="mech">Enforced at the database level · not just in the UI</span></div>
+          <div><h4>Permission-based</h4><p>Permissions enforced at the database level to ensure data safety and privacy.</p></div>
         </div>
       </div>
     </div>
