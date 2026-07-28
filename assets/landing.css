@@ -1072,8 +1072,8 @@ h1.display {
 .am-table td { padding: 6px 8px; border-top: 1px solid rgba(12,40,93,.06); color: #2b3a55; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .am-table td:nth-child(1) { width: 27%; }
 .am-table td:nth-child(2) { width: 37%; }
-.am-table td:nth-child(3) { width: 21%; }
-.am-table td:nth-child(4) { width: 15%; }
+.am-table td:nth-child(3) { width: 23%; }
+.am-table td:nth-child(4) { width: 13%; }
 .am-table .mono { font-size: 9.5px; }
 .am-table tr:first-child td { border-top: 0; }
 .am-table .pill { font-size: 9.5px; padding: 2px 8px; }
