@@ -1070,8 +1070,8 @@ h1.display {
 .am-tablehead { font-size: 10.5px; font-weight: 600; color: #5a6a85; text-transform: uppercase; letter-spacing: .06em; }
 .am-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid rgba(12,40,93,.09); border-radius: 8px; overflow: hidden; font-size: 11px; table-layout: fixed; }
 .am-table td { padding: 6px 8px; border-top: 1px solid rgba(12,40,93,.06); color: #2b3a55; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.am-table td:nth-child(1) { width: 27%; }
-.am-table td:nth-child(2) { width: 37%; }
+.am-table td:nth-child(1) { width: 30%; }
+.am-table td:nth-child(2) { width: 34%; }
 .am-table td:nth-child(3) { width: 23%; }
 .am-table td:nth-child(4) { width: 13%; }
 .am-table .mono { font-size: 9.5px; }
