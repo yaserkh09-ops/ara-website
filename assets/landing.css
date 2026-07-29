@@ -1067,3 +1067,9 @@ h1.display {
 .po-sug { color: var(--color-sky); font-weight: 600; font-variant-numeric: tabular-nums; }
 .po-note { margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 7px; }
 .po-note::before { content: ""; flex: 0 0 auto; width: 5px; height: 5px; border-radius: 50%; background: var(--color-action); }
+
+/* ---- Faded corner icons on the who-cards ---- */
+.who-grid .card { position: relative; }
+.who-fade-icon { position: absolute; top: 20px; inset-inline-start: 22px; width: 46px; height: 46px; opacity: 0.10; color: var(--color-navy); pointer-events: none; }
+.who-fade-icon svg { width: 100%; height: 100%; }
+.who-grid .card .who-body, .who-grid .card > h3:first-of-type { margin-top: 26px; }
