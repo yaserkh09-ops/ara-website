@@ -1139,6 +1139,8 @@ h1.display {
   .ara-net, .ara-net * { animation: none !important; }
 }
 
-/* cycling payload (push-api card) */
-.api-snippet [data-f] { transition: opacity .2s ease; }
-.api-snippet.swapping [data-f] { opacity: 0; }
+/* typing payload (push-api card) */
+.api-snippet [data-f="ok"] { transition: opacity .25s ease; }
+.api-snippet .typing::after { content: ""; display: inline-block; width: 7px; height: 13px; margin-inline-start: 2px;
+  vertical-align: -2px; background: #28CDFC; animation: apiCaret 0.9s steps(2, jump-none) infinite; }
+@keyframes apiCaret { 50% { opacity: 0; } }

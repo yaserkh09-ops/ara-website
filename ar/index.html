@@ -616,7 +616,7 @@
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;
 
-  // cycling payload for the push-api card
+  // typing payload for the push-api card
   var apiSnip = document.querySelector('.api-snippet');
   if (apiSnip && !reduce) {
     var apiProducts = [
@@ -632,21 +632,45 @@
       ["IBU-400-TAB","west-branch",76,"I2607-51R9","2027-03-31","Ibuprofen 400 mg"]
     ];
     var apiField = function(n){ return apiSnip.querySelector('[data-f="' + n + '"]'); };
+    var apiOrder = ['sku','loc','qty','lot','exp'];
     var apiIdx = 0;
-    setInterval(function(){
+    var typeProduct = function(p, done){
+      var vals = { sku: '"' + p[0] + '"', loc: '"' + p[1] + '"', qty: String(p[2]), lot: '"' + p[3] + '"', exp: '"' + p[4] + '"' };
+      var ok = apiField('ok');
+      ok.style.opacity = '0';
+      apiOrder.forEach(function(f){ apiField(f).textContent = ''; });
+      var fi = 0;
+      var typeField = function(){
+        if (fi >= apiOrder.length) {
+          setTimeout(function(){
+            ok.textContent = '\u2192 200 OK \u00b7 mapped to “' + p[5] + '”';
+            ok.style.opacity = '';
+            setTimeout(done, 2400);
+          }, 380);
+          return;
+        }
+        var el = apiField(apiOrder[fi]);
+        var target = vals[apiOrder[fi]];
+        el.classList.add('typing');
+        var ci = 0;
+        var tick = setInterval(function(){
+          ci++;
+          el.textContent = target.slice(0, ci);
+          if (ci >= target.length) {
+            clearInterval(tick);
+            el.classList.remove('typing');
+            fi++;
+            setTimeout(typeField, 140);
+          }
+        }, 26);
+      };
+      typeField();
+    };
+    var apiLoop = function(){
       apiIdx = (apiIdx + 1) % apiProducts.length;
-      var p = apiProducts[apiIdx];
-      apiSnip.classList.add('swapping');
-      setTimeout(function(){
-        apiField('sku').textContent = '"' + p[0] + '"';
-        apiField('loc').textContent = '"' + p[1] + '"';
-        apiField('qty').textContent = p[2];
-        apiField('lot').textContent = '"' + p[3] + '"';
-        apiField('exp').textContent = '"' + p[4] + '"';
-        apiField('ok').textContent = '\u2192 200 OK \u00b7 mapped to “' + p[5] + '”';
-        apiSnip.classList.remove('swapping');
-      }, 200);
-    }, 2600);
+      typeProduct(apiProducts[apiIdx], apiLoop);
+    };
+    setTimeout(apiLoop, 2200);
   }
 
   // grid pulses — a point surfaces at one grid intersection, travels the
