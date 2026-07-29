@@ -814,9 +814,11 @@ h1.display {
 }
 .faq-aside p { color: var(--color-neutral-500); font-size: 15px; margin: 0 0 18px; }
 .aside-link {
-  font-family: var(--font-mono); font-size: 13px; color: var(--color-action);
+  display: block; width: fit-content; font-family: var(--font-mono); font-size: 13px; color: var(--color-action);
   text-decoration: none; word-break: break-all;
 }
+.aside-link + .aside-link { margin-top: 8px; }
+[dir="rtl"] .aside-link { margin-inline-start: auto; }
 .aside-link:hover { text-decoration: underline; }
 @media (max-width: 880px) {
   .faq-wrap { grid-template-columns: 1fr; }
