@@ -1138,3 +1138,7 @@ h1.display {
 @media (prefers-reduced-motion: reduce) {
   .ara-net, .ara-net * { animation: none !important; }
 }
+
+/* cycling payload (push-api card) */
+.api-snippet [data-f] { transition: opacity .2s ease; }
+.api-snippet.swapping [data-f] { opacity: 0; }

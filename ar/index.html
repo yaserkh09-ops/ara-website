@@ -418,12 +418,12 @@
         <div class="api-snippet">
           <div class="api-bar"><span class="api-method">POST</span><span class="api-path">/v1/stock-events</span></div>
           <pre aria-label="مثال على حزمة بيانات حدث مخزون">{
-  <span class="k">"sku_code"</span>: <span class="s">"ATORVA 20 TAB"</span>,
-  <span class="k">"location"</span>: <span class="s">"main-pharmacy"</span>,
-  <span class="k">"on_hand"</span>:  <span class="n">84</span>,
-  <span class="k">"batch"</span>:    { <span class="k">"lot"</span>: <span class="s">"B2607-54E4"</span>, <span class="k">"expiry"</span>: <span class="s">"2027-01-31"</span> }
+  <span class="k">"sku_code"</span>: <span class="s" data-f="sku">"ATORVA 20 TAB"</span>,
+  <span class="k">"location"</span>: <span class="s" data-f="loc">"main-pharmacy"</span>,
+  <span class="k">"on_hand"</span>:  <span class="n" data-f="qty">84</span>,
+  <span class="k">"batch"</span>:    { <span class="k">"lot"</span>: <span class="s" data-f="lot">"B2607-54E4"</span>, <span class="k">"expiry"</span>: <span class="s" data-f="exp">"2027-01-31"</span> }
 }
-<span class="ok">→ 200 OK · mapped to “Atorvastatin 20 mg”</span></pre>
+<span class="ok" data-f="ok">→ 200 OK · mapped to “Atorvastatin 20 mg”</span></pre>
         </div>
         <div class="api-note">مثال تمثيلي: نقطة النهاية والحقول والاستجابة توضيحية. المواصفات الكاملة تُسلَّم عند التهيئة.</div>
       </div>
@@ -615,6 +615,39 @@
 
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;
+
+  // cycling payload for the push-api card
+  var apiSnip = document.querySelector('.api-snippet');
+  if (apiSnip && !reduce) {
+    var apiProducts = [
+      ["ATORVA 20 TAB","main-pharmacy",84,"B2607-54E4","2027-01-31","Atorvastatin 20 mg"],
+      ["amlodipine_5","riyadh-branch",132,"A2603-11K2","2026-11-30","Amlodipine 5 mg"],
+      ["AZITH-250-CAP","main-warehouse",57,"Z2609-77Q1","2027-04-30","Azithromycin 250 mg"],
+      ["CELECOX-200","east-branch",210,"C2605-30D8","2026-12-31","Celecoxib 200 mg"],
+      ["fluco_150_cap","main-pharmacy",43,"F2608-19B6","2027-06-30","Fluconazole 150 mg"],
+      ["ASA-100-TAB","icu-store",316,"S2604-92H3","2026-10-31","Acetylsalicylic Acid 100 mg"],
+      ["METF 500 XR","north-branch",168,"M2606-45T7","2027-02-28","Metformin 500 mg"],
+      ["omep-20-cap","main-warehouse",95,"O2602-63N4","2026-09-30","Omeprazole 20 mg"],
+      ["PARA-500-TAB","main-pharmacy",402,"P2610-08V5","2027-08-31","Paracetamol 500 mg"],
+      ["IBU-400-TAB","west-branch",76,"I2607-51R9","2027-03-31","Ibuprofen 400 mg"]
+    ];
+    var apiField = function(n){ return apiSnip.querySelector('[data-f="' + n + '"]'); };
+    var apiIdx = 0;
+    setInterval(function(){
+      apiIdx = (apiIdx + 1) % apiProducts.length;
+      var p = apiProducts[apiIdx];
+      apiSnip.classList.add('swapping');
+      setTimeout(function(){
+        apiField('sku').textContent = '"' + p[0] + '"';
+        apiField('loc').textContent = '"' + p[1] + '"';
+        apiField('qty').textContent = p[2];
+        apiField('lot').textContent = '"' + p[3] + '"';
+        apiField('exp').textContent = '"' + p[4] + '"';
+        apiField('ok').textContent = '\u2192 200 OK \u00b7 mapped to “' + p[5] + '”';
+        apiSnip.classList.remove('swapping');
+      }, 200);
+    }, 2600);
+  }
 
   // grid pulses — a point surfaces at one grid intersection, travels the
   // line, and dies at another intersection 4–6 blocks away
