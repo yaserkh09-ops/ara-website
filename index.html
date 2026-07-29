@@ -329,13 +329,13 @@
       <!-- step 1 share -->
       <div class="step">
         <div class="step-no"><b>1</b> Upload or Integrate</div>
-        <h3 class="h3">Connect inventory, on your own terms</h3>
+        <h3 class="h3">The inventory is connected</h3>
         <p class="muted">Bring in inventory via Excel/CSV upload or direct ERP integration.</p>
         <div class="step-visual">
           <div class="perm-list">
             <div class="perm-item"><div class="co"><span class="av av-blue">AM</span> Amal Pharma</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="Toggle access for Amal Pharma"></button></div>
             <div class="perm-item"><div class="co"><span class="av av-green">BY</span> Bayan Medical</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="Toggle access for Bayan Medical"></button></div>
-            <div class="perm-item"><div class="co"><span class="av av-gray">TH</span> Thurayya Labs</div><button type="button" class="toggle off" role="switch" aria-checked="false" aria-label="Toggle access for Thurayya Labs"></button></div>
+            <div class="perm-item"><div class="co"><span class="av av-sky">TH</span> Thurayya Labs</div><button type="button" class="toggle off" role="switch" aria-checked="false" aria-label="Toggle access for Thurayya Labs"></button></div>
           </div>
         </div>
       </div>
@@ -343,7 +343,7 @@
       <!-- step 2 standardize -->
       <div class="step">
         <div class="step-no"><b>2</b> Process</div>
-        <h3 class="h3">One clean, standardized catalog</h3>
+        <h3 class="h3">The catalog is standardized</h3>
         <p class="muted">ARA standardizes data, maps SKUs to canonical codes, and computes real-time stock status server-side.</p>
         <div class="step-visual">
           <div class="mapwrap">
@@ -357,31 +357,45 @@
       <!-- step 3 see -->
       <div class="step">
         <div class="step-no"><b>3</b> Live</div>
-        <h3 class="h3">A live view, for cleared teams</h3>
+        <h3 class="h3">ARA is now all set</h3>
         <p class="muted">Stock is live, accessible, and shareable. Anywhere, at any time.</p>
         <div class="step-visual dark">
-          <svg viewBox="0 0 220 180" width="100%" height="168" fill="none" aria-hidden="true">
-            <g stroke="#28CDFC" stroke-opacity="0.18">
-              <circle cx="110" cy="90" r="42"/><circle cx="110" cy="90" r="72"/>
-            </g>
-            <g stroke="#28CDFC" stroke-opacity="0.30" stroke-width="1">
-              <line x1="110" y1="90" x2="110" y2="28"/><line x1="110" y1="90" x2="178" y2="70"/>
-              <line x1="110" y1="90" x2="160" y2="150"/><line x1="110" y1="90" x2="55" y2="148"/>
-              <line x1="110" y1="90" x2="40" y2="62"/>
-            </g>
-            <circle cx="110" cy="90" r="15" fill="#0673FF"/>
-            <circle cx="110" cy="90" r="15" fill="none" stroke="#28CDFC" stroke-width="1.5"/>
-            <g font-family="IBM Plex Mono, monospace" font-size="8" fill="#fff" text-anchor="middle">
-              <text x="110" y="93">ARA</text>
-            </g>
-            <g>
-              <circle cx="110" cy="28" r="8" fill="#0C285D" stroke="#1DB87A" stroke-width="2"/><circle cx="110" cy="28" r="3" fill="#1DB87A"/>
-              <circle cx="178" cy="70" r="8" fill="#0C285D" stroke="#F5A623" stroke-width="2"/><circle cx="178" cy="70" r="3" fill="#F5A623"/>
-              <circle cx="160" cy="150" r="8" fill="#0C285D" stroke="#EF4444" stroke-width="2"/><circle cx="160" cy="150" r="3" fill="#EF4444"/>
-              <circle cx="55" cy="148" r="8" fill="#0C285D" stroke="#1DB87A" stroke-width="2"/><circle cx="55" cy="148" r="3" fill="#1DB87A"/>
-              <circle cx="40" cy="62" r="8" fill="#0C285D" stroke="#28CDFC" stroke-width="2"/><circle cx="40" cy="62" r="3" fill="#28CDFC"/>
-            </g>
-          </svg>
+          <div class="ara-net-wrap" role="img" aria-label="Animated view of the ARA network: five authorized accounts connected to the ARA core with live stock status">
+            <div class="ara-net">
+              <div class="ara-sweep"></div>
+              <div class="ara-ring"></div>
+              <div class="ara-ring" style="animation-delay: 2s;"></div>
+              <div class="ara-ring" style="animation-delay: 4s;"></div>
+              <svg width="760" height="560" viewBox="0 0 760 560" fill="none" aria-hidden="true">
+                <circle cx="380" cy="280" r="100" stroke="rgba(40,205,252,0.20)" stroke-width="1"/>
+                <circle cx="380" cy="280" r="170" stroke="rgba(40,205,252,0.15)" stroke-width="1"/>
+                <circle cx="380" cy="280" r="242" stroke="rgba(40,205,252,0.09)" stroke-width="1"/>
+                <g stroke="rgba(40,205,252,0.26)" stroke-width="1">
+                  <line x1="380" y1="280" x2="380" y2="102"/><line x1="380" y1="280" x2="226" y2="230"/>
+                  <line x1="380" y1="280" x2="547" y2="262"/><line x1="380" y1="280" x2="280" y2="418"/>
+                  <line x1="380" y1="280" x2="487" y2="427"/>
+                </g>
+                <g class="ara-flow" stroke="#28CDFC" stroke-width="1.6" stroke-linecap="round" stroke-dasharray="16 210" opacity="0.7">
+                  <line x1="380" y1="280" x2="380" y2="102"/><line x1="380" y1="280" x2="226" y2="230"/>
+                  <line x1="380" y1="280" x2="547" y2="262"/><line x1="380" y1="280" x2="280" y2="418"/>
+                  <line x1="380" y1="280" x2="487" y2="427"/>
+                </g>
+              </svg>
+              <div class="ara-comet" style="width: 178px; --r: 178px; transform: rotate(-90deg);"><span></span></div>
+              <div class="ara-comet" style="width: 162px; --r: 162px; transform: rotate(198deg);"><span style="animation-delay: 0.7s;"></span></div>
+              <div class="ara-comet" style="width: 168px; --r: 168px; transform: rotate(-6deg);"><span style="animation-delay: 1.4s;"></span></div>
+              <div class="ara-comet" style="width: 170px; --r: 170px; transform: rotate(126deg);"><span style="animation-delay: 2.1s;"></span></div>
+              <div class="ara-comet" style="width: 182px; --r: 182px; transform: rotate(54deg);"><span style="animation-delay: 2.8s;"></span></div>
+              <div class="ara-node" style="left: 380px; top: 102px; --node: #1DB87A;"><span class="nd"></span><span class="halo"></span></div>
+              <div class="ara-node" style="left: 226px; top: 230px; --node: #28CDFC;"><span class="nd"></span><span class="halo" style="animation-delay: 0.7s;"></span></div>
+              <div class="ara-node" style="left: 547px; top: 262px; --node: #F5A623;"><span class="nd"></span><span class="halo" style="animation-delay: 1.4s;"></span></div>
+              <div class="ara-node" style="left: 280px; top: 418px; --node: #1DB87A;"><span class="nd"></span><span class="halo" style="animation-delay: 2.1s;"></span></div>
+              <div class="ara-node" style="left: 487px; top: 427px; --node: #EF4444;"><span class="nd"></span><span class="halo" style="animation-delay: 2.8s;"></span></div>
+              <div class="ara-breathe"></div>
+              <div class="ara-core"><img src="assets/ara-logo-mark.png" alt="" width="58" height="58"></div>
+            </div>
+            <div class="ara-live-badge"><span></span>Live · 5 authorized accounts</div>
+          </div>
         </div>
       </div>
     </div>

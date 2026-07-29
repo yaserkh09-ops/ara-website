@@ -1078,3 +1078,72 @@ h1.display {
 .who-fade-icon svg { width: 100%; height: 100%; }
 .who-grid .card .who-body, .who-grid .card > h3:first-of-type { margin-top: 52px; }
 .who-img { width: 100%; height: auto; display: block; margin-top: auto; border-radius: 12px; border: 1px solid var(--color-neutral-100); }
+
+/* active/inactive state for the access rows (step 1) */
+.perm-item { transition: background-color .18s ease, color .18s ease; }
+.perm-item .av, .perm-item .co { transition: filter .18s ease, opacity .18s ease; }
+.perm-item:has(.toggle.off) { background: var(--color-neutral-50); color: var(--color-neutral-400); }
+.perm-item:has(.toggle.off) .av { filter: grayscale(1); opacity: 0.55; }
+.av-sky { background: #28CDFC; }
+
+/* live network illustration (step 3) — ported from Claude Design "ARA Live Network Illustration" */
+.step-visual.dark { position: relative; overflow: hidden; }
+.step-visual.dark::before { content: ""; position: absolute; inset: 0; background: radial-gradient(320px 220px at 50% 46%, rgba(40,205,252,0.18), rgba(40,205,252,0) 68%); }
+.ara-net-wrap { position: relative; width: 100%; height: 100%; }
+.ara-net { position: absolute; left: 50%; top: 50%; width: 760px; height: 560px; transform: translate(-50%, -50%) scale(0.3); }
+.ara-net > svg { position: absolute; inset: 0; overflow: visible; }
+.ara-flow { animation: araFlow 3.4s linear infinite; }
+.ara-sweep { position: absolute; left: 380px; top: 280px; width: 620px; height: 620px; margin: -310px 0 0 -310px; border-radius: 999px;
+  background: conic-gradient(from 0deg, rgba(40,205,252,0.20), rgba(40,205,252,0.04) 14%, rgba(40,205,252,0) 32%);
+  -webkit-mask-image: radial-gradient(closest-side, rgba(0,0,0,0) 26%, rgba(0,0,0,0.9) 62%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(closest-side, rgba(0,0,0,0) 26%, rgba(0,0,0,0.9) 62%, rgba(0,0,0,0) 100%);
+  animation: araSweep 14s linear infinite; }
+.ara-ring { position: absolute; left: 380px; top: 280px; width: 470px; height: 470px; margin: -235px 0 0 -235px; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(40,205,252,0.45); animation: araRingOut 6s cubic-bezier(0.16,0.6,0.3,1) infinite; }
+.ara-comet { position: absolute; left: 380px; top: 280px; height: 0; transform-origin: 0 50%; }
+.ara-comet span { position: absolute; left: 0; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 999px; background: #28CDFC;
+  box-shadow: 0 0 10px 3px rgba(40,205,252,0.55); animation: araIn 3.6s cubic-bezier(0.4,0,0.6,1) infinite; }
+.ara-node { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 999px; background: rgba(8,27,66,0.55);
+  box-shadow: inset 0 0 0 2.5px var(--node); display: flex; align-items: center; justify-content: center; }
+.ara-node .nd { width: 11px; height: 11px; border-radius: 999px; background: var(--node); }
+.ara-node .halo { position: absolute; inset: 0; border-radius: 999px; box-shadow: 0 0 0 1.5px var(--node); animation: araHalo 3.6s ease-out infinite; }
+.ara-breathe { position: absolute; left: 380px; top: 280px; width: 152px; height: 152px; margin: -76px 0 0 -76px; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(40,205,252,0.55); animation: araBreathe 4.4s ease-in-out infinite; }
+.ara-core { position: absolute; left: 380px; top: 280px; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 999px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 8px rgba(40,205,252,0.12), 0 0 0 18px rgba(40,205,252,0.06), 0 12px 32px rgba(4,15,40,0.45); }
+.ara-core img { display: block; }
+.ara-live-badge { position: absolute; top: -8px; inset-inline-start: -8px; display: flex; align-items: center; gap: 8px; padding: 5px 11px 5px 9px;
+  border-radius: 999px; background: rgba(255,255,255,0.10); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14);
+  font-size: 11px; font-weight: 500; color: #fff; z-index: 1; }
+[dir="rtl"] .ara-live-badge { padding: 5px 9px 5px 11px; }
+.ara-live-badge span { width: 7px; height: 7px; border-radius: 999px; background: #28CDFC; animation: araLive 2s ease-out infinite; }
+@keyframes araSweep { to { transform: rotate(360deg); } }
+@keyframes araRingOut {
+  0%   { transform: scale(0.28); opacity: 0; }
+  18%  { opacity: 0.55; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes araIn {
+  0%   { transform: translateX(var(--r, 170px)); opacity: 0; }
+  14%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateX(34px); opacity: 0; }
+}
+@keyframes araFlow { to { stroke-dashoffset: -220; } }
+@keyframes araHalo {
+  0%   { transform: scale(1); opacity: 0.5; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes araBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.42; }
+  50%      { transform: scale(1.06); opacity: 0.85; }
+}
+@keyframes araLive {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(40,205,252,0.55); }
+  70%      { opacity: 0.65; box-shadow: 0 0 0 7px rgba(40,205,252,0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ara-net, .ara-net *, .ara-live-badge span { animation: none !important; }
+}
