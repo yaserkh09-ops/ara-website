@@ -612,10 +612,11 @@ h1.display {
 .step-no b { width: 30px; height: 30px; border-radius: 8px; background: var(--color-action-bg); color: var(--color-action);
   display: flex; align-items: center; justify-content: center; font-size: 14px; }
 .step-visual {
-  margin-top: 22px; border-radius: 12px; background: var(--color-neutral-50);
-  border: 1px solid var(--color-neutral-100); padding: 20px; min-height: 168px;
-  display: flex; align-items: center; justify-content: center; flex: 1;
+  margin-top: auto; border-radius: 12px; background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-100); padding: 20px; height: 212px;
+  display: flex; align-items: center; justify-content: center; flex: none;
 }
+.step p.muted { margin-bottom: 22px; }
 
 /* connector toggle diagram (step 1) */
 .perm-list { width: 100%; display: flex; flex-direction: column; gap: 11px; }
@@ -623,10 +624,13 @@ h1.display {
   background: #fff; border: 1px solid var(--color-neutral-100); border-radius: 8px; padding: 11px 13px; font-size: 13px; font-weight: 500; color: var(--color-neutral-600); }
 .perm-item .co { display: flex; align-items: center; gap: 9px; }
 .perm-item .av { width: 26px; height: 26px; border-radius: 6px; display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color:#fff; }
-.toggle { width: 38px; height: 22px; border-radius: 999px; background: var(--color-success); position: relative; flex: none; }
+.toggle { width: 38px; height: 22px; border-radius: 999px; background: var(--color-success); position: relative; flex: none;
+  border: 0; padding: 0; cursor: pointer; transition: background-color .18s ease; }
 .toggle.off { background: var(--color-neutral-200); }
-.toggle::after { content:""; position: absolute; top: 3px; inset-inline-end: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.toggle.off::after { inset-inline-end: auto; inset-inline-start: 3px; }
+.toggle:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
+.toggle::after { content:""; position: absolute; top: 3px; inset-inline-start: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: transform .18s ease; }
+.toggle:not(.off)::after { transform: translateX(16px); }
+[dir="rtl"] .toggle:not(.off)::after { transform: translateX(-16px); }
 
 /* standardize mapping diagram (step 2) */
 .mapwrap { width: 100%; display: flex; flex-direction: column; gap: 10px; }

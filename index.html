@@ -328,23 +328,23 @@
     <div class="steps reveal">
       <!-- step 1 share -->
       <div class="step">
-        <div class="step-no"><b>1</b> Share</div>
+        <div class="step-no"><b>1</b> Upload or Integrate</div>
         <h3 class="h3">Connect inventory, on your own terms</h3>
-        <p class="muted">Healthcare organizations connect their inventory securely. The data stays theirs; they decide who can see it, and they can switch any company off at any time.</p>
+        <p class="muted">Bring in inventory via Excel/CSV upload or direct ERP integration.</p>
         <div class="step-visual">
           <div class="perm-list">
-            <div class="perm-item"><div class="co"><span class="av av-blue">AM</span> Amal Pharma</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av av-green">BY</span> Bayan Medical</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av av-gray">TH</span> Thurayya Labs</div><span class="toggle off"></span></div>
+            <div class="perm-item"><div class="co"><span class="av av-blue">AM</span> Amal Pharma</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="Toggle access for Amal Pharma"></button></div>
+            <div class="perm-item"><div class="co"><span class="av av-green">BY</span> Bayan Medical</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="Toggle access for Bayan Medical"></button></div>
+            <div class="perm-item"><div class="co"><span class="av av-gray">TH</span> Thurayya Labs</div><button type="button" class="toggle off" role="switch" aria-checked="false" aria-label="Toggle access for Thurayya Labs"></button></div>
           </div>
         </div>
       </div>
 
       <!-- step 2 standardize -->
       <div class="step">
-        <div class="step-no"><b>2</b> Standardize</div>
+        <div class="step-no"><b>2</b> Process</div>
         <h3 class="h3">One clean, standardized catalog</h3>
-        <p class="muted">ARA maps every item to one catalog entry, so a product means the same thing every time, everywhere.</p>
+        <p class="muted">ARA standardizes data, maps SKUs to canonical codes, and computes real-time stock status server-side.</p>
         <div class="step-visual">
           <div class="mapwrap">
             <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">→</span><span class="std">Atorvastatin 20&nbsp;mg</span></div>
@@ -356,9 +356,9 @@
 
       <!-- step 3 see -->
       <div class="step">
-        <div class="step-no"><b>3</b> See</div>
+        <div class="step-no"><b>3</b> Live</div>
         <h3 class="h3">A live view, for cleared teams</h3>
-        <p class="muted">Organizations see their own stock, live and in one place. Companies see only their products, at accounts that authorized them. Nobody sees more than they should.</p>
+        <p class="muted">Stock is live, accessible, and shareable. Anywhere, at any time.</p>
         <div class="step-visual dark">
           <svg viewBox="0 0 220 180" width="100%" height="168" fill="none" aria-hidden="true">
             <g stroke="#28CDFC" stroke-opacity="0.18">
@@ -590,6 +590,14 @@
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+
+  // interactive access toggles (how-it-works step 1)
+  document.querySelectorAll('.perm-item .toggle').forEach(function(t){
+    t.addEventListener('click', function(){
+      t.classList.toggle('off');
+      t.setAttribute('aria-checked', t.classList.contains('off') ? 'false' : 'true');
+    });
+  });
 
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;

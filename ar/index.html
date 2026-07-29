@@ -329,23 +329,23 @@
     <div class="steps reveal">
       <!-- step 1 share -->
       <div class="step">
-        <div class="step-no"><b>1</b> شارِك</div>
+        <div class="step-no"><b>1</b> ارفع أو اربط</div>
         <h3 class="h3">اربط مخزونك، بشروطك أنت</h3>
-        <p class="muted">تربط المنشآت الصحية مخزونها بأمان. تبقى البيانات ملكها، وهي من يقرر من يراها، ويمكنها إيقاف أي شركة في أي وقت.</p>
+        <p class="muted">أدخل مخزونك عبر رفع ملف Excel/CSV أو عبر ربط مباشر بنظام ERP لديك.</p>
         <div class="step-visual">
           <div class="perm-list">
-            <div class="perm-item"><div class="co"><span class="av av-blue">أم</span> أمل فارما</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av av-green">بي</span> بيان الطبية</div><span class="toggle"></span></div>
-            <div class="perm-item"><div class="co"><span class="av av-gray">ثر</span> ثريا لابز</div><span class="toggle off"></span></div>
+            <div class="perm-item"><div class="co"><span class="av av-blue">أم</span> أمل فارما</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="تفعيل أو إيقاف وصول أمل فارما"></button></div>
+            <div class="perm-item"><div class="co"><span class="av av-green">بي</span> بيان الطبية</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="تفعيل أو إيقاف وصول بيان الطبية"></button></div>
+            <div class="perm-item"><div class="co"><span class="av av-gray">ثر</span> ثريا لابز</div><button type="button" class="toggle off" role="switch" aria-checked="false" aria-label="تفعيل أو إيقاف وصول ثريا لابز"></button></div>
           </div>
         </div>
       </div>
 
       <!-- step 2 standardize -->
       <div class="step">
-        <div class="step-no"><b>2</b> وحِّد</div>
+        <div class="step-no"><b>2</b> عالِج</div>
         <h3 class="h3">كتالوج واحد، نظيف وموحّد</h3>
-        <p class="muted">تُطابق أرى كل صنف مع مُدخل واحد في الكتالوج، ليعني المنتج الشيء نفسه في كل مرة وفي كل مكان.</p>
+        <p class="muted">توحّد أرى البيانات، وتُطابق الأصناف مع رموز قياسية موحّدة، وتحسب حالة المخزون لحظيًا على الخادم.</p>
         <div class="step-visual">
           <div class="mapwrap">
             <div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">←</span><span class="std">Atorvastatin 20&nbsp;mg</span></div>
@@ -357,9 +357,9 @@
 
       <!-- step 3 see -->
       <div class="step">
-        <div class="step-no"><b>3</b> شاهِد</div>
+        <div class="step-no"><b>3</b> مباشر</div>
         <h3 class="h3">صورة حيّة للفرق المخوَّلة</h3>
-        <p class="muted">ترى المنشآت مخزونها مباشرةً وفي مكان واحد. وترى الشركات منتجاتها فقط، لدى العملاء الذين خوّلوها. لا أحد يرى أكثر مما ينبغي.</p>
+        <p class="muted">المخزون مباشر، متاح، وقابل للمشاركة. من أي مكان، وفي أي وقت.</p>
         <div class="step-visual dark">
           <svg viewBox="0 0 220 180" width="100%" height="168" fill="none" aria-hidden="true">
             <g stroke="#28CDFC" stroke-opacity="0.18">
@@ -591,6 +591,14 @@
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+
+  // interactive access toggles (how-it-works step 1)
+  document.querySelectorAll('.perm-item .toggle').forEach(function(t){
+    t.addEventListener('click', function(){
+      t.classList.toggle('off');
+      t.setAttribute('aria-checked', t.classList.contains('off') ? 'false' : 'true');
+    });
+  });
 
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;
