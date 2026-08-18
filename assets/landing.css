@@ -1218,3 +1218,18 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   .nav-inner { transition: none; }
   .frame-sweep { display: none; }
 }
+
+/* ---- hero → statement handoff (August round 2) ---- */
+.hero-inner > div:nth-child(2) { position: relative; will-change: transform; }
+.hero-browser, .hero-shot-note { position: relative; z-index: 1; }
+.hero-handoff-glow {
+  position: absolute; z-index: 0; left: 2%; right: 2%; top: 100%; height: 4px;
+  margin-top: -10px; border-radius: 999px; background: #fff;
+  opacity: 0; transform: scaleX(0); pointer-events: none;
+  box-shadow:
+    0 0 26px 8px rgba(255,255,255,0.95),
+    0 0 90px 45px rgba(255,255,255,0.6),
+    0 0 220px 120px rgba(232,244,255,0.4);
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) { .hero-handoff-glow { display: none; } }

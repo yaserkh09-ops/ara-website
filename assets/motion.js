@@ -66,6 +66,10 @@
   var EASE_OUT = "power3.out";
   var EASE_HERO = "power4.out";
 
+  /* Hero → statement scroll handoff (pinned screenshot expansion).
+     Set to false to fully restore the pre-handoff hero. */
+  var HERO_HANDOFF = true;
+
   /* =====================================================
      1 · Scroll progress bar
      ===================================================== */
@@ -156,7 +160,7 @@
         autoAlpha: 0, y: 44, scale: 0.975, duration: 1.05, delay: 0.4,
         ease: EASE_HERO, clearProps: "transform,opacity,visibility"
       });
-      if (!lite) {
+      if (!lite && !HERO_HANDOFF) {
         /* parallax on the column wrapper — the .hero-browser child keeps
            its own mouse-tilt transform untouched */
         gsap.to(shotCol, {
@@ -166,6 +170,86 @@
         });
       }
     }
+  })();
+
+  /* =====================================================
+     3b · Hero → statement handoff (scroll-driven, pinned)
+     The hero pins; the screenshot travels down to center
+     and expands; a white light-seam slides out from behind
+     it; the pin releases into the statement section, whose
+     dark-to-white "lights on" reveal stays untouched.
+     KILL SWITCH: set HERO_HANDOFF = false (top of file) to
+     restore the previous hero behavior entirely.
+     ===================================================== */
+  (function heroHandoff() {
+    if (!HERO_HANDOFF) return;
+    var heroEl = document.querySelector(".hero");
+    if (!heroEl) return;
+    var copyCol = heroEl.querySelector(".hero-inner > div:first-child");
+    var shotCol = heroEl.querySelector(".hero-inner > div:nth-child(2)");
+    var browser = shotCol && shotCol.querySelector(".hero-browser");
+    var note = shotCol && shotCol.querySelector(".hero-shot-note");
+    if (!copyCol || !shotCol || !browser) return;
+
+    var mm = gsap.matchMedia();
+    mm.add("(min-width: 1025px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", function () {
+      var glow = document.createElement("div");
+      glow.className = "hero-handoff-glow";
+      glow.setAttribute("aria-hidden", "true");
+      shotCol.insertBefore(glow, shotCol.firstChild);
+
+      /* target: horizontally centered, vertically centered, expanded to
+         fill most of the viewport (clamped by both axes) */
+      function rect() { return shotCol.getBoundingClientRect(); }
+      function dx() { var r = rect(); return (window.innerWidth / 2) - (r.left + r.width / 2); }
+      function dy() { var r = rect(); return (window.innerHeight / 2) - (r.top + r.height / 2) + 14; }
+      function grow() {
+        var r = rect();
+        return Math.min((0.92 * window.innerWidth) / r.width, (0.88 * window.innerHeight) / r.height);
+      }
+
+      var tl = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: heroEl,
+          start: "top top",
+          end: "+=135%",
+          scrub: 0.5,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: function (self) {
+            /* suppress the mouse-tilt while the handoff owns the transform */
+            if (self.progress > 0.02) docEl.setAttribute("data-hero-handoff", "");
+            else docEl.removeAttribute("data-hero-handoff");
+          }
+        }
+      });
+
+      tl.to(copyCol, { autoAlpha: 0, y: -70, duration: 0.32, ease: "power2.in" }, 0)
+        .to(note, { autoAlpha: 0, duration: 0.15, ease: "power1.in" }, 0)
+        .to(browser, { rotateY: 0, rotateX: 0, duration: 0.3, ease: "power2.out", overwrite: "auto" }, 0.04)
+        .to(shotCol, {
+          x: dx,
+          y: dy,
+          scale: grow,
+          transformOrigin: "center center",
+          duration: 0.62,
+          ease: "power2.inOut"
+        }, 0.08)
+        /* the white seam: a thin line slides out from behind the screen… */
+        .fromTo(glow, { autoAlpha: 0, scaleX: 0.05, scaleY: 1 },
+          { autoAlpha: 1, scaleX: 1, duration: 0.16, ease: "power2.out" }, 0.66)
+        /* …then blooms into the wash that hands off to the light section */
+        .to(glow, { scaleY: 9, duration: 0.22, ease: "power2.in" }, 0.8)
+        .to(glow, { autoAlpha: 0.92, duration: 0.2, ease: "none" }, 0.8);
+
+      return function () {
+        docEl.removeAttribute("data-hero-handoff");
+        glow.remove();
+        gsap.set([copyCol, shotCol, browser, note], { clearProps: "all" });
+      };
+    });
   })();
 
   /* statement headline — the only masked-line reveal outside the hero;

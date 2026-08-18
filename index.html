@@ -750,6 +750,8 @@
     var rect = null;
     browser.addEventListener('mouseenter', function(){ rect = browser.getBoundingClientRect(); });
     browser.addEventListener('mousemove', function(e){
+      // hands off to the scroll-driven hero handoff (assets/motion.js)
+      if (document.documentElement.hasAttribute('data-hero-handoff')) return;
       if (!rect) rect = browser.getBoundingClientRect();
       var px = (e.clientX - rect.left) / rect.width;
       var py = (e.clientY - rect.top) / rect.height;
@@ -760,6 +762,7 @@
     });
     browser.addEventListener('mouseleave', function(){
       rect = null;
+      if (document.documentElement.hasAttribute('data-hero-handoff')) return;
       browser.style.transform = '';
     });
   }
