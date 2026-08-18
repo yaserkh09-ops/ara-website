@@ -1346,3 +1346,118 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   .sol-modal[open], .sol-modal::backdrop { animation: none; }
   .sol-expand { transition: none; }
 }
+
+/* =========================================================
+   SOLUTIONS BENTO (August round 4b) — Stripe-style 6-tile
+   grid; headings + expand chip + full-bleed artwork, same
+   dialog sheets on click.
+   ========================================================= */
+.sol-bento { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.sol-tile {
+  position: relative; display: flex; flex-direction: column; gap: 14px;
+  min-height: 440px; padding: 26px 26px 0; overflow: hidden;
+  background: #fff; border: 1px solid var(--color-neutral-100);
+  border-radius: var(--radius-xl); box-shadow: var(--shadow-1);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.sol-tile:hover { box-shadow: var(--shadow-2); transform: translateY(-2px); }
+.sol-t1 { grid-column: span 2; }
+.sol-t6 { grid-column: 1 / -1; min-height: 330px; }
+.sol-tile-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.sol-tile-title { font-size: 20px; line-height: 1.3; letter-spacing: -0.015em; font-weight: 700; color: var(--color-navy); margin: 0; max-width: 24ch; }
+.sol-tile .sol-expand { margin-inline-start: 0; align-self: flex-start; flex: none; }
+.sol-tile:hover .sol-expand { color: #fff; background: var(--color-action); transform: translateY(-1px); }
+
+/* artwork canvas bleeds to the tile's edges */
+.sol-tile-art { position: relative; flex: 1; margin: 2px -26px 0; padding: 20px 26px 0; overflow: hidden; }
+.sa-1 { background: radial-gradient(120% 100% at 0% 100%, rgba(40,205,252,0.20), transparent 60%), linear-gradient(160deg, #f4f9ff, #e8f3ff); }
+.sa-2 { background: linear-gradient(168deg, #0673FF 0%, #2b9bff 55%, #28CDFC 100%); display: grid; gap: 14px; align-content: start; }
+.sa-3 { background: radial-gradient(120% 100% at 100% 0%, rgba(6,115,255,0.14), transparent 55%), #f6fafe; display: grid; align-content: center; }
+.sa-4 { background: radial-gradient(130% 110% at 80% 100%, rgba(240,90,41,0.16), transparent 55%), linear-gradient(150deg, #eef6ff, #f9fbff); }
+.sa-5 { background: radial-gradient(120% 100% at 0% 0%, rgba(240,90,41,0.10), transparent 55%), #fdfaf8; display: grid; align-content: center; }
+.sa-6 { background: linear-gradient(105deg, #f5f9ff 0%, #e9f2ff 55%, rgba(40,205,252,0.18) 100%); display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; padding-bottom: 22px; }
+
+/* floating panels */
+.sa-panel { background: #fff; border: 1px solid var(--color-neutral-100); border-radius: 12px; box-shadow: 0 12px 30px rgba(12,40,93,0.14); padding: 14px 16px; }
+.sa-cap { display: block; font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-neutral-400); margin-bottom: 9px; }
+[dir="rtl"] .sa-cap { font-family: var(--font-arabic); letter-spacing: 0; }
+.sa-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 14px; color: var(--color-neutral-700); font-weight: 600; }
+.sa-row b { color: var(--color-action); font-family: var(--font-mono); font-weight: 600; }
+
+/* tile 1: floating stat chips + screenshot */
+.sa-chip-panel {
+  position: absolute; z-index: 2; top: 20px; inset-inline-start: 26px;
+  display: flex; align-items: baseline; gap: 8px;
+  background: #fff; border: 1px solid var(--color-neutral-100); border-radius: 999px;
+  box-shadow: 0 10px 26px rgba(12,40,93,0.14); padding: 10px 18px;
+  font-size: 12px; color: var(--color-neutral-400);
+}
+.sa-chip-panel b { font-family: var(--font-mono); font-size: 16px; color: var(--color-navy); font-weight: 600; }
+.sa-chip-panel em { width: 1px; height: 14px; background: var(--color-neutral-200); align-self: center; }
+.sa-chip-panel .sa-live { color: var(--color-success); font-size: 12px; }
+.sa-shot { position: absolute; z-index: 1; inset-inline-end: -7%; bottom: -8%; width: 76%; border-radius: 10px; overflow: hidden; border: 1px solid var(--color-neutral-100); box-shadow: 0 22px 54px rgba(12,40,93,0.24); }
+.sa-shot img { display: block; width: 100%; }
+.sol-t1 .sol-tile-art { min-height: 300px; }
+
+/* tile 2: white panels on vivid gradient */
+.sa-2 .sa-panel { border: 0; }
+.sa-barrow { display: flex; align-items: flex-end; gap: 3px; height: 76px; }
+.sa-barrow i { flex: 1; background: linear-gradient(180deg, #6FA8FF, #0673FF); border-radius: 2px 2px 0 0; }
+
+/* tile 3: decorative permission rows */
+.sa-perm { display: grid; gap: 9px; width: min(100%, 330px); margin-inline: auto; background: transparent; border: 0; box-shadow: none; padding: 0; }
+.sa-perm .perm-item { box-shadow: 0 10px 26px rgba(12,40,93,0.10); }
+.sa-perm .toggle { pointer-events: none; }
+
+/* tile 4: the gradient visiting card */
+.sa-idcard {
+  width: min(88%, 330px); margin: 7% auto 0; padding: 20px 22px;
+  border-radius: 16px; color: #fff;
+  background: linear-gradient(135deg, #0C285D 0%, #0673FF 58%, #28CDFC 100%);
+  box-shadow: 0 24px 50px rgba(12,40,93,0.35);
+  transform: rotate(-4deg);
+  display: grid; gap: 8px;
+}
+[dir="rtl"] .sa-idcard { transform: rotate(4deg); }
+.sa-id-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.sa-id-brand { font-weight: 800; letter-spacing: -0.02em; font-size: 15px; }
+.sa-id-brand .sa-id-ar { font-family: var(--font-arabic); font-weight: 500; opacity: 0.8; margin-inline-start: 5px; }
+.sa-id-chip { width: 34px; height: 24px; border-radius: 6px; background: linear-gradient(140deg, rgba(255,255,255,0.85), rgba(255,255,255,0.45)); border: 1px solid rgba(255,255,255,0.6); }
+.sa-id-name { font-size: 17px; font-weight: 700; }
+.sa-id-org { font-size: 12px; opacity: 0.78; }
+.sa-id-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.sa-id-badge { font-size: 10.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.35); border-radius: 999px; padding: 4px 10px; }
+[dir="rtl"] .sa-id-badge { letter-spacing: 0; }
+.sa-id-dots { display: grid; grid-template-columns: repeat(4, 5px); gap: 3px; }
+.sa-id-dots i { width: 5px; height: 5px; background: rgba(255,255,255,0.75); border-radius: 1px; }
+.sa-id-dots i:nth-child(2n) { opacity: 0.45; }
+
+/* tile 5 + modal: expiry buckets */
+.sa-exp-panel { display: grid; gap: 12px; width: min(100%, 330px); margin-inline: auto; }
+.sa-exp-panel.in-modal { width: 100%; background: #fff; border: 1px solid var(--color-neutral-100); border-radius: 10px; padding: 14px; }
+.sa-exp-row { display: grid; grid-template-columns: 76px 1fr 30px; align-items: center; gap: 10px; font-size: 12px; }
+.sa-exp-label { font-family: var(--font-mono); font-size: 11px; color: var(--color-neutral-500); }
+[dir="rtl"] .sa-exp-label { font-family: var(--font-arabic); }
+.sa-exp-bar { height: 12px; border-radius: 6px; background: var(--color-neutral-100); overflow: hidden; }
+.sa-exp-bar i { display: block; height: 100%; border-radius: 6px; }
+.sa-red { background: var(--color-danger); } .sa-amber { background: var(--color-warning); } .sa-green { background: var(--color-success); }
+.sa-exp-row b { font-family: var(--font-mono); font-size: 12px; color: var(--color-neutral-600); text-align: end; font-weight: 600; }
+
+/* tile 6: code panel + mapping */
+.sa-code { direction: ltr; flex: 1 1 300px; background: linear-gradient(160deg, #0C285D, #0A2150); border-radius: 12px; box-shadow: 0 14px 34px rgba(12,40,93,0.28); overflow: hidden; }
+.sa-code-bar { display: flex; align-items: center; gap: 10px; padding: 9px 15px; border-bottom: 1px solid rgba(255,255,255,0.10); font-family: var(--font-code); font-size: 12px; color: rgba(255,255,255,0.66); }
+.sa-code-bar b { font-weight: 500; color: var(--color-sky); background: rgba(40,205,252,0.12); border: 1px solid rgba(40,205,252,0.35); border-radius: 5px; padding: 1px 8px; font-size: 11px; letter-spacing: 0.04em; }
+.sa-code pre { margin: 0; padding: 13px 15px 15px; font-family: var(--font-code); font-size: 12px; line-height: 1.6; color: rgba(255,255,255,0.88); white-space: pre-wrap; }
+.sa-map { flex: 1 1 260px; display: grid; gap: 12px; }
+.sa-map .tag { justify-self: start; }
+
+@media (max-width: 880px) {
+  .sol-bento { grid-template-columns: 1fr; }
+  .sol-t1, .sol-t6 { grid-column: auto; }
+  .sol-tile { min-height: 400px; }
+  .sa-shot { width: 92%; inset-inline-end: -10%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sol-tile { transition: none; }
+  .sol-tile:hover { transform: none; }
+}
