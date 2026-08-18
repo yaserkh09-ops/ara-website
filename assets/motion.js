@@ -43,6 +43,50 @@
 
   governAmbient();
 
+  /* ---- solutions modals: native <dialog> bottom sheets ----
+     Ported from the portfolio's project-modal pattern: showModal() gives
+     the focus trap, ESC, and top layer; this wires the card anchors
+     (whose no-JS fallback is #contact), backdrop-click close, scroll
+     lock, and focus return. Runs on every path — the open animation is
+     CSS and dies under prefers-reduced-motion. */
+  (function initSolutionModals() {
+    var keyboardIntent = false;
+    addEventListener("keydown", function () { keyboardIntent = true; }, true);
+    addEventListener("pointerdown", function () { keyboardIntent = false; }, true);
+
+    document.querySelectorAll("[data-sol-card]").forEach(function (card) {
+      var anchor = card.querySelector(".sol-anchor");
+      var dialog = card.querySelector("[data-sol-modal]");
+      if (!anchor || !dialog || typeof dialog.showModal !== "function") return;
+
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        dialog.showModal();
+        /* focus the dialog itself, not its first button — otherwise mobile
+           browsers paint a focus ring on the close button after every tap */
+        dialog.focus();
+        docEl.setAttribute("data-modal-open", "");
+      });
+
+      /* click on the backdrop area (the dialog element itself) closes */
+      dialog.addEventListener("click", function (e) {
+        if (e.target === dialog) dialog.close();
+      });
+
+      var closeBtn = dialog.querySelector("[data-modal-close]");
+      if (closeBtn) closeBtn.addEventListener("click", function () { dialog.close(); });
+
+      dialog.addEventListener("close", function () {
+        docEl.removeAttribute("data-modal-open");
+        if (!keyboardIntent) {
+          anchor.classList.add("no-focus-ring");
+          anchor.addEventListener("blur", function () { anchor.classList.remove("no-focus-ring"); }, { once: true });
+        }
+        anchor.focus({ preventScroll: true });
+      });
+    });
+  })();
+
   if (reduce || !window.gsap || !window.ScrollTrigger) {
     classicReveal();
     docEl.setAttribute("data-motion", reduce ? "reduced" : "css");
