@@ -276,16 +276,41 @@
      keys off it (viz bars, ECG draw).
      ===================================================== */
   (function reveals() {
-    var GROUPS = [".solve-bento", ".platform-grid", ".intel-grid", ".who-grid",
+    var GROUPS = [".platform-grid", ".intel-grid", ".who-grid",
       ".steps", ".bento-integration", ".pillars", ".faq-wrap"];
+    var CLEAR = "transform,opacity,visibility";
+
+    /* problem section — bespoke choreography: the alert feed card sweeps
+       in from its reading side, its notification rows cascade in, the two
+       pain cards follow from the other side, and the wide ECG card lands
+       last. `.in` is added mid-timeline so the ECG draw and the stock
+       bars fire on arrival, visible, instead of pre-playing off-screen. */
+    function solveReveal(el) {
+      var focal = el.querySelector(".focal-alerts");
+      var feedHead = el.querySelector(".focal-alerts .feed-head");
+      var rows = el.querySelectorAll(".focal-alerts tbody tr");
+      var p1 = el.querySelector(".pain-1");
+      var p2 = el.querySelector(".pain-2");
+      var wide = el.querySelector(".pain-wide");
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: el, start: "top 78%", once: true }
+      });
+      tl.from(focal, { x: dx(-48), y: 26, autoAlpha: 0, scale: 0.98, duration: 0.7, ease: EASE_OUT, clearProps: CLEAR }, 0)
+        .from(feedHead, { autoAlpha: 0, y: 12, duration: 0.4, ease: EASE_OUT, clearProps: CLEAR }, 0.18)
+        .from(rows, { autoAlpha: 0, y: 14, duration: 0.38, stagger: 0.07, ease: "power2.out", clearProps: CLEAR }, 0.26)
+        .from(p1, { x: dx(48), y: 22, autoAlpha: 0, scale: 0.98, duration: 0.62, ease: EASE_OUT, clearProps: CLEAR }, 0.14)
+        .from(p2, { x: dx(48), y: 22, autoAlpha: 0, scale: 0.98, duration: 0.62, ease: EASE_OUT, clearProps: CLEAR }, 0.3)
+        .call(function () { el.classList.add("in"); }, null, 0.52)
+        .from(wide, { y: 46, autoAlpha: 0, scale: 0.985, duration: 0.7, ease: EASE_OUT, clearProps: CLEAR }, 0.48);
+    }
 
     document.querySelectorAll(".reveal:not(.in)").forEach(function (el) {
+      if (el.matches(".solve-bento")) { solveReveal(el); return; }
       var isGroup = GROUPS.some(function (s) { return el.matches(s); });
       var isStatband = el.matches(".statband");
       var targets = isGroup ? Array.prototype.slice.call(el.children) : el;
-      el.classList.add("in"); /* neutralized visually; keeps dependent CSS alive */
 
-      if (isStatband) return; /* handled below */
+      if (isStatband) { el.classList.add("in"); return; } /* handled below */
 
       gsap.from(targets, {
         autoAlpha: 0,
@@ -293,8 +318,11 @@
         duration: 0.72,
         stagger: isGroup ? 0.09 : 0,
         ease: EASE_OUT,
-        clearProps: "transform,opacity,visibility",
-        scrollTrigger: { trigger: el, start: "top 82%", once: true }
+        clearProps: CLEAR,
+        scrollTrigger: {
+          trigger: el, start: "top 82%", once: true,
+          onEnter: function () { el.classList.add("in"); }
+        }
       });
     });
   })();
