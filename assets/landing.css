@@ -321,7 +321,7 @@ h1.display {
 .browser-dots i { width: 11px; height: 11px; border-radius: 50%; display: block; }
 .browser-url {
   margin: 0 auto; background: #fff; border: 1px solid #e6e9f0; border-radius: 7px;
-  font-family: var(--font-mono); font-size: 12px; color: var(--color-neutral-400);
+  font-family: var(--font-code); font-size: 12px; color: var(--color-neutral-400);
   padding: 5px 56px 5px 16px; display: flex; align-items: center; gap: 7px;
   min-width: 280px; justify-content: center;
 }
@@ -612,10 +612,11 @@ h1.display {
 .step-no b { width: 30px; height: 30px; border-radius: 8px; background: var(--color-action-bg); color: var(--color-action);
   display: flex; align-items: center; justify-content: center; font-size: 14px; }
 .step-visual {
-  margin-top: 22px; border-radius: 12px; background: var(--color-neutral-50);
-  border: 1px solid var(--color-neutral-100); padding: 20px; min-height: 168px;
-  display: flex; align-items: center; justify-content: center; flex: 1;
+  margin-top: auto; border-radius: 12px; background: var(--color-neutral-50);
+  border: 1px solid var(--color-neutral-100); padding: 20px; height: 212px;
+  display: flex; align-items: center; justify-content: center; flex: none;
 }
+.step p.muted { margin-bottom: 22px; }
 
 /* connector toggle diagram (step 1) */
 .perm-list { width: 100%; display: flex; flex-direction: column; gap: 11px; }
@@ -623,16 +624,19 @@ h1.display {
   background: #fff; border: 1px solid var(--color-neutral-100); border-radius: 8px; padding: 11px 13px; font-size: 13px; font-weight: 500; color: var(--color-neutral-600); }
 .perm-item .co { display: flex; align-items: center; gap: 9px; }
 .perm-item .av { width: 26px; height: 26px; border-radius: 6px; display:flex; align-items:center; justify-content:center; font-family: var(--font-mono); font-size: 11px; font-weight: 600; color:#fff; }
-.toggle { width: 38px; height: 22px; border-radius: 999px; background: var(--color-success); position: relative; flex: none; }
+.toggle { width: 38px; height: 22px; border-radius: 999px; background: var(--color-success); position: relative; flex: none;
+  border: 0; padding: 0; cursor: pointer; transition: background-color .18s ease; }
 .toggle.off { background: var(--color-neutral-200); }
-.toggle::after { content:""; position: absolute; top: 3px; inset-inline-end: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
-.toggle.off::after { inset-inline-end: auto; inset-inline-start: 3px; }
+.toggle:focus-visible { outline: 2px solid var(--color-action); outline-offset: 2px; }
+.toggle::after { content:""; position: absolute; top: 3px; inset-inline-start: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,.2); transition: transform .18s ease; }
+.toggle:not(.off)::after { transform: translateX(16px); }
+[dir="rtl"] .toggle:not(.off)::after { transform: translateX(-16px); }
 
 /* standardize mapping diagram (step 2) */
 .mapwrap { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .maprow { display: grid; grid-template-columns: minmax(0, 1fr) 16px minmax(0, 1.3fr); gap: 10px; align-items: center; font-size: 12px; }
 .maprow .arr { text-align: center; }
-.maprow .raw { font-family: var(--font-mono); color: var(--color-neutral-500); background:#fff; border:1px solid var(--color-neutral-100); border-radius:8px; padding:7px 9px; }
+.maprow .raw { font-family: var(--font-code); color: var(--color-neutral-500); background:#fff; border:1px solid var(--color-neutral-100); border-radius:8px; padding:7px 9px; }
 .maprow .arr { color: var(--color-neutral-300); }
 .maprow .std { font-weight: 600; color: var(--color-navy); background: var(--color-action-bg); border:1px solid var(--color-action-border); border-radius:8px; padding:7px 10px; }
 
@@ -678,7 +682,7 @@ h1.display {
 .api-bar {
   display: flex; align-items: center; gap: 10px; padding: 10px 18px;
   border-bottom: 1px solid rgba(255,255,255,0.10);
-  font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.66);
+  font-family: var(--font-code); font-size: 12px; color: rgba(255,255,255,0.66);
 }
 .api-method {
   font-weight: 500; color: var(--color-sky);
@@ -687,7 +691,7 @@ h1.display {
 }
 .api-snippet pre {
   margin: 0; padding: 16px 18px 18px;
-  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.75;
+  font-family: var(--font-code); font-size: 12.5px; line-height: 1.75;
   color: rgba(255,255,255,0.88); white-space: pre;
 }
 .api-snippet .k { color: rgba(255,255,255,0.60); }
@@ -715,7 +719,10 @@ h1.display {
 }
 
 /* ---------- INTELLIGENCE ---------- */
-.intel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+.intel-grid { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: stretch; }
+.intel-arrow { align-self: center; display: flex; align-items: center; justify-content: center; color: rgba(40,205,252,0.55); }
+.intel-arrow svg { display: block; }
+[dir="rtl"] .intel-arrow svg { transform: scaleX(-1); }
 .intel-card {
   position: relative; border-radius: var(--radius-xl); padding: 34px 34px 30px;
   background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
@@ -760,7 +767,10 @@ h1.display {
 .em-soft  { background: #f7c96b; }
 .em-green { background: var(--color-success); }
 .em-val { font-family: var(--font-mono); font-size: 11px; color: rgba(255,255,255,0.70); text-align: end; font-variant-numeric: tabular-nums; }
-@media (max-width: 880px) { .intel-grid { grid-template-columns: 1fr; } }
+@media (max-width: 880px) {
+  .intel-grid { grid-template-columns: 1fr; }
+  .intel-arrow svg, [dir="rtl"] .intel-arrow svg { transform: rotate(90deg); }
+}
 
 /* ---------- ORG DASHBOARD MOCK (frameless panel — it is a mock, so it
    carries no browser chrome or URL bar; the om-band header + dashed
@@ -804,9 +814,11 @@ h1.display {
 }
 .faq-aside p { color: var(--color-neutral-500); font-size: 15px; margin: 0 0 18px; }
 .aside-link {
-  font-family: var(--font-mono); font-size: 13px; color: var(--color-action);
+  display: block; width: fit-content; font-family: var(--font-mono); font-size: 13px; color: var(--color-action);
   text-decoration: none; word-break: break-all;
 }
+.aside-link + .aside-link { margin-top: 8px; }
+[dir="rtl"] .aside-link { margin-inline-start: auto; }
 .aside-link:hover { text-decoration: underline; }
 @media (max-width: 880px) {
   .faq-wrap { grid-template-columns: 1fr; }
@@ -1051,3 +1063,86 @@ h1.display {
   .faq-item[open] .faq-body { animation: none; }
   .section.bg-navy-dark::before, .section.bg-navy-dark::after { animation: none; }
 }
+
+/* ---- Draft-PO concept mock (roadmap card) ---- */
+.po-mock { margin-top: 22px; border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; padding: 14px 16px 13px; background: rgba(12,40,93,0.35); }
+.po-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 12.5px; }
+.po-row:last-of-type { border-bottom: 0; }
+.po-item { flex: 1; color: rgba(255,255,255,0.86); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.po-qty { color: rgba(255,255,255,0.5); font-size: 11.5px; }
+.po-sug { color: var(--color-sky); font-weight: 600; font-variant-numeric: tabular-nums; }
+.po-note { margin-top: 10px; font-size: 11px; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 7px; }
+.po-note::before { content: ""; flex: 0 0 auto; width: 5px; height: 5px; border-radius: 50%; background: var(--color-action); }
+
+/* ---- Faded corner icons on the who-cards ---- */
+.who-grid .card { position: relative; }
+.who-fade-icon { position: absolute; top: 20px; inset-inline-start: 22px; width: 46px; height: 46px; opacity: 0.10; color: var(--color-navy); pointer-events: none; }
+.who-fade-icon svg { width: 100%; height: 100%; }
+.who-grid .card .who-body, .who-grid .card > h3:first-of-type { margin-top: 52px; }
+.who-img { width: 100%; height: auto; display: block; margin-top: auto; border-radius: 12px; border: 1px solid var(--color-neutral-100); }
+
+/* active/inactive state for the access rows (step 1) */
+.perm-item { transition: background-color .18s ease, color .18s ease; }
+.perm-item .av, .perm-item .co { transition: filter .18s ease, opacity .18s ease; }
+.perm-item:has(.toggle.off) { background: var(--color-neutral-50); color: var(--color-neutral-400); }
+.perm-item:has(.toggle.off) .av { filter: grayscale(1); opacity: 0.55; }
+.av-sky { background: #28CDFC; }
+
+/* live network illustration (step 3) — ported from Claude Design "ARA Live Network Illustration" */
+.step-visual.dark { position: relative; overflow: hidden; }
+.step-visual.dark::before { content: ""; position: absolute; inset: 0; background: radial-gradient(320px 220px at 50% 46%, rgba(40,205,252,0.18), rgba(40,205,252,0) 68%); }
+.ara-net-wrap { position: relative; width: 100%; height: 100%; }
+.ara-net { position: absolute; left: 50%; top: 50%; width: 760px; height: 560px; transform: translate(-50%, -50%) scale(0.3); }
+.ara-net > svg { position: absolute; inset: 0; overflow: visible; }
+.ara-flow { animation: araFlow 3.4s linear infinite; }
+.ara-sweep { position: absolute; left: 380px; top: 280px; width: 620px; height: 620px; margin: -310px 0 0 -310px; border-radius: 999px;
+  background: conic-gradient(from 0deg, rgba(40,205,252,0.20), rgba(40,205,252,0.04) 14%, rgba(40,205,252,0) 32%);
+  -webkit-mask-image: radial-gradient(closest-side, rgba(0,0,0,0) 26%, rgba(0,0,0,0.9) 62%, rgba(0,0,0,0) 100%);
+  mask-image: radial-gradient(closest-side, rgba(0,0,0,0) 26%, rgba(0,0,0,0.9) 62%, rgba(0,0,0,0) 100%);
+  animation: araSweep 14s linear infinite; }
+.ara-ring { position: absolute; left: 380px; top: 280px; width: 470px; height: 470px; margin: -235px 0 0 -235px; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(40,205,252,0.45); animation: araRingOut 6s cubic-bezier(0.16,0.6,0.3,1) infinite; }
+.ara-comet { position: absolute; left: 380px; top: 280px; height: 0; transform-origin: 0 50%; }
+.ara-comet span { position: absolute; left: 0; top: 0; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 999px; background: #28CDFC;
+  box-shadow: 0 0 10px 3px rgba(40,205,252,0.55); animation: araIn 3.6s cubic-bezier(0.4,0,0.6,1) infinite; }
+.ara-node { position: absolute; width: 34px; height: 34px; margin: -17px 0 0 -17px; border-radius: 999px; background: rgba(8,27,66,0.55);
+  box-shadow: inset 0 0 0 2.5px var(--node); display: flex; align-items: center; justify-content: center; }
+.ara-node .nd { width: 11px; height: 11px; border-radius: 999px; background: var(--node); }
+.ara-node .halo { position: absolute; inset: 0; border-radius: 999px; box-shadow: 0 0 0 1.5px var(--node); animation: araHalo 3.6s ease-out infinite; }
+.ara-breathe { position: absolute; left: 380px; top: 280px; width: 152px; height: 152px; margin: -76px 0 0 -76px; border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(40,205,252,0.55); animation: araBreathe 4.4s ease-in-out infinite; }
+.ara-core { position: absolute; left: 380px; top: 280px; width: 96px; height: 96px; margin: -48px 0 0 -48px; border-radius: 999px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 0 8px rgba(40,205,252,0.12), 0 0 0 18px rgba(40,205,252,0.06), 0 12px 32px rgba(4,15,40,0.45); }
+.ara-core img { display: block; }
+@keyframes araSweep { to { transform: rotate(360deg); } }
+@keyframes araRingOut {
+  0%   { transform: scale(0.28); opacity: 0; }
+  18%  { opacity: 0.55; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes araIn {
+  0%   { transform: translateX(var(--r, 170px)); opacity: 0; }
+  14%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translateX(34px); opacity: 0; }
+}
+@keyframes araFlow { to { stroke-dashoffset: -220; } }
+@keyframes araHalo {
+  0%   { transform: scale(1); opacity: 0.5; }
+  70%  { transform: scale(1.9); opacity: 0; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes araBreathe {
+  0%, 100% { transform: scale(1); opacity: 0.42; }
+  50%      { transform: scale(1.06); opacity: 0.85; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ara-net, .ara-net * { animation: none !important; }
+}
+
+/* typing payload (push-api card) */
+.api-snippet [data-f="ok"] { transition: opacity .25s ease; }
+.api-snippet .typing::after { content: ""; display: inline-block; width: 7px; height: 13px; margin-inline-start: 2px;
+  vertical-align: -2px; background: #28CDFC; animation: apiCaret 0.9s steps(2, jump-none) infinite; }
+@keyframes apiCaret { 50% { opacity: 0; } }
