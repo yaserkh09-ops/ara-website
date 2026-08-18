@@ -168,11 +168,9 @@
     }
   })();
 
-  /* section + statement headlines */
+  /* statement headline — the only masked-line reveal outside the hero;
+     section h2s stay static by design ruling (Aug round 1 feedback) */
   headlineReveal(document.querySelector(".statement-head"));
-  document.querySelectorAll(".section .section-head .h2").forEach(function (el) {
-    headlineReveal(el);
-  });
 
   /* =====================================================
      4 · Unified scroll reveals (upgrades the old .reveal IO)
@@ -274,10 +272,7 @@
   }
 
   (function frames() {
-    var platformFrame = document.querySelector(".platform-grid .panel-frame");
-    var platformImg = platformFrame && platformFrame.querySelector(".browser-screen");
-    frameReveal(platformFrame, platformImg, { sweep: !lite, radius: "12px" });
-
+    /* #platform screenshot stays static by design ruling (Aug round 1 feedback) */
     var whoShot = document.querySelector(".who-grid .who-shot");
     var whoImg = whoShot && whoShot.querySelector(".who-img");
     frameReveal(whoShot, whoImg, { radius: "12px" });
