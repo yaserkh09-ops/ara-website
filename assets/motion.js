@@ -193,19 +193,27 @@
 
     var mm = gsap.matchMedia();
     mm.add("(min-width: 1025px) and (pointer: fine) and (prefers-reduced-motion: no-preference)", function () {
-      var glow = document.createElement("div");
-      glow.className = "hero-handoff-glow";
-      glow.setAttribute("aria-hidden", "true");
-      shotCol.insertBefore(glow, shotCol.firstChild);
+      /* white wash: the hero background itself brightens into the light
+         section — the statement's lights-on, started early */
+      var wash = document.createElement("div");
+      wash.className = "hero-handoff-wash";
+      wash.setAttribute("aria-hidden", "true");
+      heroEl.insertBefore(wash, heroEl.querySelector(".hero-inner"));
+      var statement = document.querySelector(".statement");
 
-      /* target: horizontally centered, vertically centered, expanded to
-         fill most of the viewport (clamped by both axes) */
+      /* target: centered in the space below the navbar, expanded but
+         always clearing the nav (clamped by both axes) */
+      var NAV_RESERVE_TOP = 108, RESERVE_BOTTOM = 36;
       function rect() { return shotCol.getBoundingClientRect(); }
+      function availH() { return window.innerHeight - NAV_RESERVE_TOP - RESERVE_BOTTOM; }
       function dx() { var r = rect(); return (window.innerWidth / 2) - (r.left + r.width / 2); }
-      function dy() { var r = rect(); return (window.innerHeight / 2) - (r.top + r.height / 2) + 14; }
+      function dy() {
+        var r = rect();
+        return (NAV_RESERVE_TOP + availH() / 2) - (r.top + r.height / 2);
+      }
       function grow() {
         var r = rect();
-        return Math.min((0.92 * window.innerWidth) / r.width, (0.88 * window.innerHeight) / r.height);
+        return Math.min((0.84 * window.innerWidth) / r.width, availH() / r.height);
       }
 
       var tl = gsap.timeline({
@@ -222,6 +230,14 @@
             /* suppress the mouse-tilt while the handoff owns the transform */
             if (self.progress > 0.02) docEl.setAttribute("data-hero-handoff", "");
             else docEl.removeAttribute("data-hero-handoff");
+            /* pre-start the statement's lights-on: floor its --lit to the
+               wash progress so the dark→light transition is continuous */
+            var floor = Math.max(0, Math.min(1, (self.progress - 0.62) / 0.34));
+            docEl.dataset.litFloor = floor.toFixed(3);
+            if (statement && floor > 0) {
+              var current = parseFloat(statement.style.getPropertyValue("--lit") || "0");
+              if (floor > current) statement.style.setProperty("--lit", floor.toFixed(3));
+            }
           }
         }
       });
@@ -237,16 +253,13 @@
           duration: 0.62,
           ease: "power2.inOut"
         }, 0.08)
-        /* the white seam: a thin line slides out from behind the screen… */
-        .fromTo(glow, { autoAlpha: 0, scaleX: 0.05, scaleY: 1 },
-          { autoAlpha: 1, scaleX: 1, duration: 0.16, ease: "power2.out" }, 0.66)
-        /* …then blooms into the wash that hands off to the light section */
-        .to(glow, { scaleY: 9, duration: 0.22, ease: "power2.in" }, 0.8)
-        .to(glow, { autoAlpha: 0.92, duration: 0.2, ease: "none" }, 0.8);
+        /* the hero background brightens seamlessly into the light section */
+        .to(wash, { autoAlpha: 1, duration: 0.34, ease: "power1.inOut" }, 0.64);
 
       return function () {
         docEl.removeAttribute("data-hero-handoff");
-        glow.remove();
+        delete docEl.dataset.litFloor;
+        wash.remove();
         gsap.set([copyCol, shotCol, browser, note], { clearProps: "all" });
       };
     });

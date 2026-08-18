@@ -737,6 +737,9 @@
       var vh = window.innerHeight || 800;
       var p = (vh - r.top) / (vh * 0.72);
       p = Math.max(0, Math.min(1, p));
+      // hero handoff (assets/motion.js) may have pre-lit the section
+      var floor = parseFloat(document.documentElement.dataset.litFloor || '0');
+      if (floor > p) p = floor;
       statement.style.setProperty('--lit', reduce ? 1 : p.toFixed(3));
       ticking = false;
     }
