@@ -30,6 +30,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="../colors_and_type.css">
 <link rel="stylesheet" href="../assets/landing.css">
+<script defer src="../assets/vendor/gsap.min.js"></script>
+<script defer src="../assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="../assets/vendor/SplitText.min.js"></script>
+<script defer src="../assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="../assets/vendor/ScrambleTextPlugin.min.js"></script>
+<script defer src="../assets/motion.js"></script>
 </head>
 <body class="lp">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
@@ -599,11 +605,8 @@
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  // reveal on scroll
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+  // reveal-on-scroll now lives in assets/motion.js (GSAP when available,
+  // classic IntersectionObserver fallback otherwise)
 
   // interactive access toggles (how-it-works step 1)
   document.querySelectorAll('.perm-item .toggle').forEach(function(t){
