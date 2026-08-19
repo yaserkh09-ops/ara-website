@@ -1461,3 +1461,32 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   .sol-tile { transition: none; }
   .sol-tile:hover { transform: none; }
 }
+
+/* ---- bento refinement: artwork fills the whole card (no white strip);
+       the title sits directly on the art ---- */
+.sol-tile { padding: 0; }
+.sol-tile-head { position: relative; z-index: 2; padding: 24px 26px 0; }
+.sol-tile-art { position: absolute; inset: 0; z-index: 0; margin: 0; padding: 96px 26px 0; }
+.sol-t1 .sol-tile-art { min-height: 0; }
+.sa-1 .sa-chip-panel { top: auto; bottom: 26px; }
+.sa-6 { padding-bottom: 24px; align-items: flex-end; }
+/* vivid tile: light-on-gradient heading + chip */
+.sol-t2 .sol-tile-title a { color: #fff; }
+.sol-t2 .sol-expand { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.16); }
+.sol-t2:hover .sol-expand { color: var(--color-action); background: #fff; }
+
+/* ---- ARA network globe (tile 3 background asset) ---- */
+.sa-3 { display: block; padding: 0; background: #fff; }
+.ara-globe-host { position: absolute; inset: 0; }
+.ara-globe { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.ara-globe-bg { position: absolute; inset: 0; background: radial-gradient(circle at 50% 30%, rgba(59,130,246,0.09), rgba(59,130,246,0) 62%); }
+.ara-globe-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.ara-globe-card {
+  position: absolute; left: 0; top: 0; opacity: 0; will-change: transform, opacity;
+  display: flex; flex-direction: column; gap: 1px;
+  background: #fff; border: 1px solid rgba(226,232,240,0.9); border-radius: 12px;
+  padding: 8px 13px; box-shadow: 0 10px 28px rgba(15,42,77,0.16);
+  white-space: nowrap; pointer-events: none;
+}
+.ara-globe-sku { font-size: 12.5px; font-weight: 700; color: #0e2a47; }
+.ara-globe-sub { font-size: 11px; color: #64748b; }
