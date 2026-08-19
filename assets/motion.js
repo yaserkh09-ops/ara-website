@@ -59,13 +59,25 @@
       var dialog = card.querySelector("[data-sol-modal]");
       if (!anchor || !dialog || typeof dialog.showModal !== "function") return;
 
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
+      function open() {
         dialog.showModal();
         /* focus the dialog itself, not its first button — otherwise mobile
            browsers paint a focus ring on the close button after every tap */
         dialog.focus();
         docEl.setAttribute("data-modal-open", "");
+      }
+
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        open();
+      });
+
+      /* the whole card is a click target, not just the title */
+      card.addEventListener("click", function (e) {
+        if (dialog.open) return;
+        if (e.target.closest("dialog")) return;
+        if (e.target.closest(".sol-anchor")) return; /* the anchor handles itself */
+        open();
       });
 
       /* click on the backdrop area (the dialog element itself) closes */

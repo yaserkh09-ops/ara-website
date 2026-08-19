@@ -1519,3 +1519,24 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
 .sa-lg-green { background: #22c55e; } .sa-lg-amber { background: #f59e0b; } .sa-lg-red { background: #ef4444; }
 /* hosts are absolutely positioned: size from insets, not width:100% */
 .ara-globe-host.ara-globe, .ara-expiry-host.ara-expiry { position: absolute; width: auto; height: auto; }
+
+/* ---- forecast wave gradient (tile 2 background; handed-off asset, CSS-only, speed 1.8) ---- */
+.sa-2 { background: linear-gradient(to top, #2563eb 0%, #38bdf8 52%, #7dd3fc 100%); }
+.sa-2 .sa-panel { position: relative; z-index: 1; }
+.ara-wave { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.ara-wave-glow { position: absolute; inset: 0; background: radial-gradient(circle at 50% -10%, rgba(224,242,254,0.55), rgba(224,242,254,0) 55%); }
+.ara-wave .wy { position: absolute; left: 0; bottom: 0; width: 100%; animation: araWaveY 3.11s ease-in-out infinite; }
+.ara-wave .wx { position: absolute; top: 0; bottom: 0; left: -20%; width: 240%; animation: araWaveX 5s ease-in-out infinite alternate; will-change: transform; }
+.ara-wave svg { width: 100%; height: 100%; display: block; filter: blur(44px); }
+.wy1 { height: 67%; }
+.wy2 { height: 54%; animation-duration: 2.44s; animation-delay: -1.6s; }
+.wy3 { height: 40%; animation-duration: 2.72s; animation-delay: -3s; }
+.wx2 { animation-duration: 3.61s; animation-direction: alternate-reverse; }
+.wx3 { animation-duration: 4.17s; animation-delay: -2.5s; }
+@keyframes araWaveX { from { transform: translateX(0); } to { transform: translateX(-35%); } }
+@keyframes araWaveY { 0% { transform: translateY(0); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .ara-wave * { animation: none !important; } }
+
+/* whole card opens the sheet */
+.sol-tile { cursor: pointer; }
+.sol-tile dialog { cursor: auto; }
