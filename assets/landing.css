@@ -1713,3 +1713,25 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   /* Arabic CTA line-height made the button 43px vs the 38px burger */
   .nav-cta { line-height: 20px; }
 }
+
+/* ---------- custom icon set: plain icons, no colored chips ----------
+   One family: 24-grid, 1.8 stroke, round caps, currentColor. Every
+   tinted chip/circle behind an icon is removed — the icon sits directly
+   on the section background. */
+.card-icon { width: auto; height: auto; border-radius: 0; margin-bottom: 18px; justify-content: flex-start; }
+.ci-navy, .ci-blue, .ci-sky, .ci-orange, .ci-green { background: none; }
+.card-icon svg { width: 26px; height: 26px; stroke-width: 1.8; }
+.pillar .pic { width: auto; height: auto; border-radius: 0; background: none; border: 0; margin-bottom: 18px; justify-content: flex-start; }
+.pillar .pic svg { width: 28px; height: 28px; stroke-width: 1.8; }
+.sol-expand, .sol-t2 .sol-expand, .sol-t4 .sol-expand, .sol-t6 .sol-expand { background: none; }
+.sol-tile:hover .sol-expand { background: none; color: var(--color-action); }
+.sol-t2:hover .sol-expand, .sol-t4:hover .sol-expand, .sol-t6:hover .sol-expand { background: none; color: #fff; }
+.nav-menu-btn, .nav.scrolled .nav-menu-btn, .nav.menu-open .nav-menu-btn { background: none; }
+/* modal bullets: plain check tick, no tinted circle */
+.sm-bullets li { padding-inline-start: 24px; }
+.sm-bullets li::before {
+  width: 12px; height: 6.5px; top: 6px; border-radius: 1px;
+  background: none; border: solid var(--color-success);
+  border-width: 0 0 2px 2px; transform: rotate(-45deg);
+}
+.sm-bullets li::after { display: none; }
