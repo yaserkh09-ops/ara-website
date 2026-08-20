@@ -51,28 +51,8 @@ a:hover { opacity: 1; }
   color: #fff;
 }
 .bg-navy-dark { background: #061634; color: #fff; }
-/* aurora drift — one ambient moment at the close, echoing the hero's palette */
 .section.bg-navy-dark { position: relative; overflow: hidden; }
 .section.bg-navy-dark .wrap { position: relative; z-index: 1; }
-.section.bg-navy-dark::before, .section.bg-navy-dark::after {
-  content: ""; position: absolute; width: 55vmax; height: 55vmax; border-radius: 50%;
-  filter: blur(60px); pointer-events: none; will-change: transform;
-}
-.section.bg-navy-dark::before {
-  top: -30vmax; left: -14vmax;
-  background: radial-gradient(circle, rgba(40,205,252,0.09), transparent 62%);
-  animation: auroraA 46s ease-in-out infinite;
-}
-.section.bg-navy-dark::after {
-  bottom: 0; right: -14vmax;
-  background: radial-gradient(circle, rgba(6,115,255,0.13), transparent 62%);
-  animation: auroraB 58s ease-in-out infinite;
-}
-@keyframes auroraA { 50% { transform: translate(10vmax, 6vmax) scale(1.12); } }
-@keyframes auroraB { 50% { transform: translate(-9vmax, -7vmax) scale(0.92); } }
-@media (prefers-reduced-motion: reduce) {
-  .section.bg-navy-dark::before, .section.bg-navy-dark::after { animation: none; }
-}
 
 /* ---------- TYPE ---------- */
 .eyebrow {
@@ -1028,7 +1008,6 @@ h1.display {
   .solve-bento.in .viz-ecg .ecg-line, .reveal.in .viz-ecg .ecg-line { animation: none; stroke-dashoffset: 0; }
   .btn:focus-visible .arr .arr-head { transform: none; }
   .faq-item[open] .faq-body { animation: none; }
-  .section.bg-navy-dark::before, .section.bg-navy-dark::after { animation: none; }
 }
 
 /* ---- Draft-PO concept mock (roadmap card) ---- */
@@ -1615,8 +1594,7 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
    at opacity p while the CTA's flat white veil thins at 1-p — the two
    blends are identical (p·navy + (1-p)·white), so no seam is visible at
    the section edge. #contact and the footer stack above the wash and
-   carry their own dark paint. The veil is a dedicated div, NOT ::after —
-   .section.bg-navy-dark::after is the aurora drift and must stay. */
+   carry their own dark paint. The veil is a dedicated div, not ::after. */
 #contact { --dim: 0; }
 .cta-dim-veil {
   position: absolute; inset: 0;
