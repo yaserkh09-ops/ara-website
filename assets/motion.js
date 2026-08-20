@@ -526,7 +526,7 @@
   (function navIndicator() {
     var links = document.querySelector(".nav-links");
     if (!links) return;
-    var items = links.querySelectorAll("a");
+    var items = links.querySelectorAll("a:not(.lang-toggle)");
     if (!items.length) return;
     var bar = document.createElement("span");
     bar.className = "nav-indicator";

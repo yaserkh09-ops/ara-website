@@ -213,22 +213,42 @@ h1.display {
 .nav-cta { padding: 10px 18px; font-size: 14px; }
 .nav-cta .cta-s { display: none; } /* short label swaps in on phones */
 
-/* language link — plain underlined text beside the last nav item;
-   both versions are live so this is a real link */
-.lang-link {
-  font-size: 15px; font-weight: 500;
-  color: var(--color-sky);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-thickness: 1.5px;
-  transition: color .25s ease;
+/* language toggle — recessed pill track with a coin flag knob (FR/EN
+   switch reference); the whole control is a real link to the other
+   live version, sitting as the last item in the nav links row */
+.nav-links { align-items: center; }
+.lang-toggle {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 4px; padding-inline-start: 12px;
+  border-radius: 999px;
+  background: rgba(9,26,60,0.38);
+  box-shadow: inset 0 1.5px 4px rgba(3,10,32,0.45), inset 0 0 0 1px rgba(255,255,255,0.08);
+  text-decoration: none;
+  transition: background .2s ease, box-shadow .25s ease;
 }
-.lang-link[lang="ar"] { font-family: var(--font-arabic); }
-.nav.scrolled .lang-link { color: var(--color-action); }
-.lang-link:hover { color: #fff; }
-.nav.scrolled .lang-link:hover { color: #0961d8; }
-.lang-link:focus-visible { outline: 2px solid var(--color-sky); outline-offset: 3px; border-radius: 4px; }
-.nav.scrolled .lang-link:focus-visible { outline-color: var(--color-action); }
+.nav-links a.lang-toggle::after { display: none; } /* no hover underline on the control */
+.lang-toggle:hover { background: rgba(9,26,60,0.55); }
+.lt-code {
+  font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em; line-height: 1;
+  color: rgba(255,255,255,0.88); transition: color .25s ease;
+}
+.lt-code[lang="ar"], [dir="rtl"] .lt-code { font-family: var(--font-arabic); font-size: 13.5px; letter-spacing: 0; }
+.lt-flag {
+  width: 24px; height: 24px; border-radius: 50%; overflow: hidden; flex: none;
+  box-shadow: 0 1px 3px rgba(3,10,32,0.45), inset 0 1px 1px rgba(255,255,255,0.35);
+  transition: transform .2s ease;
+}
+.lt-flag svg { display: block; width: 100%; height: 100%; }
+.lang-toggle:hover .lt-flag { transform: scale(1.07); }
+@media (prefers-reduced-motion: reduce) { .lt-flag { transition: none; } .lang-toggle:hover .lt-flag { transform: none; } }
+.nav.scrolled .lang-toggle {
+  background: rgba(12,40,93,0.08);
+  box-shadow: inset 0 1.5px 4px rgba(12,40,93,0.20), inset 0 0 0 1px rgba(12,40,93,0.05);
+}
+.nav.scrolled .lang-toggle:hover { background: rgba(12,40,93,0.14); }
+.nav.scrolled .lt-code { color: var(--color-neutral-500); }
+.lang-toggle:focus-visible { outline: 2px solid var(--color-sky); outline-offset: 3px; }
+.nav.scrolled .lang-toggle:focus-visible { outline-color: var(--color-action); }
 
 /* ---------- HERO ---------- */
 .hero {
@@ -951,7 +971,6 @@ h1.display {
   .nav-inner { padding: 14px 22px; gap: 16px; }
   .browser-url { min-width: 0; flex: 1; padding: 5px 12px; }
   .nav-signin { display: none; }
-  .lang-link { font-size: 14px; } /* language link stays visible on phones — both languages are live */
   .nav-cta { padding: 9px 14px; font-size: 13px; }
   .cta-split { grid-template-columns: 1fr; }
   .bento-2, .bento-3, .steps, .pillars { grid-template-columns: 1fr; }
@@ -1123,16 +1142,12 @@ html[data-motion="gsap"] .reveal { opacity: 1; transform: none; transition: none
   width: min(1040px, calc(100% - 24px));
   margin-top: 10px; padding: 10px 14px 10px 24px;
   border-radius: 8px;
-  /* Apple material recipe: low-opacity white, heavy blur + saturation,
-     hairline light border, inner top highlight */
-  background: rgba(255,255,255,0.60);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  backdrop-filter: blur(24px) saturate(180%);
-  border-color: rgba(255,255,255,0.55);
-  box-shadow:
-    0 12px 36px rgba(12,40,93,0.16),
-    0 1px 0 rgba(12,40,93,0.04),
-    inset 0 1px 0 rgba(255,255,255,0.70);
+  /* clear-glass recipe: high transparency, light blur, no outline */
+  background: rgba(255,255,255,0.45);
+  -webkit-backdrop-filter: blur(12px) saturate(170%);
+  backdrop-filter: blur(12px) saturate(170%);
+  border-color: transparent;
+  box-shadow: 0 12px 32px rgba(12,40,93,0.14);
 }
 [dir="rtl"] .nav.scrolled .nav-inner { padding: 10px 24px 10px 14px; }
 @media (max-width: 760px) {
@@ -1619,4 +1634,45 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
 #contact, .footer { position: relative; z-index: 3; }
 @media (prefers-reduced-motion: reduce) {
   .cta-dim-veil, .footer-theme-wash { display: none !important; }
+}
+
+/* ---------- expandable nav (tablet/phone): burger + glass panel ---------- */
+.nav-menu-btn {
+  display: none; align-items: center; justify-content: center;
+  width: 38px; height: 38px; flex: none;
+  border: 0; border-radius: 8px; cursor: pointer;
+  background: rgba(255,255,255,0.14); color: #fff;
+  transition: background .2s ease, color .25s ease;
+}
+.nav.scrolled .nav-menu-btn { background: rgba(12,40,93,0.07); color: var(--color-navy); }
+.nav-menu-btn:focus-visible { outline: 2px solid var(--color-sky); outline-offset: 2px; }
+.nav.scrolled .nav-menu-btn:focus-visible { outline-color: var(--color-action); }
+@media (max-width: 880px) {
+  .nav-menu-btn { display: inline-flex; }
+  .nav-inner { position: relative; }
+  /* the links row becomes the expandable panel; the language toggle
+     is hidden from the bar and reachable in here instead */
+  .nav.menu-open .nav-links {
+    display: flex; flex-direction: column; align-items: stretch; gap: 2px;
+    position: absolute; top: calc(100% + 10px); inset-inline: 10px;
+    margin: 0; padding: 12px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.94);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    box-shadow: 0 18px 44px rgba(12,40,93,0.22);
+  }
+  .nav.menu-open .nav-links a:not(.lang-toggle) {
+    color: var(--color-navy); font-size: 16px; font-weight: 600;
+    padding: 11px 10px; border-radius: 6px;
+  }
+  .nav.menu-open .nav-links a:not(.lang-toggle):hover { color: var(--color-action); background: rgba(6,115,255,0.07); }
+  .nav.menu-open .nav-links a::after { display: none; }
+  .nav.menu-open .nav-indicator { display: none; }
+  .nav.menu-open .lang-toggle {
+    margin: 8px 10px 4px; align-self: flex-start;
+    background: rgba(12,40,93,0.08);
+    box-shadow: inset 0 1.5px 4px rgba(12,40,93,0.20), inset 0 0 0 1px rgba(12,40,93,0.05);
+  }
+  .nav.menu-open .lt-code { color: var(--color-neutral-500); }
 }
