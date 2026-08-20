@@ -332,7 +332,7 @@
      keys off it (viz bars, ECG draw).
      ===================================================== */
   (function reveals() {
-    var GROUPS = [".sol-bento", ".intel-grid", ".who-grid",
+    var GROUPS = [".sol-bento", ".who-grid",
       ".steps", ".bento-integration", ".pillars", ".faq-wrap"];
     var CLEAR = "transform,opacity,visibility";
 
