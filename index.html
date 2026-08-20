@@ -614,9 +614,9 @@
 
 <!-- ============ 10 · FINAL CTA ============ -->
 <section class="section bg-navy-dark" id="contact" data-screen-label="Final CTA">
+  <div class="cta-grid" aria-hidden="true"></div>
   <div class="wrap">
     <div class="cta-card reveal">
-      <div class="divider-grad"></div>
       <h2 class="h2 cta-title">See what's available. <span class="gradient-text">Instantly.</span></h2>
       <p class="lead">One live picture of pharmaceutical stock, shared on your terms. Tell us who you are, and we'll show you ARA on your own use case.</p>
       <div class="cta-split">
@@ -641,6 +641,7 @@
 
 <!-- ============ 11 · FOOTER ============ -->
 <footer class="footer bg-navy-dark" data-screen-label="Footer">
+  <div class="footer-grid" aria-hidden="true"></div>
   <div class="wrap">
     <div class="footer-top">
       <div>
@@ -828,6 +829,24 @@
     lights();
     window.addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(lights); } }, {passive:true});
     window.addEventListener('resize', lights);
+  }
+
+  // "lights off" — the statement reveal in reverse: the final CTA enters
+  // as bright as the FAQ above it, then dims to navy as you scroll in
+  var contact = document.getElementById('contact');
+  if (contact) {
+    var offTicking = false;
+    function lightsOff(){
+      var r = contact.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      var p = (vh - r.top) / (vh * 0.72);
+      p = Math.max(0, Math.min(1, p));
+      contact.style.setProperty('--dim', reduce ? 1 : p.toFixed(3));
+      offTicking = false;
+    }
+    lightsOff();
+    window.addEventListener('scroll', function(){ if(!offTicking){ offTicking = true; requestAnimationFrame(lightsOff); } }, {passive:true});
+    window.addEventListener('resize', lightsOff);
   }
 
   // mouse-tracking 3D tilt on the hero screenshot

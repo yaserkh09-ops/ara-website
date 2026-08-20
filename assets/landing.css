@@ -827,12 +827,8 @@ h1.display {
 }
 .pillar .pic svg { width: 24px; height: 24px; stroke: var(--color-sky); stroke-width: 2; }
 .pillar p { color: rgba(255,255,255,0.78); font-size: 16px; }
-.divider-grad { height: 3px; width: 100%; border-radius: 999px;
-  background: linear-gradient(90deg, #28CDFC, #0673FF 55%, #F05A29); }
-
 /* ---------- FINAL CTA ---------- */
 .cta-card { text-align: center; max-width: 860px; margin: 0 auto; position: relative; }
-.cta-card .divider-grad { max-width: 120px; margin: 0 auto 34px; }
 .cta-split {
   display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
   margin: 10px 0 28px; text-align: start;
@@ -1589,4 +1585,42 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
 @media (max-width: 880px) {
   .sol-t6 { min-height: 380px; }
   .ara-erpmap-host { inset: 96px 8px 14px; }
+}
+
+/* ---------- FINAL CTA + FOOTER: hero grid, "lights off" entry ----------
+   The dark ending mirrors the hero: the same 56px grid runs behind the
+   final CTA and the footer, invisible where the dark region starts and
+   fully visible at the page bottom (the CTA layer fades 0 -> 50% and the
+   footer layer continues 50% -> 100%, so the two read as one gradient).
+   Entering the CTA reverses the statement's "lights on": a light veil,
+   matching the FAQ above, fades out as --dim goes 0 -> 1 (inline script). */
+.cta-grid, .footer-grid {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+.cta-grid {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 100%);
+}
+.footer-grid {
+  -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, #000 100%);
+  mask-image: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, #000 100%);
+}
+.footer { position: relative; overflow: hidden; }
+.section.bg-navy-dark .wrap, .footer .wrap { position: relative; z-index: 1; }
+#contact { --dim: 0; }
+#contact::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, #ffffff 0%, #f2f7fd 100%);
+  opacity: calc(1 - var(--dim));
+  pointer-events: none;
+  z-index: 3;
+  transition: opacity .1s linear;
+}
+@media (prefers-reduced-motion: reduce) {
+  #contact::after { display: none; }
 }
