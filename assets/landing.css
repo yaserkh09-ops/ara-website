@@ -1698,3 +1698,18 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .nav-menu-btn .mb-l, .nav-links { transition: none !important; }
 }
+
+/* ---------- nav polish: toggle switch animation + mobile bar rhythm ---------- */
+/* knob and label glide past each other before the page swaps languages */
+.lang-toggle.switching .lt-flag,
+.lang-toggle.switching .lt-code {
+  transition: transform .38s cubic-bezier(.22,1,.36,1);
+}
+.lang-toggle.switching:hover .lt-flag { transform: none; } /* hover scale must not fight the slide */
+@media (max-width: 880px) {
+  /* the collapsed links row still occupied one flex row-gap, bloating the
+     closed bar; spacing for the open state lives on the links row instead */
+  .nav-inner { row-gap: 0; }
+  /* Arabic CTA line-height made the button 43px vs the 38px burger */
+  .nav-cta { line-height: 20px; }
+}
