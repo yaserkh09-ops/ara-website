@@ -30,7 +30,7 @@
   /* ---- ambient-loop governor: pause CSS keyframe loops off-screen ---- */
   function governAmbient() {
     var targets = document.querySelectorAll(
-      ".section.bg-navy-dark, .ara-net-wrap, .focal-alerts, .viz-time, .api-snippet, .ara-wave, [data-ara-visitcard]"
+      ".section.bg-navy-dark, .ara-net-wrap, .focal-alerts, .viz-time, .api-snippet, .ara-wave, [data-ara-visitcard], [data-ara-erpmap]"
     );
     if (!targets.length || !("IntersectionObserver" in window)) return;
     var io = new IntersectionObserver(function (entries) {

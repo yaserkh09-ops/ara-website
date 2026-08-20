@@ -1603,3 +1603,19 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   .ara-vc-aur1, .ara-vc-aur2, .ara-vc-sway { animation: none !important; }
   .ara-vc-card { transition: none; }
 }
+
+/* ---- tile 6: integration map (handed-off AraIntegrationMap, dark preset) ----
+   The design box is a fixed 1240x720 canvas the engine scales to fit the
+   host; the tile background matches the asset's navy canvas so the scaled
+   box blends edge-to-edge. */
+.sol-t6 { min-height: 620px; }
+.sa-6 { display: block; padding: 0; background: #0b1f4e; align-items: initial; }
+.sol-t6 .sol-tile-title a { color: #fff; }
+.sol-t6 .sol-expand { color: rgba(255,255,255,0.85); background: rgba(255,255,255,0.16); }
+.sol-t6:hover .sol-expand { color: var(--color-action); background: #fff; }
+.ara-erpmap-host { position: absolute; inset: 100px 20px 20px; overflow: hidden; }
+.ara-erpmap-host > img { opacity: 0; } /* shipped logo stays hidden until the engine adopts it */
+@media (max-width: 880px) {
+  .sol-t6 { min-height: 380px; }
+  .ara-erpmap-host { inset: 96px 8px 14px; }
+}
