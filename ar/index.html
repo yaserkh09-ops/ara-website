@@ -616,6 +616,7 @@
 <!-- ============ 10 · FINAL CTA ============ -->
 <section class="section bg-navy-dark" id="contact" data-screen-label="Final CTA">
   <div class="cta-grid" aria-hidden="true"></div>
+  <div class="cta-dim-veil" aria-hidden="true"></div>
   <div class="wrap">
     <div class="cta-card reveal">
       <h2 class="h2 cta-title">شاهد المتوفر. <span class="gradient-text">فورًا.</span></h2>
@@ -832,17 +833,25 @@
     window.addEventListener('resize', lights);
   }
 
-  // "lights off" — the statement reveal in reverse: the final CTA enters
-  // as bright as the FAQ above it, then dims to navy as you scroll in
+  // "lights off" — whole-screen morph into the dark ending: a fixed navy
+  // wash dims the viewport at opacity p while the CTA's white veil thins
+  // at 1-p, so the screen reads as one continuous light-to-dark blend
   var contact = document.getElementById('contact');
   if (contact) {
+    var wash = document.createElement('div');
+    wash.className = 'footer-theme-wash';
+    wash.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(wash);
+    contact.classList.add('dim-armed');
     var offTicking = false;
     function lightsOff(){
       var r = contact.getBoundingClientRect();
       var vh = window.innerHeight || 800;
       var p = (vh - r.top) / (vh * 0.72);
       p = Math.max(0, Math.min(1, p));
-      contact.style.setProperty('--dim', reduce ? 1 : p.toFixed(3));
+      if (reduce) p = 1;
+      contact.style.setProperty('--dim', p.toFixed(3));
+      wash.style.opacity = p.toFixed(3);
       offTicking = false;
     }
     lightsOff();

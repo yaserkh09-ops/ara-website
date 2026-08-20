@@ -1611,16 +1611,33 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
 }
 .footer { position: relative; overflow: hidden; }
 .section.bg-navy-dark .wrap, .footer .wrap { position: relative; z-index: 1; }
+/* Whole-screen morph: a fixed navy wash dims everything in the viewport
+   at opacity p while the CTA's flat white veil thins at 1-p — the two
+   blends are identical (p·navy + (1-p)·white), so no seam is visible at
+   the section edge. #contact and the footer stack above the wash and
+   carry their own dark paint. The veil is a dedicated div, NOT ::after —
+   .section.bg-navy-dark::after is the aurora drift and must stay. */
 #contact { --dim: 0; }
-#contact::after {
-  content: "";
+.cta-dim-veil {
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, #ffffff 0%, #f2f7fd 100%);
+  background: #fff;
   opacity: calc(1 - var(--dim));
   pointer-events: none;
   z-index: 3;
   transition: opacity .1s linear;
+  display: none; /* armed by the inline script, so no-JS keeps the plain dark section */
 }
+#contact.dim-armed .cta-dim-veil { display: block; }
+.footer-theme-wash {
+  position: fixed; inset: 0;
+  background: #061634;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  will-change: opacity;
+  transition: opacity .1s linear;
+}
+#contact, .footer { position: relative; z-index: 3; }
 @media (prefers-reduced-motion: reduce) {
-  #contact::after { display: none; }
+  .cta-dim-veil, .footer-theme-wash { display: none !important; }
 }

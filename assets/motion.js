@@ -264,8 +264,15 @@
       function availH() { return window.innerHeight - NAV_RESERVE_TOP - RESERVE_BOTTOM; }
       function dx() { var r = rect(); return (window.innerWidth / 2) - (r.left + r.width / 2); }
       function dy() {
-        var r = rect();
-        return (NAV_RESERVE_TOP + availH() / 2) - (r.top + r.height / 2);
+        /* measure the shot's offset within the hero, not the viewport:
+           during the pin the hero sits at the viewport top so the two are
+           equal, but a ScrollTrigger refresh can run while the page is
+           scrolled far past the hero — a viewport-relative rect there
+           computes a huge bogus translate that drops the screenshot into
+           the current viewport */
+        var r = rect(), hr = heroEl.getBoundingClientRect();
+        var relTop = r.top - hr.top;
+        return (NAV_RESERVE_TOP + availH() / 2) - (relTop + r.height / 2);
       }
       function grow() {
         var r = rect();
