@@ -99,6 +99,52 @@
     });
   })();
 
+  /* ---- demo request form: same bottom-sheet pattern, mail-compose
+     submit. No backend anywhere on this site: Send builds a prefilled
+     email to the public address and opens the visitor's mail app —
+     the [data-demo-form] CTAs keep their mailto href as no-JS fallback. */
+  (function initDemoForm() {
+    var dialog = document.getElementById("demo-modal");
+    if (!dialog || typeof dialog.showModal !== "function") return;
+    var openers = document.querySelectorAll("[data-demo-form]");
+    if (!openers.length) return;
+    var form = dialog.querySelector("form");
+    var opener = null;
+
+    function open(btn) {
+      opener = btn;
+      var note = dialog.querySelector(".df-sent");
+      if (note) note.hidden = true;
+      dialog.showModal();
+      dialog.focus();
+      docEl.setAttribute("data-modal-open", "");
+    }
+    openers.forEach(function (btn) {
+      btn.addEventListener("click", function (e) { e.preventDefault(); open(btn); });
+    });
+    dialog.addEventListener("click", function (e) { if (e.target === dialog) dialog.close(); });
+    var closeBtn = dialog.querySelector("[data-modal-close]");
+    if (closeBtn) closeBtn.addEventListener("click", function () { dialog.close(); });
+    dialog.addEventListener("close", function () {
+      docEl.removeAttribute("data-modal-open");
+      if (opener) opener.focus({ preventScroll: true });
+    });
+
+    if (form) form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var v = function (n) { return (form.elements[n] && form.elements[n].value || "").trim(); };
+      var subject = (rtl ? "طلب عرض توضيحي — " : "Demo request — ") + v("name");
+      var lines = rtl
+        ? ["مرحبًا فريق أرى،", "", "الاسم: " + v("name"), "البريد الإلكتروني: " + v("email"), "رقم الجوال: " + (v("phone") || "—"), "", v("message")]
+        : ["Hello ARA team,", "", "Name: " + v("name"), "Email: " + v("email"), "Phone: " + (v("phone") || "—"), "", v("message")];
+      location.href = "mailto:admin@arasolutions.io?subject=" + encodeURIComponent(subject) +
+        "&body=" + encodeURIComponent(lines.join("\r\n"));
+      var note = dialog.querySelector(".df-sent");
+      if (note) note.hidden = false;
+    });
+  })();
+
   if (reduce || !window.gsap || !window.ScrollTrigger) {
     classicReveal();
     docEl.setAttribute("data-motion", reduce ? "reduced" : "css");
