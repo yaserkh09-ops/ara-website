@@ -1839,3 +1839,18 @@ html[data-motion="gsap"] .nav-links a::after { display: none; }
   .pds-list { grid-template-columns: 1fr; }
   .pds-price { margin-inline-start: 0; }
 }
+
+/* ---------- inner-page hero grid: the footer grid mirrored ----------
+   Standing pattern for secondary pages: the same 56px grid, strongest
+   at the very top and fading out toward the bottom of the hero band. */
+.pricing-hero { position: relative; overflow: hidden; }
+.pricing-hero .wrap { position: relative; z-index: 1; }
+.inner-hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 96%);
+  mask-image: linear-gradient(180deg, #000 0%, transparent 96%);
+}
