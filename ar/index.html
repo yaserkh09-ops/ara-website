@@ -30,6 +30,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans+Arabic:wght@400;500;700&amp;display=swap">
 <link rel="stylesheet" href="../colors_and_type.css">
 <link rel="stylesheet" href="../assets/landing.css">
+<script defer src="../assets/vendor/gsap.min.js"></script>
+<script defer src="../assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="../assets/vendor/SplitText.min.js"></script>
+<script defer src="../assets/vendor/DrawSVGPlugin.min.js"></script>
+<script defer src="../assets/vendor/ScrambleTextPlugin.min.js"></script>
+<script defer src="../assets/motion.js"></script>
+<script defer src="../assets/ara-globe.js"></script>
+<script defer src="../assets/ara-expiry.js"></script>
+<script defer src="../assets/ara-visitcard.js"></script>
+<script defer src="../assets/ara-erpmap.js"></script>
 </head>
 <body class="lp">
 <a class="skip-link" href="#main">تخطَّ إلى المحتوى</a>
@@ -41,19 +51,18 @@
       <img src="../assets/ara-logo-mark.png" alt="أرى">
       <span class="brand-name">ARA<span class="ar" lang="ar">أرى</span></span>
     </a>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#solve">ماذا نحل</a>
-      <a href="#platform">المنصة</a>
+      <a href="#solutions">الحلول</a>
       <a href="#how">كيف تعمل</a>
+      <a href="pricing/">الأسعار</a>
       <a href="#faq">الأسئلة الشائعة</a>
+      <a class="lang-toggle" href="../" hreflang="en" aria-label="Switch to English"><span class="lt-code" lang="en">EN</span><span class="lt-flag" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><mask id="araLangFlag"><circle cx="256" cy="256" r="256" fill="#fff"/></mask><g mask="url(#araLangFlag)"><path fill="#eee" d="M256 0h256v64l-32 32 32 32v64l-32 32 32 32v64l-32 32 32 32v64l-256 32L0 448v-64l32-32-32-32v-64z"/><path fill="#d80027" d="M224 64h288v64H224Zm0 128h288v64H256ZM0 320h512v64H0Zm0 128h512v64H0Z"/><path fill="#0052b4" d="M0 0h256v256H0Z"/><path fill="#eee" d="m187 243 57-41h-70l57 41-22-67zm-81 0 57-41H93l57 41-22-67zm-81 0 57-41H12l57 41-22-67zm162-81 57-41h-70l57 41-22-67zm-81 0 57-41H93l57 41-22-67zm-81 0 57-41H12l57 41-22-67Zm162-82 57-41h-70l57 41-22-67Zm-81 0 57-41H93l57 41-22-67zm-81 0 57-41H12l57 41-22-67Z"/></g></svg></span></a>
     </div>
     <div class="nav-right">
-      <div class="lang" role="group" aria-label="اللغة">
-        <span class="on" lang="ar" aria-current="true">عربي</span>
-        <a class="alt" href="../" lang="en" hreflang="en" aria-label="English version">EN</a>
-      </div>
       <a class="nav-signin" href="https://app.arasolutions.io">تسجيل الدخول</a>
-      <a class="btn btn-primary nav-cta" href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85"><span class="cta-l">اطلب عرضًا توضيحيًا</span><span class="cta-s">اطلب عرضًا</span></a>
+      <a class="btn btn-primary nav-cta" data-demo-form href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85"><span class="cta-l">اطلب عرض توضيحي</span><span class="cta-s">اطلب عرضًا</span></a>
+      <button type="button" class="nav-menu-btn" aria-expanded="false" aria-controls="navLinks" aria-label="القائمة"><span class="mb-l"></span><span class="mb-l"></span><span class="mb-l"></span></button>
     </div>
   </div>
 </nav>
@@ -71,12 +80,12 @@
   </div>
   <div class="wrap hero-inner">
     <div class="reveal in">
-      <p class="eyebrow">ذكاء مخزون الأدوية</p>
-      <h1 class="display">لا نفادَ يفاجئك.<br><span class="gradient-text">ولا بيعَ بلا رؤية.</span></h1>
-      <p class="lead hero-sub">تُحيي أرى بياناتك: صورة حيّة موحّدة لمخزونك، وميزات تعالج عقبات سلسلة الإمداد حتى لا يمسّ تجربةَ مرضاك شيء.</p>
+      <p class="eyebrow">المنصة الذكية لإدارة مخزونك وعلاقاتك بالموردين معًا</p>
+      <h1 class="display">منصة تتيح لك رؤية شاملة <span class="gradient-text">وذكية</span> لإدارة مخزونك الحالي وتوقع الطلب المستقبلي</h1>
+      <p class="lead hero-sub">أرى تمنح بياناتك صورة حيّة وموحّدة لمخزونك، وتمنح مميزات مثل حساب مخزون الطوارئ أو نقاط إعادة الطلب لمعالجة عقبات سلسلة الإمداد التي قد تواجهك.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرضًا توضيحيًا
-          <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M5 12h14"/><path class="arr-head" d="M13 6l6 6-6 6"/></svg>
+        <a class="btn btn-primary" data-demo-form href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرض توضيحي
+          <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M4.5 12h14"/><path class="arr-head" d="M12.5 5.5 19 12l-6.5 6.5"/></svg>
         </a>
         <a class="btn btn-ghost-light" href="mailto:admin@arasolutions.io">
           تواصل معنا
@@ -87,11 +96,11 @@
       <div class="browser hero-browser">
         <div class="browser-bar">
           <div class="browser-dots"><i></i><i></i><i></i></div>
-          <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io</div>
+          <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.75" y="10.5" width="14.5" height="9.5" rx="2.2"/><path d="M8.25 10.5V7.75a3.75 3.75 0 0 1 7.5 0v2.75"/><path d="M12 14.4v1.9"/></svg>app.arasolutions.io</div>
         </div>
         <img class="browser-screen" src="../assets/screens/dashboard-lawamea.png" alt="لوحة تحكم المنشأة في أرى مع مخزون مجمّع عبر الفروع" width="2880" height="1800" fetchpriority="high">
       </div>
-      <div class="hero-shot-note"><span class="mono">بيانات تجريبية</span> · جميع الجهات الظاهرة خيالية</div>
+      <div class="hero-shot-note"><span class="mono">بيانات تجريبية</span></div>
     </div>
   </div>
 </header>
@@ -101,7 +110,7 @@
   <div class="wrap">
     <div class="statement-inner">
       <h2 class="statement-head">التوافر مشكلة مشتركة.<br>والرؤية هي الحل المشترك.</h2>
-      <p class="statement-body">المستشفيات ترى رفوفها، والشركات ترى مستودعاتها، ولا أحد يرى الفجوة بينهما. وفي تلك الفجوة يعيش نفاد المخزون. تمنح أرى منشأتك صورة حيّة واحدة للمخزون في كل فرع، وتتيح لك مدّ تلك الرؤية إلى مورّديك، صلاحيةً بعد صلاحية.</p>
+      <p class="statement-body">المستشفيات ترى رفوفها، والشركات ترى مستودعاتها، ولا أحد يرى الفجوة بينهما. أرى تتيح للمنشآت الصحية فتح نافذة مخصصة لرؤية مخزون محدد من أصناف محددة بالاتفاق المسبق بين المنشأة الصحية والمورّد.</p>
     </div>
   </div>
 </section>
@@ -110,9 +119,9 @@
 <section class="section bg-mist" id="solve" data-screen-label="What We Solve">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">المشكلة</div>
-      <h2 class="h2">نفاد المخزون لا يُرى حتى يصل إلى المريض.</h2>
-      <p class="lead solve-lead">بين الرف والمستودع تقع نقطة عمياء: ينخفض المخزون بصمت، وتنتقل طلبات إعادة التزويد عبر المكالمات وجداول البيانات، ويكتشف الجميع المشكلة في أسوأ لحظة ممكنة.<span class="emph">عملٌ يدويٌّ يكلّفك كل يوم.</span></p>
+      <div class="eyebrow">المشكلة التي نحلها</div>
+      <h2 class="h2">نفاد المخزون والمخزون الزائد.</h2>
+      <p class="lead solve-lead">هذه المشاكل تكلّف المريض عدم الحصول على الأدوية المطلوبة، وتكلّف المستشفى عدم رضا المرضى، وتكلّف الشركة عدم وصول أدويتها للمستفيدين.<span class="emph">هنا بعض الأمثلة لما قد يحصل بسبب هذه المشكلة:</span></p>
     </div>
 
     <div class="reveal solve-bento">
@@ -152,7 +161,7 @@
         <div class="pain-head">
           <h3>لحظات إعادة التزويد تمرّ دون أن يلحظها أحد</h3>
         </div>
-        <p>ينخفض المخزون تحت حد إعادة الطلب بهدوء، ثم يبقى هناك حتى يلتفت إليه أحدٌ مصادفة.</p>
+        <p>ينخفض المخزون تحت حد إعادة الطلب بهدوء، ثم يبقى هناك حتى ينعكس الأثر على تجربة المرضى.</p>
         <div class="pain-viz viz-bars">
           <span class="bar" style="height:88%"></span>
           <span class="bar" style="height:74%"></span>
@@ -168,15 +177,13 @@
       <!-- patient impact · wide focal -->
       <div class="card pain-card pain-wide">
         <div class="pw-copy">
-          <span class="kicker">الكلفة تقع هنا</span>
-          <h3>نفاد المخزون يصل إلى المريض</h3>
-          <p>حين تمرّ الفجوة دون أن تُرى، يدفع الجميع الثمن: المنشأة تتخبّط، والشركة تخسر البيع، والمريض يغادر بلا دوائه.</p>
+          <h3>نفاد المخزون يصل إلى المريض!</h3>
+          <p>المنشأة تتكلّف في إعادة الشراء المتأخر، والشركة تخسر البيع، والمريض يغادر بلا دوائه.</p>
         </div>
         <div class="viz-ecg">
           <svg viewBox="0 0 420 84" preserveAspectRatio="none" aria-hidden="true">
             <path class="ecg-line" d="M0,42 L70,42 L86,42 L96,20 L106,64 L118,42 L150,42 L168,42 L182,28 L196,42 L240,42 L240,42 L420,42"/>
           </svg>
-          <span class="ecg-cap pill pill-danger">خط مستقيم · نفاد المخزون</span>
         </div>
       </div>
     </div>
@@ -184,97 +191,177 @@
 </section>
 
 <!-- ============ 3 · WHAT ARA DOES ============ -->
-<section class="section bg-white" id="platform" data-screen-label="What ARA Does">
+<section class="section bg-white" id="solutions" data-screen-label="Solutions">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">حلولنا</div>
+      <div class="eyebrow">الحلول التي نقدمها</div>
       <h2 class="h2">صورة حيّة واحدة للمخزون. ومجموعة حلول متنامية مبنية عليها.</h2>
-      <p class="lead">تحوّل أرى سجلات المخزون إلى صورة حيّة واحدة قابلة للمشاركة. شاهد مخزونك من أي مكان وفي أي وقت، وامنح كل شركة صلاحية رؤية منتجاتها هي فقط. ومع بطاقات الزيارة الرقمية الموثَّقة عبر الشبكة، تساعدك أرى على إدارة زيارات المندوبين بشكل أفضل.</p>
+      <p class="lead">تحوّل أرى سجلات المخزون إلى صورة حيّة واحدة قابلة للمشاركة، وتبني عليها الحلول التي تعمل بها. انقر أي حل للاطلاع على التفاصيل الكاملة.</p>
     </div>
 
-    <div class="reveal platform-grid">
-      <div class="card card-flush flex-col">
-        <div class="browser on-light panel-frame">
-          <div class="browser-bar">
-            <div class="browser-dots"><i></i><i></i><i></i></div>
-            <div class="browser-url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.arasolutions.io/dashboard</div>
-          </div>
-          <img class="browser-screen" src="../assets/screens/inventory.png" alt="شاشة المخزون في أرى مع مستويات مباشرة عبر المواقع" width="2880" height="1800" loading="lazy">
+    <div class="reveal sol-bento">
+        <div class="sol-tile sol-t1" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">شاهد كل رف في كل فرع</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-1" aria-hidden="true"><div class="sa-chip-panel"><b>5</b><span>فروع</span><em></em><b>1050</b><span>صنف</span><em></em><b class="sa-live">● مباشر</b></div><div class="sa-shot"><img src="../assets/screens/inventory.png" alt="" loading="lazy"></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t1" tabindex="-1">
+            <button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+            <div class="sm-grid">
+              <div class="sm-main">
+                <p class="sm-meta kicker">الحل ٠١ · الإدارة الذكية للمخزون</p>
+                <h3 class="h3 sm-title" id="sm-t1">الرؤية الموحدة للمخزون</h3>
+                <p class="sm-details">يربط أرى فروعك ومواقع التخزين لديك في عرض واحد مباشر. تتوقف مستويات المخزون وتواريخ الصلاحية والتنبيهات عن العيش في أنظمة منفصلة، وتبدأ بالعمل كمنشأة واحدة.</p>
+                <p class="sm-label kicker">ما الذي تحصل عليه</p>
+                <ul class="sm-bullets">
+                  <li>مخزون مباشر عبر جميع الفروع ومواقع التخزين</li>
+                  <li>لوحة موحدة متعددة الفروع</li>
+                  <li>تتبع الصلاحية مع نوافذ تنبيه 90 / 60 / 30 يومًا</li>
+                  <li>تنبيهات انخفاض ونفاد المخزون</li>
+                  <li>بحث في كتالوج أدوية موحّد</li>
+                </ul>
+              </div>
+              <div class="sm-art" aria-hidden="true">
+                <span class="kicker">بيانات توضيحية</span>
+                <table class="mini-table">
+                  <tbody>
+                    <tr><td class="prod">Atorvastatin 20 mg</td><td><span class="pill pill-ok">متوفر</span></td><td class="mono num">418</td></tr>
+                    <tr><td class="prod">Amlodipine 5 mg</td><td><span class="pill pill-warn">مخزون منخفض</span></td><td class="mono num">12</td></tr>
+                    <tr><td class="prod">Azithromycin 250 mg</td><td><span class="pill pill-danger">نفاد المخزون</span></td><td class="mono num">0</td></tr>
+                  </tbody>
+                </table>
+                <p class="sm-art-note">مباشر عبر 5 فروع · حُدّث قبل ثوانٍ</p>
+              </div>
+            </div>
+          </dialog>
         </div>
-        <div class="panel-caption">
-          <span class="kicker">مصدر واحد للحقيقة</span>
-          <p>جدول بيانات كان حبيس نظام ERP في مكتب خلفي، وقد تحوّل إلى مركز قيادة حيّ.</p>
-        </div>
-      </div>
 
-      <div class="card value-stack">
-        <div class="vrow">
-          <div class="vi ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14l3.5-1 2.5-6 3 10 2.5-7 1.5 4h3"/><circle cx="21" cy="14" r="2.1" fill="currentColor" stroke="none"/></svg></div>
-          <div><h4>مباشرة</h4><p>‏Push API يعكس التغيّرات مباشرة لحظة حدوثها.</p></div>
+        <div class="sol-tile sol-t2" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">خطط للطلب قبل أن تظهر الفجوة</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-2" aria-hidden="true"><div class="ara-wave" aria-hidden="true"><i class="ara-wave-glow"></i><span class="wy wy1"><span class="wx wx1"><svg viewBox="0 0 1200 320" preserveAspectRatio="none"><path d="M0 70 Q75 30 150 70 T300 70 T450 70 T600 70 T750 70 T900 70 T1050 70 T1200 70 L1200 320 L0 320 Z" fill="#38bdf8" opacity="0.55"/></svg></span></span><span class="wy wy2"><span class="wx wx2"><svg viewBox="0 0 1200 320" preserveAspectRatio="none"><path d="M0 90 Q75 40 150 90 T300 90 T450 90 T600 90 T750 90 T900 90 T1050 90 T1200 90 L1200 320 L0 320 Z" fill="#2563eb" opacity="0.65"/></svg></span></span><span class="wy wy3"><span class="wx wx3"><svg viewBox="0 0 1200 320" preserveAspectRatio="none"><path d="M0 60 Q75 20 150 60 T300 60 T450 60 T600 60 T750 60 T900 60 T1050 60 T1200 60 L1200 320 L0 320 Z" fill="#1d4ed8" opacity="0.9"/></svg></span></span></div><div class="sa-panel"><span class="sa-cap">اقتراح إعادة طلب</span><div class="sa-row"><span>Atorvastatin 20 mg</span><b>≈ 120</b></div></div><div class="sa-panel"><span class="sa-cap">الاستهلاك · آخر 30 يومًا</span><div class="sa-barrow"><i style="height:28%"></i><i style="height:34%"></i><i style="height:30%"></i><i style="height:42%"></i><i style="height:38%"></i><i style="height:52%"></i><i style="height:44%"></i><i style="height:60%"></i><i style="height:50%"></i><i style="height:68%"></i><i style="height:58%"></i><i style="height:74%"></i><i style="height:62%"></i><i style="height:82%"></i><i style="height:70%"></i><i style="height:90%"></i></div></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t2" tabindex="-1">
+            <button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+            <div class="sm-grid">
+              <div class="sm-main">
+                <p class="sm-meta kicker">الحل ٠٢ · رؤية الشبكة وإدارتها</p>
+                <h3 class="h3 sm-title" id="sm-t2">مشاركة البيانات</h3>
+                <p class="sm-details">امنح شركة الأدوية نافذة مباشرة على المخزون والاستهلاك لمنتجاتها فقط، عبر اتفاقية موحّدة تتم بالكامل على المنصة. أنت من يمنح الوصول، وأنت من يلغيه، ويسري الإلغاء فورًا.</p>
+                <p class="sm-label kicker">ما الذي تحصل عليه</p>
+                <ul class="sm-bullets">
+                  <li>تفويض لكل شركة على حدة، تمنحه من لوحة تحكمك</li>
+                  <li>لا ترى الشركة إلا المنتجات التي تورّدها لك</li>
+                  <li>اتفاقية مشاركة بيانات موحّدة تُبرم عبر المنصة</li>
+                  <li>إلغاء في أي وقت — بمفعول فوري من المصدر</li>
+                  <li>لا بيانات للمرضى. إطلاقًا.</li>
+                </ul>
+              </div>
+              <div class="sm-art" aria-hidden="true">
+                <span class="kicker">بيانات توضيحية</span>
+                <div class="perm-list">
+                  <div class="perm-item"><div class="co"><span class="av av-blue">أم</span> أمل فارما</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="تفعيل أو إيقاف وصول أمل فارما"></button></div>
+                  <div class="perm-item"><div class="co"><span class="av av-green">بي</span> بيان الطبية</div><button type="button" class="toggle" role="switch" aria-checked="true" aria-label="تفعيل أو إيقاف وصول بيان الطبية"></button></div>
+                  <div class="perm-item"><div class="co"><span class="av av-sky">ثر</span> ثريا لابز</div><button type="button" class="toggle off" role="switch" aria-checked="false" aria-label="تفعيل أو إيقاف وصول ثريا لابز"></button></div>
+                </div>
+                <p class="sm-art-note">جرّب المفاتيح — يتوقف الوصول لحظة إيقافه</p>
+              </div>
+            </div>
+          </dialog>
         </div>
-        <div class="vrow">
-          <div class="vi ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18"/><circle cx="6.2" cy="6.5" r="0.9" fill="currentColor" stroke="none"/><path d="M6.5 13.5h7M6.5 16.5h9"/></svg></div>
-          <div><h4>في المتناول</h4><p>تطبيق ويب دون تثبيت يعمل على أي جهاز في أي فرع.</p></div>
+
+        <div class="sol-tile sol-t3" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">شارك بياناتك بشروطك</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-3" aria-hidden="true"><div class="ara-globe-host" data-ara-globe></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t3" tabindex="-1">
+            <button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+            <div class="sm-grid">
+              <div class="sm-main">
+                <p class="sm-meta kicker">الحل ٠٣ · رؤية الشبكة وإدارتها</p>
+                <h3 class="h3 sm-title" id="sm-t3">بطاقات الزيارة الرقمية</h3>
+                <p class="sm-details">يحمل مندوبو الشركات بطاقات رقمية موثّقة عبر الشبكة. تتحول الزيارات إلى طلبات توافق عليها أنت، وتترك كل زيارة سجلًا منظّمًا يثق به الطرفان.</p>
+                <p class="sm-label kicker">ما الذي تحصل عليه</p>
+                <ul class="sm-bullets">
+                  <li>هوية موثّقة عبر الشبكة لكل مندوب</li>
+                  <li>طلبات زيارة توافق عليها قبل حضور أي أحد</li>
+                  <li>سجلات زيارات منظّمة يمكن الرجوع إليها لاحقًا</li>
+                  <li>وصول الزيارات فقط مع تفويض مشاركة بيانات سارٍ</li>
+                </ul>
+              </div>
+              <div class="sm-art" aria-hidden="true">
+                <span class="kicker">بيانات توضيحية</span>
+                <div class="sm-visit">
+                  <div class="sm-visit-head"><span class="av av-blue">مح</span><div><div class="sm-visit-name">محمد الحربي</div><div class="sm-visit-org">مجموعة قمم الطبية</div></div></div>
+                  <div class="sm-visit-row"><span class="tag tag-ok">موثّق عبر الشبكة</span><span class="pill pill-ok">زيارة معتمدة</span></div>
+                  <p class="sm-art-note">سجل زيارة · الثلاثاء 10:30 · الصيدلية الرئيسية</p>
+                </div>
+              </div>
+            </div>
+          </dialog>
         </div>
-        <div class="vrow">
-          <div class="vi ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="7" r="2.3"/><path d="M12 7h4.5"/><path d="M18.8 5.9l1.5 1.5 2.5-2.8"/><g opacity="0.55"><circle cx="6.5" cy="17" r="2.3"/><path d="M12 17h4.5"/><path d="M19.2 15.5l3 3M22.2 15.5l-3 3"/></g></svg></div>
-          <div><h4>قائمة على الصلاحيات</h4><p>صلاحيات مُطبَّقة على مستوى قاعدة البيانات لضمان أمان البيانات وخصوصيتها.</p></div>
+
+        <div class="sol-tile sol-t4" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">امنح المندوبين بطاقة زيارة رقمية</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-4" aria-hidden="true"><div class="ara-vc-host" data-ara-visitcard></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t4" tabindex="-1">
+            <button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+            <div class="sm-grid">
+              <div class="sm-main">
+                <p class="sm-meta kicker">الحل ٠٤ · الإدارة الذكية للمخزون</p>
+                <h3 class="h3 sm-title" id="sm-t4">تخطيط الطلب</h3>
+                <p class="sm-details">يقرأ أرى تاريخ الاستهلاك لديك ويحوّله إلى توجيه مستقبلي: ما الذي يتزايد، وما الموسمي، وما الذي يجب إعادة طلبه ومتى، وأي مخزون يُنقل بين الفروع قبل انتهاء صلاحيته.</p>
+                <p class="sm-label kicker">ما الذي تحصل عليه</p>
+                <ul class="sm-bullets">
+                  <li>اتجاهات الاستهلاك لكل صنف، مع متوسطات متحركة</li>
+                  <li>عرض الموسمية على مدار السنة</li>
+                  <li>اقتراحات نقاط إعادة الطلب مع الكميات المقترحة</li>
+                  <li>تقارير قرب انتهاء الصلاحية — انقل المخزون بين الفروع في الوقت المناسب</li>
+                </ul>
+              </div>
+              <div class="sm-art" aria-hidden="true">
+                <span class="kicker">بيانات توضيحية</span>
+                <svg class="sm-spark" viewBox="0 0 220 64" aria-hidden="true"><path class="sm-spark-line" d="M4 50 C24 46 34 40 52 42 S84 30 102 33 S138 18 156 22 S196 10 216 12" fill="none"/><circle cx="216" cy="12" r="3.2" class="sm-spark-dot"/></svg>
+                <div class="sm-visit-row"><span class="tag">إعادة طلب ≈ 120 · Atorvastatin 20 mg</span></div>
+                <p class="sm-art-note">قرب انتهاء الصلاحية: انقل 40 وحدة إلى الفرع الثاني قبل نوفمبر</p>
+              </div>
+            </div>
+          </dialog>
         </div>
-      </div>
+
+        <div class="sol-tile sol-t5" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">أدرك المخزون قبل أن يكلفك</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-5" aria-hidden="true"><div class="ara-expiry-host" data-ara-expiry></div><div class="sa-exp-legend"><span><i class="sa-lg-green"></i>&ge; 90 يومًا</span><span><i class="sa-lg-amber"></i>&ge; 60 يومًا</span><span><i class="sa-lg-red"></i>&ge; 30 يومًا</span></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t5" tabindex="-1"><button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button><div class="sm-grid"><div class="sm-main"><p class="sm-meta kicker">قدرة · الإدارة الذكية للمخزون</p><h3 class="h3 sm-title" id="sm-t5">ذكاء الصلاحية</h3><p class="sm-details">انتهاء الصلاحية مشكلة إمداد يمكن رؤيتها قادمة. يراقب أرى تاريخ كل تشغيلة ويحوّل «قرب الانتهاء» إلى قائمة عمل: ما الذي يُنقل، وإلى أين، ومتى.</p><p class="sm-label kicker">ما الذي تحصل عليه</p><ul class="sm-bullets">
+                  <li>تتبع الصلاحية على مستوى التشغيلة عبر الفروع</li>
+                  <li>نوافذ تنبيه قابلة للضبط: 90 و60 و30 يومًا</li>
+                  <li>تقارير مباشرة لقرب انتهاء الصلاحية</li>
+                  <li>اقتراحات نقل بين الفروع قبل انتهاء الصلاحية</li>
+</ul></div><div class="sm-art" aria-hidden="true"><span class="kicker">بيانات توضيحية</span><div class="sa-exp-panel in-modal"><div class="sa-exp-row"><span class="sa-exp-label">≤ 30 يومًا</span><span class="sa-exp-bar"><i class="sa-red" style="width:64%"></i></span><b>14</b></div><div class="sa-exp-row"><span class="sa-exp-label">≤ 60 يومًا</span><span class="sa-exp-bar"><i class="sa-amber" style="width:42%"></i></span><b>9</b></div><div class="sa-exp-row"><span class="sa-exp-label">≤ 90 يومًا</span><span class="sa-exp-bar"><i class="sa-green" style="width:26%"></i></span><b>5</b></div></div><p class="sm-art-note">انقل 40 وحدة إلى الفرع الثاني قبل نوفمبر</p></div></div></dialog>
+        </div>
+
+        <div class="sol-tile sol-t6" data-sol-card>
+          <div class="sol-tile-head"><h3 class="sol-tile-title"><a class="sol-anchor" href="#contact" aria-haspopup="dialog">يعمل مع نظام ERP الذي تستخدمه اليوم</a></h3><span class="sol-expand" aria-hidden="true"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4.5h5.5V10"/><path d="M19.5 4.5 13 11"/><path d="M10 19.5H4.5V14"/><path d="m4.5 19.5 6.5-6.5"/></svg></span></div>
+          <div class="sol-tile-art sa-6" aria-hidden="true"><div class="ara-erpmap-host" data-ara-erpmap><img src="../assets/ara-logo-mark.png" alt="" loading="lazy"></div></div>
+          <dialog class="sol-modal" data-sol-modal aria-labelledby="sm-t6" tabindex="-1"><button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button><div class="sm-grid"><div class="sm-main"><p class="sm-meta kicker">قدرة · أساس المنصة</p><h3 class="h3 sm-title" id="sm-t6">التكامل وتوحيد الكتالوج</h3><p class="sm-details">لن تستبدل شيئًا. يبقى نظام ERP لديك هو نظام السجل، ويعمل أرى إلى جانبه: أرسل التغيّرات عبر واجهة برمجية خفيفة، أو ارفع ملف CSV. وفي الحالتين، تطابق طبقة الكتالوج أكوادك مع مدخل موحّد واحد.</p><p class="sm-label kicker">ما الذي تحصل عليه</p><ul class="sm-bullets">
+                  <li>‏Push API يعكس التغيّرات لحظة حدوثها</li>
+                  <li>رفع CSV حين لا يتوفر فريق تكامل</li>
+                  <li>كتالوج موحّد واحد عبر جميع الأنظمة</li>
+                  <li>محايد تجاه أنظمة ERP: أرى طبقة الرؤية، لا نظام السجل</li>
+</ul></div><div class="sm-art" aria-hidden="true"><span class="kicker">بيانات توضيحية</span><div class="maprow"><span class="raw">ATORVA 20 TAB</span><span class="arr">←</span><span class="std">Atorvastatin 20&nbsp;mg</span></div><div class="maprow"><span class="raw">amlodipine_5</span><span class="arr">←</span><span class="std">Amlodipine 5&nbsp;mg</span></div><p class="sm-art-note">رفع CSV · دون فريق تكامل</p></div></div></dialog>
+        </div>
     </div>
   </div>
 </section>
 
-<!-- ============ 4 · INTELLIGENCE ============ -->
-<section class="section bg-navy section--angled" id="intelligence" data-screen-label="Intelligence">
-  <div class="seam-bars" aria-hidden="true"><i></i><i></i></div>
-  <div class="wrap">
-    <div class="section-head">
-      <h2 class="h2">الشبكة ترى اليوم. والذكاء يصنع المستقبل.</h2>
-    </div>
-    <div class="intel-grid reveal">
-      <div class="intel-card">
-        <span class="kicker intel-kicker"><span class="live-dot-ok"></span>مباشر اليوم</span>
-        <h3 class="h3">شاهد كل شيء. وأدر الجميع.</h3>
-        <p>تسجيل دخول واحد يريك المخزون الحي في كل فروعك ويتيح لك إدارة شبكة مورّديك، من صلاحيات المنتجات إلى زيارات المندوبين. قرارات كانت تستغرق اجتماعات ومكالمات صارت تؤخذ بنظرة واحدة.</p>
-        <ul class="intel-list">
-          <li>رؤية حيّة للمخزون عبر المنشآت والفروع</li>
-          <li>تتبّع تواريخ الانتهاء وتخطيط الطلب مدمجان</li>
-          <li>وصول قائم على الصلاحيات، قابل للإلغاء بلمسة واحدة</li>
-          <li>بطاقات زيارة رقمية موثَّقة لزيارات المندوبين</li>
-        </ul>
-      </div>
-<div class="intel-arrow" aria-hidden="true">
-        <svg width="34" height="24" viewBox="0 0 34 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h26"/><path d="M23 6l6 6-6 6"/></svg>
-      </div>
-      <div class="intel-card roadmap">
-        <span class="kicker intel-kicker">القادِم</span>
-        <h3 class="h3">أرى تكتسب عقلًا.</h3>
-        <p>كانت الرؤية الخطوة الأولى. تاليًا تبدأ أرى بالعمل نيابةً عنك: تحليلات وتقارير مدعومة بالذكاء الاصطناعي عبر الشبكة، ومهام روتينية تُنجَز آليًا من البداية إلى النهاية، وأوامر شراء تُصاغ تلقائيًا لميزانيات أذكى ورفوف أفضل تزويدًا. قيد التطوير الآن، ومُعلَّم بذلك عن قصد.</p>
-        <div class="po-mock" aria-hidden="true">
-          <div class="em-head"><span>مسودة أمر شراء · مولَّدة تلقائيًا</span><span class="concept-tag">معاينة تصوّرية</span></div>
-          <div class="po-row"><span class="po-item">Paracetamol 500 mg</span><span class="po-qty">الرصيد 42</span><span class="po-sug">أعد طلب 120</span></div>
-          <div class="po-row"><span class="po-item">Amoxicillin 250 mg</span><span class="po-qty">الرصيد 8</span><span class="po-sug">أعد طلب 200</span></div>
-          <div class="po-row"><span class="po-item">Omeprazole 20 mg</span><span class="po-qty">الرصيد 15</span><span class="po-sug">أعد طلب 90</span></div>
-          <div class="po-note">مضبوطة على طلب الفرع والميزانية المتبقية</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ============ 5 · WHO IT'S FOR ============ -->
 <section class="section bg-mist" id="who" data-screen-label="Who It's For">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">لمن صُممت</div>
+      <div class="eyebrow">المستفيدين من المنصة</div>
       <h2 class="h2">صُممت لطرفَي الرف معًا.</h2>
     </div>
 
     <div class="reveal who-grid">
       <!-- healthcare org (larger) -->
       <div class="card card-flush flex-col">
-        <div class="who-fade-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/><path d="M12 8v3M10.5 9.5h3"/></svg></div>
+        <div class="who-fade-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 21V8.8L12 3.4l7.5 5.4V21"/><path d="M9.6 21v-5.4h4.8V21"/><path d="M12 8.3v3.4M10.3 10h3.4"/></svg></div>
         <div class="who-body">
           <h3 class="h3 h3-lg">المنشآت الصحية</h3>
           <p class="card-lead">صُممت للمستشفيات والصيدليات. رؤية ذكية واحدة لكل ما تخزّنه عبر كل الفروع: نفادٌ يُرصد قبل أن يقع، وتواريخ انتهاء تُرصد قبل أن تكلّفك، وطلبات مبنية على ما تحتاجه فعلًا. بياناتك تبقى ملكك؛ أنت تمنح الوصول وأنت تلغيه، دائمًا.</p>
@@ -286,7 +373,7 @@
 
       <!-- pharma company -->
       <div class="card flex-col">
-        <div class="who-fade-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5a4.95 4.95 0 0 1-7-7l7-7a4.95 4.95 0 0 1 7 7z"/><path d="M8.5 8.5l7 7"/></svg></div>
+        <div class="who-fade-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 20.8 12 12 20.8 3.2 12z"/><path d="M8.3 8.3l7.4 7.4"/></svg></div>
         <h3 class="h3 h3-lg">البائعون والمورّدون</h3>
         <p class="card-lead card-lead-gap">لمن يبقي شبكة الرعاية الصحية مزوّدةً من بائعين ومورّدين. شاهد مخزون منتجاتك لحظيًا لدى كل عميل منحك الصلاحية. الرف الفارغ مريضٌ ينتظر. تحرّك أولًا، وضع مندوبيك حيث تمسّ الحاجة إليهم فعلًا.</p>
 
@@ -344,7 +431,7 @@
       <!-- step 2 standardize -->
       <div class="step">
         <div class="step-no"><b>2</b> عالِج</div>
-        <h3 class="h3">الكتالوج الآن موحّد</h3>
+        <h3 class="h3">يتم توحيد المخزون تلقائيًا</h3>
         <p class="muted">توحّد أرى البيانات، وتُطابق الأصناف مع رموز قياسية موحّدة، وتحسب حالة المخزون لحظيًا على الخادم.</p>
         <div class="step-visual">
           <div class="mapwrap">
@@ -408,11 +495,11 @@
     <div class="section-head">
       <div class="eyebrow">التكامل</div>
       <h2 class="h2">تعمل مع ما لديك.</h2>
-      <p class="lead">لن تستبدل شيئًا. تعمل أرى إلى جانب نظام ERP الذي تشغّله اليوم، بطريقتين للربط وكتالوج مشترك واحد. وليس هناك مشروع ترحيل.</p>
+      <p class="lead">لن تستبدل شيئًا. تعمل أرى إلى جانب نظام ERP الذي تشغّله اليوم، بطريقتين للربط. وليس هناك مشروع ترحيل.</p>
     </div>
     <div class="bento-integration reveal">
       <div class="card card-api">
-        <div class="card-icon ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div>
+        <div class="card-icon ci-blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 2.6 4.6 13.4h6.2l-1 8 9.6-10.8h-6.2z"/></svg></div>
         <h3 class="h3">Push API</h3>
         <p>نظامك يرسل تغيّرات المخزون إلى أرى لحظة حدوثها، عبر واجهة برمجية خفيفة لا عبر إصلاح شامل للأنظمة. حِزمة البيانات المرسلة صغيرة إلى هذا الحد:</p>
         <div class="api-snippet">
@@ -428,12 +515,12 @@
         <div class="api-note">مثال تمثيلي: نقطة النهاية والحقول والاستجابة توضيحية. المواصفات الكاملة تُسلَّم عند التهيئة.</div>
       </div>
       <div class="card card-csv">
-        <div class="card-icon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/></svg></div>
+        <div class="card-icon ci-green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.5z"/><path d="M13.5 3v5.5H19"/><path d="M8.5 13.5h7M8.5 17h4.5"/></svg></div>
         <h3 class="h3">رفع ملف CSV</h3>
         <p>لا فريق تقني لديك؟ صدِّر وارفع. جدول بيانات واحد يكفي لوضع منشأة كاملة على الشبكة.</p>
       </div>
       <div class="card card-cat">
-        <div class="card-icon ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 5-10 5L2 7z"/><path d="M2 12l10 5 10-5"/><path d="M2 17l10 5 10-5"/></svg></div>
+        <div class="card-icon ci-navy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.7-9 4.7-9-4.7z"/><path d="m3 12.4 9 4.7 9-4.7"/><path d="m3 16.9 9 4.7 9-4.7"/></svg></div>
         <h3 class="h3">توحيد الكتالوج</h3>
         <p>مهما كان اسم المنتج في نظامك، تطابقه أرى مع مُدخل واحد موحّد، ليعني الدواء الشيء نفسه في كل نظام وكل تقرير.</p>
       </div>
@@ -450,24 +537,24 @@
     </div>
     <div class="pillars reveal">
       <div class="pillar">
-        <div class="pic"><svg viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="26" height="12" rx="6"/><circle cx="10" cy="16" r="3.6" fill="currentColor" stroke="none"/><path d="M20 13.5l5 5M25 13.5l-5 5"/></svg></div>
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="12" r="3.7"/><path d="M11.7 12h9.1"/><path d="M17.6 12v3.3M14.6 12v2.3"/></svg></div>
         <h3 class="h3">أنت مالك بياناتك</h3>
-        <p>مخزونك ملكك. امنح الوصول شركةً بعد شركة، وألغِه في أي وقت بمفعول فوري.</p>
+        <p>مخزونك ملكك. امنح الوصول لكل شركة بشروطك، وألغِه في أي وقت.</p>
       </div>
       <div class="pillar">
-        <div class="pic"><svg viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h24" opacity="0.55"/><path d="M4 25h24" opacity="0.55"/><rect x="4" y="12" width="24" height="8" rx="2"/><rect x="13" y="14.6" width="6" height="4.8" rx="1"/><path d="M14.5 14.6v-1.4a1.5 1.5 0 0 1 3 0v1.4"/></svg></div>
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.4" rx="7.2" ry="2.8"/><path d="M4.8 5.4v13.2c0 1.55 3.2 2.8 7.2 2.8s7.2-1.25 7.2-2.8V5.4"/><path d="M4.8 12c0 1.55 3.2 2.8 7.2 2.8s7.2-1.25 7.2-2.8"/></svg></div>
         <h3 class="h3">مطبَّقة على مستوى قاعدة البيانات</h3>
-        <p>الصلاحيات ليست مجرد شاشة. يُفرض التحكم بالوصول على مستوى قاعدة البيانات، فالمستخدم غير المخوَّل برؤية سجلٍّ لا يستطيع الاستعلام عنه أصلًا.</p>
+        <p>الصلاحيات ليست مجرد شاشة. يُفرض التحكم بالوصول على مستوى قاعدة البيانات، لضمان أعلى مستوى من الحماية لبياناتك.</p>
       </div>
       <div class="pillar">
-        <div class="pic"><svg viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="19" cy="13" r="3" fill="currentColor" stroke="none"/><circle cx="19" cy="13" r="6.5"/><circle cx="7" cy="9" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><circle cx="9" cy="24" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><circle cx="26" cy="25" r="1.6" fill="currentColor" stroke="none" opacity="0.6"/><path d="M8.5 9.8l4.2 1.7M10.3 22.4l4.4-5.4M24.9 23.3l-2.7-4.2" opacity="0.5"/></svg></div>
+        <div class="pic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.7"/><circle cx="4.9" cy="5.6" r="1.5"/><circle cx="19.3" cy="5.2" r="1.5"/><circle cx="19" cy="18.9" r="1.5"/><circle cx="5.2" cy="18.6" r="1.5"/><path d="M10 10.3 6.2 7"/><path d="M14 10.2l4.2-3.7"/><path d="M13.9 13.9l3.9 3.8"/><path d="M10.1 13.9l-3.7 3.5"/></svg></div>
         <h3 class="h3">صُممت للرعاية الصحية السعودية</h3>
         <p>صُنعت في الرياض للسوق السعودي، ومصمّمة حول الطريقة التي يشتري بها القطاع الصحي السعودي ويخزّن ويورّد.</p>
       </div>
     </div>
     <div class="statband mt-56 reveal">
       <div class="stats">
-        <div class="stat"><div class="stat-num">0</div><div class="stat-label">لا وصول افتراضيًا؛ أنت من يمنحه من لوحة تحكمك</div></div>
+        <div class="stat"><div class="stat-num">0</div><div class="stat-label">لا يوجد وصول افتراضي؛ أنت من يمنحه من لوحة تحكمك</div></div>
         <div class="stat"><div class="stat-num">1</div><div class="stat-label">نقرة واحدة للإلغاء، بمفعول فوري من المصدر</div></div>
         <div class="stat"><div class="stat-num">2</div><div class="stat-label">كل سجلّ يخضع لفحص الصلاحيات على مستوى قاعدة البيانات</div></div>
         <div class="stat"><div class="stat-num"><span class="u">الآن</span></div><div class="stat-label">بياناتك تبقى آمنة ومحدَّثة</div></div>
@@ -485,31 +572,31 @@
     <div class="faq-wrap reveal">
     <div class="faq">
       <details class="faq-item">
-        <summary>كم يستغرق التفعيل؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>كم يستغرق التفعيل؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>المنشآت التي تعتمد ملفات CSV يمكن أن تعمل فورًا تقريبًا؛ أما الربط عبر الواجهة البرمجية فيعتمد على جاهزية فريقك التقني، ونعمل معه جنبًا إلى جنب. لا مشروع تنفيذ طويل.</p></div>
       </details>
       <details class="faq-item">
-        <summary>من يقف خلف أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>من يقف خلف أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>أرى شركة سعودية مقرّها الرياض، بُنيت خصيصًا للسوق الصحي السعودي. نحن في مرحلة مبكرة ونبني بشفافية: ما تراه في هذه الصفحة هو المتاح اليوم، ونُعلّم بوضوح ما لم يصدر بعد.</p></div>
       </details>
       <details class="faq-item">
-        <summary>كيف تدخل بياناتنا إلى أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>كيف تدخل بياناتنا إلى أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>طريقتان: يرسل نظامك تغيّرات المخزون إلى أرى عبر واجهة برمجية خفيفة، أو يرفع فريقك ملف CSV. وفي الحالتين، تُوحِّد طبقة الكتالوج رموز منتجاتك تلقائيًا.</p></div>
       </details>
       <details class="faq-item">
-        <summary>هل بياناتنا آمنة؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>هل بياناتنا آمنة؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>الوصول قائم على الصلاحيات ومفروض على مستوى قاعدة البيانات لا في الواجهة فقط، والبيانات مشفّرة أثناء النقل. أنت تتحكم بمن يرى ماذا، ويمكنك سحب الوصول فورًا.</p></div>
       </details>
       <details class="faq-item">
-        <summary>هل نحتاج إلى استبدال نظام ERP لدينا؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>هل نحتاج إلى استبدال نظام ERP لدينا؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>لا. تعمل أرى إلى جانب نظامك القائم وتبقى متزامنة معه. يبقى نظام ERP هو سجلّك الرسمي، وأرى تجعل ما بداخله مرئيًا.</p></div>
       </details>
       <details class="faq-item">
-        <summary>كم تكلف أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>كم تكلف أرى؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>أرى منصة واحدة باشتراكين مدفوعين: تشترك شركات الأدوية في «رؤية الشبكة وإدارتها» لترى منتجاتها عبر شبكتها، وتشترك المنشآت الصحية في «الإدارة الذكية للمخزون» إذا أرادتها لعملياتها الخاصة. أما الانضمام إلى شبكة أي شركة فمجانيٌّ تمامًا للمنشأة؛ فالشركة هي من يدفع، والمنشأة تمنح الصلاحية فقط، ويمكنها إلغاؤها في أي وقت. راسلنا على <a href="mailto:admin@arasolutions.io">admin@arasolutions.io</a> ونطلعك على التفاصيل.</p></div>
       </details>
       <details class="faq-item">
-        <summary>من يستطيع رؤية مخزوننا؟ وهل يمكننا إلغاء الوصول؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+        <summary>من يستطيع رؤية مخزوننا؟ وهل يمكننا إلغاء الوصول؟<svg class="faq-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9.2 6 6 6-6"/></svg></summary>
         <div class="faq-body"><p>لا أحد، حتى تمنح الصلاحية بنفسك. أنت تخوّل كل شركة على حدة، ولا ترى الشركة إلا المنتجات التي تورّدها لك. ويمكنك إلغاء صلاحية أي شركة في أي وقت، ويسري ذلك فورًا.</p></div>
       </details>
     </div>
@@ -525,18 +612,19 @@
 </section>
 
 <!-- ============ 10 · FINAL CTA ============ -->
-<section class="section bg-navy-dark" data-screen-label="Final CTA">
+<section class="section bg-navy-dark" id="contact" data-screen-label="Final CTA">
+  <div class="cta-grid" aria-hidden="true"></div>
+  <div class="cta-dim-veil" aria-hidden="true"></div>
   <div class="wrap">
     <div class="cta-card reveal">
-      <div class="divider-grad"></div>
       <h2 class="h2 cta-title">شاهد المتوفر. <span class="gradient-text">فورًا.</span></h2>
-      <p class="lead">صورة حيّة واحدة لمخزون الأدوية، تُشارك بشروطك أنت. أخبرنا من أنت، وسنعرض لك أرى على حالة عملك نفسها.</p>
+      <p class="lead">صورة حيّة واحدة لمخزون الأدوية، تُشارك بشروطك أنت.</p>
       <div class="cta-split">
         <div class="cta-cell">
           <span class="kicker">تدير منشأة صحية؟</span>
           <p>صورة حيّة لكل رف تديره، والانضمام إلى شبكات الشركات مجانيٌّ للمنشآت.</p>
-          <a class="btn btn-primary" href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%B9%20%2F%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A7%D8%AA%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرضًا توضيحيًا
-            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M5 12h14"/><path class="arr-head" d="M13 6l6 6-6 6"/></svg>
+          <a class="btn btn-primary" data-demo-form href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D8%B9%D8%AF%D8%AF%20%D8%A7%D9%84%D9%81%D8%B1%D9%88%D8%B9%20%2F%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A7%D8%AA%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرض توضيحي
+            <svg class="arr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="arr-stem" d="M4.5 12h14"/><path class="arr-head" d="M12.5 5.5 19 12l-6.5 6.5"/></svg>
           </a>
         </div>
         <div class="cta-cell">
@@ -552,7 +640,33 @@
 </main>
 
 <!-- ============ 11 · FOOTER ============ -->
+
+<!-- نموذج طلب العرض التوضيحي — يعمل عبر البريد: لا يوجد خادم لهذا الموقع،
+     فزر الإرسال يفتح رسالة جاهزة إلى الفريق في تطبيق بريد الزائر -->
+<dialog class="sol-modal demo-modal" id="demo-modal" aria-labelledby="demo-title" tabindex="-1">
+  <button type="button" class="sm-close" data-modal-close aria-label="إغلاق"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></svg></button>
+  <div class="df-wrap">
+    <p class="sm-meta kicker">طلب عرض توضيحي</p>
+    <h3 class="h3 sm-title" id="demo-title">شاهد أرى على حالة عملك نفسها.</h3>
+    <p class="sm-details">أخبرنا من أنت وما الذي تودّ رؤيته. زر الإرسال يفتح رسالة جاهزة إلى فريقنا في تطبيق البريد لديك — يجيبك إنسان، لا نظام تذاكر.</p>
+    <form class="demo-form">
+      <div class="df-row">
+        <label class="df-field"><span>الاسم</span><input type="text" name="name" required autocomplete="name"></label>
+        <label class="df-field"><span>البريد الإلكتروني للعمل</span><input type="email" name="email" required autocomplete="email"></label>
+      </div>
+      <label class="df-field"><span>رقم الجوال <em>(اختياري)</em></span><input type="tel" name="phone" autocomplete="tel" dir="ltr"></label>
+      <label class="df-field"><span>رسالتك</span><textarea name="message" rows="4" placeholder="منشأتك، المدينة، وما تودّ رؤيته"></textarea></label>
+      <div class="df-foot">
+        <button type="submit" class="btn btn-primary">أرسل الطلب</button>
+        <p class="df-alt">تفضّل التواصل المباشر؟ <a href="mailto:admin@arasolutions.io">admin@arasolutions.io</a> · <a href="tel:+966533379210"><span dir="ltr">+966 53 337 9210</span></a></p>
+      </div>
+      <p class="df-sent" hidden>تم فتح تطبيق البريد لديك والرسالة جاهزة — اضغط إرسال هناك.</p>
+    </form>
+  </div>
+</dialog>
+
 <footer class="footer bg-navy-dark" data-screen-label="Footer">
+  <div class="footer-grid" aria-hidden="true"></div>
   <div class="wrap">
     <div class="footer-top">
       <div>
@@ -564,16 +678,17 @@
         <h5>المنتج</h5>
         <ul>
           <li><a href="#solve">ماذا نحل</a></li>
-          <li><a href="#platform">المنصة</a></li>
+          <li><a href="#solutions">الحلول</a></li>
           <li><a href="#who">لمن صُممت</a></li>
           <li><a href="#how">كيف تعمل</a></li>
+          <li><a href="pricing/">الأسعار</a></li>
           <li><a href="#faq">الأسئلة الشائعة</a></li>
         </ul>
       </div>
       <div>
         <h5>ابدأ الآن</h5>
         <ul>
-          <li><a href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرضًا توضيحيًا</a></li>
+          <li><a data-demo-form href="mailto:admin@arasolutions.io?subject=%D8%B7%D9%84%D8%A8%20%D8%B9%D8%B1%D8%B6%20%D8%AA%D9%88%D8%B6%D9%8A%D8%AD%D9%8A%20%E2%80%94%20%5B%D8%A7%D8%B3%D9%85%20%D9%85%D9%86%D8%B4%D8%A3%D8%AA%D9%83%5D&amp;body=%D9%85%D8%B1%D8%AD%D8%A8%D9%8B%D8%A7%20%D9%81%D8%B1%D9%8A%D9%82%20%D8%A3%D8%B1%D9%89%D8%8C%0D%0A%0D%0A%D8%A7%D9%84%D9%85%D9%86%D8%B4%D8%A3%D8%A9%3A%20%0D%0A%D9%86%D8%AD%D9%86%3A%20%D9%85%D9%86%D8%B4%D8%A3%D8%A9%20%D8%B5%D8%AD%D9%8A%D8%A9%20%2F%20%D8%B4%D8%B1%D9%83%D8%A9%20%D8%A3%D8%AF%D9%88%D9%8A%D8%A9%0D%0A%D8%A7%D9%84%D9%85%D8%AF%D9%8A%D9%86%D8%A9%3A%20%0D%0A%D9%85%D8%A7%20%D9%86%D9%88%D8%AF%D9%91%20%D8%B1%D8%A4%D9%8A%D8%AA%D9%87%3A%20%0D%0A%0D%0A%D8%B4%D9%83%D8%B1%D9%8B%D8%A7%20%D9%84%D9%83%D9%85">اطلب عرض توضيحي</a></li>
           <li><a href="https://app.arasolutions.io">تسجيل الدخول</a></li>
           <li><a href="#top">العودة إلى الأعلى</a></li>
         </ul>
@@ -599,11 +714,25 @@
   function onScroll(){ nav.classList.toggle('scrolled', window.scrollY > 40); }
   onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
 
-  // reveal on scroll
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
-  }, {threshold:0.12, rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ io.observe(el); });
+  // expandable menu (tablet/phone) — nav links + language toggle
+  var menuBtn = nav.querySelector('.nav-menu-btn');
+  if (menuBtn) {
+    var setMenu = function(open){
+      nav.classList.toggle('menu-open', open);
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    menuBtn.addEventListener('click', function(){ setMenu(!nav.classList.contains('menu-open')); });
+    nav.querySelectorAll('.nav-links a:not(.lang-toggle)').forEach(function(a){
+      a.addEventListener('click', function(){ setMenu(false); });
+    });
+    document.addEventListener('click', function(e){
+      if (nav.classList.contains('menu-open') && !e.target.closest('#nav')) setMenu(false);
+    });
+    window.addEventListener('keydown', function(e){ if (e.key === 'Escape') setMenu(false); });
+  }
+
+  // reveal-on-scroll now lives in assets/motion.js (GSAP when available,
+  // classic IntersectionObserver fallback otherwise)
 
   // interactive access toggles (how-it-works step 1)
   document.querySelectorAll('.perm-item .toggle').forEach(function(t){
@@ -615,6 +744,30 @@
 
   var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var reduce = reduceQuery.matches;
+
+  // language toggle — play the knob-swap animation, then navigate
+  var langToggle = document.querySelector('.lang-toggle');
+  if (langToggle) {
+    var ltBusy = false;
+    langToggle.addEventListener('click', function(e){
+      if (reduce) return; /* no animation: let the link navigate instantly */
+      e.preventDefault();
+      if (ltBusy) return;
+      ltBusy = true;
+      var code = langToggle.querySelector('.lt-code');
+      var flag = langToggle.querySelector('.lt-flag');
+      var href = langToggle.getAttribute('href');
+      if (code && flag) {
+        var c = code.getBoundingClientRect(), f = flag.getBoundingClientRect();
+        langToggle.classList.add('switching');
+        requestAnimationFrame(function(){
+          flag.style.transform = 'translateX(' + (c.left - f.left) + 'px)';
+          code.style.transform = 'translateX(' + (f.right - c.right) + 'px)';
+        });
+      }
+      setTimeout(function(){ location.href = href; }, 430);
+    });
+  }
 
   // typing payload for the push-api card
   var apiSnip = document.querySelector('.api-snippet');
@@ -734,6 +887,9 @@
       var vh = window.innerHeight || 800;
       var p = (vh - r.top) / (vh * 0.72);
       p = Math.max(0, Math.min(1, p));
+      // hero handoff (assets/motion.js) may have pre-lit the section
+      var floor = parseFloat(document.documentElement.dataset.litFloor || '0');
+      if (floor > p) p = floor;
       statement.style.setProperty('--lit', reduce ? 1 : p.toFixed(3));
       ticking = false;
     }
@@ -742,12 +898,40 @@
     window.addEventListener('resize', lights);
   }
 
+  // "lights off" — whole-screen morph into the dark ending: a fixed navy
+  // wash dims the viewport at opacity p while the CTA's white veil thins
+  // at 1-p, so the screen reads as one continuous light-to-dark blend
+  var contact = document.getElementById('contact');
+  if (contact) {
+    var wash = document.createElement('div');
+    wash.className = 'footer-theme-wash';
+    wash.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(wash);
+    contact.classList.add('dim-armed');
+    var offTicking = false;
+    function lightsOff(){
+      var r = contact.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      var p = (vh - r.top) / (vh * 0.72);
+      p = Math.max(0, Math.min(1, p));
+      if (reduce) p = 1;
+      contact.style.setProperty('--dim', p.toFixed(3));
+      wash.style.opacity = p.toFixed(3);
+      offTicking = false;
+    }
+    lightsOff();
+    window.addEventListener('scroll', function(){ if(!offTicking){ offTicking = true; requestAnimationFrame(lightsOff); } }, {passive:true});
+    window.addEventListener('resize', lightsOff);
+  }
+
   // mouse-tracking 3D tilt on the hero screenshot
   var browser = document.querySelector('.hero-browser');
   if (browser && !reduce && window.matchMedia('(hover: hover)').matches) {
     var rect = null;
     browser.addEventListener('mouseenter', function(){ rect = browser.getBoundingClientRect(); });
     browser.addEventListener('mousemove', function(e){
+      // hands off to the scroll-driven hero handoff (assets/motion.js)
+      if (document.documentElement.hasAttribute('data-hero-handoff')) return;
       if (!rect) rect = browser.getBoundingClientRect();
       var px = (e.clientX - rect.left) / rect.width;
       var py = (e.clientY - rect.top) / rect.height;
@@ -758,6 +942,7 @@
     });
     browser.addEventListener('mouseleave', function(){
       rect = null;
+      if (document.documentElement.hasAttribute('data-hero-handoff')) return;
       browser.style.transform = '';
     });
   }
