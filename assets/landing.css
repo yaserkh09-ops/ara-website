@@ -70,7 +70,7 @@ a:hover { opacity: 1; }
 .bg-navy .eyebrow, .bg-navy-dark .eyebrow { color: var(--color-sky); }
 
 h1.display {
-  font-size: clamp(40px, 5.4vw, 72px);
+  font-size: clamp(30px, 3.3vw, 48px); /* sized for the long platform headline: hero must fit 100vh */
   line-height: 1.03;
   letter-spacing: -0.025em; /* opsz=32 Display cut supplies the rest */
   font-weight: 700;
@@ -979,7 +979,7 @@ h1.display {
   .footer-top { grid-template-columns: 1fr 1fr; }
   .hero { padding: 132px 0 72px; }
   .lead { font-size: 17px; }
-  h1.display { font-size: clamp(28px, 8.4vw, 40px); }
+  h1.display { font-size: clamp(24px, 6.8vw, 32px); }
   .eyebrow { font-size: 11px; letter-spacing: 0.12em; }
 }
 
